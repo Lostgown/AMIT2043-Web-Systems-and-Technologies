@@ -6,7 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>AMIT2043 Web Systems and Technologies</title>
+        <title>AMIT2043-Web Systems and Technologies</title>
     </head>
     <body>
         <?php
