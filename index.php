@@ -7,15 +7,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
     <head>
         <meta charset="UTF-8">
         <title>AMIT2043 Web Systems-and Technologies</title>
+
+        <title>AMIT2043-Web Systems and Technologies</title>
+
     </head>
     <body>
         <?php
+
         // put your code here
         echo "hello";
         
         
-        
+        function hello() {
+            
+        }
         echo "niga wat";
+
+            echo "hello";
+
         ?>
     </body>
 </html>
