@@ -25,6 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
             echo "hello";
             
             hello(2,3);
+            hello(2,3);
         ?>
     </body>
 </html>
