@@ -8,8 +8,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
         <meta charset="UTF-8">
         <title>AMIT2043 Web Systems-and Technologies</title>
 
-        <title>AMIT2043-Web Systems and Technologies</title>
-
     </head>
     <body>
         <?php
@@ -18,13 +16,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
         echo "hello";
         
         
-        function hello() {
-            
+        function hello($a, $b) {
+            $c = $a + $b;
+            return $c;
         }
         echo "niga wat";
 
             echo "hello";
-
+            
+            hello(2,3);
         ?>
     </body>
 </html>
