@@ -15,10 +15,13 @@
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
     <link rel = 'stylesheet' type = 'text/css' href = '../css/menuMember.css'>
 <head>
-<body>
-        <header class = "heading" style="display:block;">
+    
+<header class = "heading" style="display:block;">
             <?php include('../lib/navbar.php'); ?>
-        </header>
+</header>
+
+<body>
+        
 
         <main>
             <div class = "content">
@@ -70,7 +73,7 @@
                             $row = mysqli_fetch_assoc($result);
                                 echo $row['email'];
                         ?>
-                        <a href="explore/explore.html" class="btn">Edit</a>
+                        <a href="../General/updateMember.php" class="btn">Edit</a>
                     </div>
                     
                 </div>

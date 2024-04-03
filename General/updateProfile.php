@@ -8,21 +8,21 @@
 <head>
     <title>Update Profile</title>
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+    <link rel = 'stylesheet' type = 'text/css' href = '../css/updateProfile.css'>
 <head>
+    
 <body>
-    <div class = 'main'>
 
-        <div class = 'ui'>
+    <div class = 'ui'>
             <?php include('../lib/navbar.php'); ?>
-        </div>
-            
-        <div class = 'heading'>
-            <h1 style="text-align:center"> Edit Profile </h1>
-        </div>
-        
+    </div>
+
+    <div class = 'main'>     
+
         <div class = 'content'>
+            <div>
             <div class = "frm" style="text-align:left;">  
+            <h1 style="text-align:center"> Edit Profile </h1>
                 <form name = 'f1' action = '../Sys/update.php' onsubmit = 'return validation()' method = 'POST' autocomplete='off'>
 
                     <div class = 'input_box'>
@@ -49,13 +49,15 @@
             <div class = "genderRadio">
                 <p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>      
                 <p id = "btnMale"><label>
-                    <input type = "radio" name = "gender" value = 'Male' required = "required" /> Male &nbsp </label>
+                    <input type = "radio" name = "gender" value = 'Male' required = "required"
+                    oninvalid="this.setCustomValidity('Choose your gender.')"
+                    oninput="this.setCustomValidity('')" /> Male &nbsp </label>
                 </p>
                 <p id = "btnFemale"><label><input type = "radio" name = "gender" value = 'Female' required = "required"/> Female </p></label>
                 <br>
             </div>
 
-                    <?php echo "<button id = 'btn' type = 'submit' name = 'id' value = '$_POST[id]'> Update </button>"; ?>
+                    <?php echo "<button id = 'btnSubmit' type = 'submit' name = 'id' value = '$_POST[id]'> Update </button>"; ?>
 
                 </form>
 
@@ -63,21 +65,7 @@
             </div>
         </div>
     </div>
-
-    <script>  
-        function validation() {  
-            var ps=document.f1.pass.value;  
-            var pscfm=document.f1.passcfm.value; 
-            
-            if(ps != pscfm) {  
-                alert("Please confirm your password is same!");  
-                return false;
-            }
-            else if (ps == pscfm) {
-                return true;
-            }     
-        }                              
-    </script>
+</div>
     
 </body>
 </html> 

@@ -19,6 +19,7 @@
     height:50px;
     width: auto;
 }
+
 .navMenu a.title{
     display:block;
     text-align:center;
@@ -76,6 +77,7 @@
     width:100%;
     text-align:left;
     transition: all 0.3s ease 0s; 
+    margin-bottom:10px;
 }
 /* drop down button hover */
 .navMenu a:hover {

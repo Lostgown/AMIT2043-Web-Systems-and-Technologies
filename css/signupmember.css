@@ -5,7 +5,7 @@ body{
     background-position: center; 
     overflow: hidden;
 }  
-.form{  
+.frm{  
     background: rgb(236, 230, 230, 0.95);  
     border: solid rgb(73, 62, 73) 1px;  
     border-radius: 15px;  
@@ -36,7 +36,7 @@ body{
 #btnSignUp{  
     background: #337ab7;  
     border: solid rgb(73, 62, 73) 1px;
-    border-radius: 4px;
+    border-radius: 20px;
     color: rgb(236, 230, 230); 
     position: relative; 
     margin-left: min(25%, 110px);

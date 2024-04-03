@@ -37,8 +37,8 @@
 
         if ($_POST['regType'] == 'admin') {
                 $sql ="INSERT INTO `admin` 
-                (`admin_id`, `admin_name`, `admin_pass`, `phone_no`, `gender`,'email') 
-                VALUES('$id', '$name', '$password', '$phone', '$gender',$email)";
+                (`admin_id`, `admin_name`, `admin_pass`, `phone_no`, `gender`,`email`) 
+                VALUES('$id', '$name', '$password', '$phone', '$gender','$email')";
                 $con->query($sql); 
 
                 echo "<link rel = 'stylesheet' type = 'text/css' href = '../Bling/main.css'><div></div>
@@ -50,8 +50,8 @@
         
         else {
                 $sql ="INSERT INTO `member` 
-                (`member_id`, `member_name`, `member_pass`, `phone_no`, `gender`,'email') 
-                VALUES('$id', '$name', '$password', '$phone', '$gender',$email)";
+                (`member_id`, `member_name`, `member_pass`, `phone_no`, `gender`,`email`) 
+                VALUES('$id', '$name', '$password', '$phone', '$gender','$email')";
                 $con->query($sql);
 
                 if (isset($_SESSION['userType'])) {

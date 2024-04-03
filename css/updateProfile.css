@@ -1,66 +1,58 @@
-body{   
-    background-image: url('../photo/login-wallpaper.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center; 
-    overflow: hidden;
-    font-family: "Montserrat", sans-serif;  
-}  
-.form{  
-    background: rgb(236, 230, 230, 0.95);
+.container{
+    display: block;
+}
+
+.content {
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.frm{  
+    background: rgb(236, 230, 230, 0.95);  
     border: solid rgb(73, 62, 73) 1px;  
-    width: 330px;  
     border-radius: 15px;  
     margin: 15vh auto;  
-    padding: 4vw;
-    padding-top: 2.5vw;
-    padding-bottom: 0;
+    padding: 40px;
+    padding-bottom: 24px;
+    width: 380px;  
 }  
 
-.userType {
+.genderRadio{
     margin-top: 1rem;
 }
-#btnMember{
-    position: relative;
-    margin-left: 40px;
-    bottom: 20px;
-    display:inline-block;
-}
-
-#btnAdmin{
+#gender{
     position: relative;
     bottom: 20px;
-    margin-left: 5px;
-    display:inline-block;
+    display: inline-block;
+}
+#btnMale{
+    position: relative;
+    bottom: 20px;
+    display: inline-block;
+}
+#btnFemale{
+    position: relative;
+    bottom: 20px;
+    display: inline-block;
 }
 
-#btnlogin{  
+#btnSubmit{
     background: #337ab7;  
-    border: solid rgb(73, 62, 73);
-    border-radius: 4px;
-    color: rgb(236, 230, 230);  
-    position: relative;
-    padding: 7px;   
-    bottom: 30px;
-}  
-#btnlogin:active {
+    border: solid rgb(73, 62, 73) 1px;
+    border-radius: 20px;
+    color: rgb(236, 230, 230); 
+    position: relative; 
+    margin-left: min(25%, 110px);
+    padding: 7px; 
+    float:left;
+}
+
+#btnSubmit:active {
 	position:relative;
-	bottom:27px;
+	top:3px;
 }
 
-#btnSignUp{  
-    color: rgb(236, 230, 230);
-    position: relative;
-    bottom: 30px; 
-    text-align: center;
-}
-#btnSignUp:active {
-	position:relative;
-	bottom:27px;
-}
-
-
-/* Textbox CSS  */
 :root {
     --color-light: rgb(236, 230, 230);
     --color-background: var(--color-light);
