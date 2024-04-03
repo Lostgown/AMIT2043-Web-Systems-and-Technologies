@@ -1,11 +1,10 @@
 * {
-
+    /* margin: 0; */
     font-family: "Montserrat", sans-serif;
 }
 
 
 .ui {
     position: absolute;
-    right: 80px; 
+    right: 80px;
 }
-

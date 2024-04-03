@@ -32,7 +32,6 @@
                 </div>
 
                 <div class="box-container">
-
                     <div class="box-profile">
                         <h3>Profile</h3>
                         <p><b>ID:</b><?php echo $_SESSION['idUser']?>
@@ -75,10 +74,8 @@
                         ?>
                         <a href="../General/updateMember.php" class="btn">Edit</a>
                     </div>
-                    
                 </div>
                 </p>
-
 
             </div>
     </main>

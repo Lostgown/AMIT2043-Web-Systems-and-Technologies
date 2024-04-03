@@ -1,56 +1,67 @@
-.container{
-    display: block;
+.fixed {
+    margin: 0;
+    /* top: 200rem; */
+    /* position: absolute; */
+    /* position: top; */
+}
+
+.container {
+    /* display: block; */
 }
 
 .content {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     text-align: left;
-    padding-left: 20px;
+    /* padding-left: 20px; */
 }
 
-.frm{  
-    background: rgb(236, 230, 230, 0.95);  
-    border: solid rgb(73, 62, 73) 1px;  
-    border-radius: 15px;  
-    margin: 15vh auto;  
+.frm {
+    background: rgb(236, 230, 230, 0.95);
+    border: solid rgb(73, 62, 73) 1px;
+    border-radius: 15px;
+    margin: 15vh auto;
     padding: 40px;
-    padding-bottom: 24px;
-    width: 380px;  
-}  
+    /* padding-bottom: 24px; */
+    width: 380px;
+    top: 2rem;
+}
 
-.genderRadio{
+.genderRadio {
     margin-top: 1rem;
 }
-#gender{
-    position: relative;
-    bottom: 20px;
-    display: inline-block;
-}
-#btnMale{
-    position: relative;
-    bottom: 20px;
-    display: inline-block;
-}
-#btnFemale{
+
+#gender {
     position: relative;
     bottom: 20px;
     display: inline-block;
 }
 
-#btnSubmit{
-    background: #337ab7;  
+#btnMale {
+    position: relative;
+    bottom: 20px;
+    display: inline-block;
+}
+
+#btnFemale {
+    position: relative;
+    bottom: 20px;
+    display: inline-block;
+}
+
+#btnSubmit {
+    background: #337ab7;
     border: solid rgb(73, 62, 73) 1px;
     border-radius: 20px;
-    color: rgb(236, 230, 230); 
-    position: relative; 
+    color: rgb(236, 230, 230);
+    position: relative;
     margin-left: min(25%, 110px);
-    padding: 7px; 
-    float:left;
+    padding: 7px;
+    float: left;
 }
 
 #btnSubmit:active {
-	position:relative;
-	top:3px;
+    position: relative;
+    top: 3px;
 }
 
 :root {
@@ -89,7 +100,8 @@
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
     margin: 0.5rem;
-    margin-top: 0.5rem;           /* firefox = 1.15rem, 19px, 3vh || chrome = 0.5rem, 9px, 1.35vh */
+    margin-top: 0.5rem;
+    /* firefox = 1.15rem, 19px, 3vh || chrome = 0.5rem, 9px, 1.35vh */
     white-space: nowrap;
     transform: translate(0, 0);
     transform-origin: 0 0;
@@ -97,7 +109,8 @@
     color: rgb(73, 62, 73);
     transition: transform 120ms ease-in;
     font-weight: bold;
-    line-height: 1.3rem;    /* firefox = 1.6rem, 24px, 4vh || chrome = 1.3rem, 21px, 3.3vh */
+    line-height: 1.3rem;
+    /* firefox = 1.6rem, 24px, 4vh || chrome = 1.3rem, 21px, 3.3vh */
     border-radius: 15px;
 }
 

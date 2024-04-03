@@ -13,11 +13,11 @@
     
 <body>
 
-    <div class = 'ui'>
+    <div class = 'fixed'>
             <?php include('../lib/navbar.php'); ?>
     </div>
 
-    <div class = 'main'>     
+    <div class = 'fixed'>     
 
         <div class = 'content'>
             <div>

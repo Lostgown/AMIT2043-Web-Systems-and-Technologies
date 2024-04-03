@@ -1,4 +1,5 @@
 <style>
+
 .navMenu{
     display:block;
     float: right;
@@ -7,6 +8,8 @@
     height:50px;
     width: 100%;
     font-family: "Montserrat", sans-serif;
+    padding: 9px;
+    /* position: relative; */
 }
 
 .navMenu img{
@@ -44,7 +47,8 @@
 .navMenu .dropdown{
     float:right;
     overflow:hidden;
-    transition: all 0.3s ease 0s; 
+    /* transition: all 0.3s ease 0s;  */
+    
 }
 .navMenu .icon{
     display:none;
@@ -53,8 +57,8 @@
 .main_links{
     background-color:transparent;
     color: white;
-    font-size:2.7vh;
-    line-height:1;
+    font-size:1.2rem;
+    /* line-height:1; */
     transition: all 0.3s ease 0s; 
 }
 /* main buttons hover */
@@ -69,36 +73,39 @@
 .dropdown .dropbtn{
     background-color:transparent;
     color: white;
-    font-size:2.7vh;
+    font-size:1.2rem;
     border:none;
-    outline:none;
-    padding:11px 16px;
-    font-family:inherit;
-    width:100%;
+    /* outline:none; */
+    padding:14px;
+    /* font-family:inherit; */
+    /* width:100%; */
+    /* dont never ever fucking touch here i swear to god jesus*/
     text-align:left;
-    transition: all 0.3s ease 0s; 
+    /* transition: all 0.3s ease 0s;  */
     margin-bottom:10px;
 }
 /* drop down button hover */
 .navMenu a:hover {
     color:black;
-    scale:110%;
+    /* scale:110%; */
 }
 
 .navMenu a.title:hover {
     color:white;
-    scale:103%;
+    /* scale:103%; */
 }
 
 .navbar a:hover,.navMenu .dropdown:hover .dropbtn{
     background-color:#EDF1F5;
     color: black;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
      /* border: 1px solid black;   */
-    border-top: 0px;
+    /* border-top: 0px; */
 
 }
 .dropdown-content{
+    margin: 0;
+    /* padding: 11px; */
     display:none;
     position:absolute;
     min-width:160px;
@@ -110,8 +117,8 @@
 .dropdown-content a{
     background-color:#EDF1F5;
     color:black;
-    font-size:2.7vh;
-    padding:12px 16px;
+    /* font-size:2.7vh; */
+    /* padding:12px 16px; */
     text-decoration:none;
     display:block;
     text-align:left;
@@ -123,9 +130,9 @@
 .dropdown-content a:hover{
     background-color:#EDF1F5;
     color:black;
-    box-sizing: border-box;
-    border: 1px solid #404040;
-    margin-top: -1px; 
+    /* box-sizing: border-box; */
+    /* border: 1px solid #404040; */
+    /* margin-top: -1px;  */
     
 }
 .dropdown:hover .dropdown-content{
@@ -214,7 +221,7 @@
     else if ($_SESSION['userType'] == 'admin') {
         echo "<a href='../Admin/menuAdmin.php' class='main_links'>Main Page</a>
               <div class='dropdown'>
-                  <button class='dropbtn'> Content <i>&#9660;</i> </button>
+                  <a class='dropbtn'> Content <i>&#9660;</i> </a>
                   <div class='dropdown-content'>
                       <a href='../Hakim/semakHakim.php'> - Register User </a>
                       <a href='../Admin/daftarAhli.php'> - Admin Account Maintenance </a>

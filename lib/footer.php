@@ -1,4 +1,5 @@
 <style>
+
     .container {
     max-width: 2000px;
     margin-right: auto;
@@ -17,11 +18,13 @@ ul {
 .footer {
     background-color: #282A2C;
     padding: 70px 0;   
+    position: relative;
 }
 
 .footer-col {
     width: 25%;
     padding: 0 15px;    
+    /* position: relative; */
 }
 
 .footer-col h4 {
