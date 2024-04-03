@@ -212,7 +212,7 @@
               <div class='dropdown'>
                   <button class='dropbtn'>Content<i>&#9660;</i></button>
                   <div class='dropdown-content'>
-                      <a href='../Peserta/keputusanPeserta.php'> - Events </a>
+                      <a href='../Event/join_event.php'> - Events </a>
                       <a href='../Peserta/keputusanPeserta.php'> - My Bookings </a>
                   </div>
               </div>";

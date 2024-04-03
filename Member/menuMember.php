@@ -75,12 +75,12 @@
                         <a href="../General/updateMember.php" class="btn">Edit</a>
                     </div>
                 </div>
-                </p>
 
             </div>
     </main>
 </body>
 <footer>
+<!-- <footer style="padding-bottom: 2.5rem; position: absolute; bottom: 0; width: 100%; height: 2.5rem;"> -->
     <?php include('../lib/footer.php'); ?>
 </footer>
 </html>
