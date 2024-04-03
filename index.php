@@ -6,11 +6,50 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>AMIT2043-Web Systems and Technologies</title>
+        <title>Login Page</title>
+        <link href="css/index.css" rel="stylesheet" />
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
     </head>
     <body>
-        <?php
-            echo "hello";
-        ?>
+        <div class="form">
+            
+            <h1 style="text-align:center;"> TARUMT Penang Badminton Club </h1> 
+            <form action="Sys/loginAuth.php" method="POST" autocomplete="off">
+                <div class = "input_box">
+                <label class="input">
+                    <input class ="input_field" type = "text" id ="user" name  = "user" 
+                        onkeyup="this.value = this.value.toUpperCase();"
+                        autofocus="autofocus" placeholder= " " required
+                        oninvalid="this.setCustomValidity('Fill in your ID.')"
+                        oninput="this.setCustomValidity('')"/>
+                    <span class="input_label">ID</span>
+                </label> 
+                </div>
+
+                <div class = 'input_box'>
+                <label class="input">
+                    <input class = "input_field" type = "password" id ="pass" name  = "pass" 
+                        placeholder= " " required
+                        oninvalid="this.setCustomValidity('Fill in your password.')"
+                        oninput="this.setCustomValidity('')" />  
+                    <span class="input_label">Password</span>
+                </label>
+                </div>
+
+                <div class = "userType">
+                    <p id = "btnMember"><label><input type = "radio" name = "loginType" value = 'member' checked/> Member </label></p>
+                    <p id = "btnAdmin"><label><input type = "radio" name = "loginType" value = 'admin' /> Admin </label></p>
+                </div>
+    
+                <p style = "text-align: center;"><input type = "submit" id = "btnlogin" name = 'btn' value = "Login" required = "required" /></p>  
+
+                <p id = "btnSignUp"><a href='signUpMember.php' style = "text-decoration: none;"> Sign Up as Member </a></p>  
+            
+                
+                
+            </form>
+            
+        <?php  ?>
+        </div>
     </body>
 </html>

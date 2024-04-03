@@ -1,0 +1,116 @@
+body{   
+    background-image: url('../photo/login-wallpaper.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center; 
+    overflow: hidden;
+    font-family: "Montserrat", sans-serif;  
+}  
+.form{  
+    background: rgb(236, 230, 230, 0.95);
+    border: solid rgb(73, 62, 73) 1px;  
+    width: 330px;  
+    border-radius: 15px;  
+    margin: 15vh auto;  
+    padding: 4vw;
+    padding-top: 2.5vw;
+    padding-bottom: 0;
+}  
+
+.userType {
+    margin-top: 1rem;
+}
+#btnMember{
+    position: relative;
+    margin-left: 40px;
+    bottom: 20px;
+    display:inline-block;
+}
+
+#btnAdmin{
+    position: relative;
+    bottom: 20px;
+    margin-left: 5px;
+    display:inline-block;
+}
+
+#btnlogin{  
+    background: #337ab7;  
+    border: solid rgb(73, 62, 73) 1px;
+    border-radius: 4px;
+    color: rgb(236, 230, 230);  
+    position: relative;
+    padding: 7px;   
+    bottom: 30px;
+}  
+#btnlogin:active {
+	position:relative;
+	bottom:27px;
+}
+
+#btnSignUp{  
+    color: rgb(236, 230, 230);
+    position: relative;
+    bottom: 30px; 
+    text-align: center;
+}
+#btnSignUp:active {
+	position:relative;
+	bottom:27px;
+}
+
+
+/* Textbox CSS  */
+:root {
+    --color-light: rgb(236, 230, 230);
+    --color-background: var(--color-light);
+    --color-accent: #0945e7;
+    font-family: 'Inter', sans-serif;
+}
+
+.input_box {
+    background: var(--color-background);
+    border-radius: 15px;
+    margin-top: 1rem;
+}
+
+.input {
+    position: relative;
+    font-size: 12px;
+}
+
+.input_field {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 2px solid rgb(73, 62, 73);
+    padding: 0.6rem;
+    background: transparent;
+    border-radius: 15px;
+}
+
+.input_label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0.2rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    margin: 0.5rem;
+    margin-top: 0.5rem;           /* firefox = 1.15rem, 19px, 3vh || chrome = 0.5rem, 9px, 1.35vh */
+    white-space: nowrap;
+    transform: translate(0, 0);
+    transform-origin: 0 0;
+    background: var(--color-background);
+    color: rgb(73, 62, 73);
+    transition: transform 120ms ease-in;
+    font-weight: bold;
+    line-height: 1.3rem;    /* firefox = 1.6rem, 24px, 4vh || chrome = 1.3rem, 21px, 3.3vh */
+    border-radius: 15px;
+}
+
+.input_field:focus+.input_label,
+.input_field:not(:placeholder-shown)+.input_label {
+    transform: translate(0.25rem, -65%) scale(0.8);
+    color: var(--color-accent);
+}
