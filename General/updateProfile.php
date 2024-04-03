@@ -14,11 +14,12 @@
 <body>
 
     <div class = 'fixed'>
-            <?php include('../lib/navbar.php'); ?>
+            <?php 
+            // include('../lib/navbar.php'); 
+            ?>
     </div>
 
     <div class = 'fixed'>     
-
         <div class = 'content'>
             <div>
             <div class = "frm" style="text-align:left;">  
