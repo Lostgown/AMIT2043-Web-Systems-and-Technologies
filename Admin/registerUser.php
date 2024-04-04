@@ -7,27 +7,20 @@
 <!DOCTYPE html>
 <html> 
 <head>
-    <title>Badminton Club Event Management System</title>
+    <title>Register User</title>
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
     <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
 <head>
 <body>
     <div class = 'main'>
-
-        <div class = 'title'>
-            <h2> &nbsp Badminton Club Event Management System </h2>
-        </div>
-
-        <div class = 'ui'>
-            <?php include('../lib/navbar.php'); ?>
-        </div>
             
-        <div class = 'heading'>
-            <h1> Sign Up User </h1>
-        </div>
+        
         
         <div class = 'content'>
-            <div class = "form">  
+            <div class = "frm">
+                <div class = 'heading'>
+                    <h1 style="text-align: center;"> Sign Up User </h1>
+                </div>  
                 <form name = "f1" action = "../Sys/signup.php" onsubmit = "return validation()" method = "POST" autocomplete="off"> 
                 
                     <div class = 'input_box'>
@@ -79,26 +72,28 @@
                     </div>
 
                     <div class = "genderRadio">
-                        <p id = "gender"> Gender: </p>           
+                        <p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>      
                         <p id = "btnMale"><label>
-                            <input type = "radio" name = "jantina" value = 'Male' required = "required" 
-                            oninvalid="this.setCustomValidity('Choose your gender.')"
-                            oninput="this.setCustomValidity('')" /> Male &nbsp </label>
+                        <input type = "radio" name = "gender" value = 'Male' required = "required"
+                        oninvalid="this.setCustomValidity('Choose your gender.')"
+                        oninput="this.setCustomValidity('')" /> Male &nbsp </label>
                         </p>
                         <p id = "btnFemale"><label><input type = "radio" name = "gender" value = 'Female' required = "required"/> Female </p></label>
+                    </div>
+
+                    <div class = "userRadio">
+                        <p id = "user"> User Type: </p>
+                        <p id = "btnMember"><label>
+                            <input type = "radio" name = "regType" value = 'member' required = "required" 
+                        oninvalid="this.setCustomValidity('Please choose the user type that you want to register.')" oninput="this.setCustomValidity('')" /> Member </label></p>
+                        <p id = "btnAdmin"><label><input type = "radio" name = "regType" value = 'admin' required = "required" /> Admin </label></p>
                         <br>
                     </div>
 
-                    <div class = "userType">
-                        <p id = "btnMember"><label><input type = "radio" name = "regType" value = 'member' required = "required" 
-                        oninvalid="this.setCustomValidity('Please choose the user type that you want to register.')" oninput="this.setCustomValidity('')" /> Member </label></p>
-                        <p id = "btnAdmin"><label><input type = "radio" name = "regType" value = 'admin' required = "required" /> Admin </label></p>
-                    </div>
 
 
 
-
-                    <button id = 'btn' style = 'margin-left:42%;' name ='btn'> Register </button>
+                    <button id = 'btnRegister' style = 'margin-left:42%;' name ='btn'> Register </button>
 
                 </form>
 

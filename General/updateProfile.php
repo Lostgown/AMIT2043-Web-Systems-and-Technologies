@@ -8,7 +8,7 @@
 <head>
     <title>Update Profile</title>
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/updateProfile.css'>
+    <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
 <head>
     
 <body>
@@ -58,7 +58,7 @@
                 <br>
             </div>
 
-                    <?php echo "<button id = 'btnSubmit' type = 'submit' name = 'id' value = '$_POST[id]'> Update </button>"; ?>
+                    <?php echo "<button id = 'btnUpdate' type = 'submit' name = 'id' value = '$_POST[id]'> Update </button>"; ?>
 
                 </form>
 

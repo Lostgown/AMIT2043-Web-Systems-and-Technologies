@@ -171,11 +171,11 @@
         display:block;
         text-align:left;
         width: 100%;
-        background-color:#f0e3d7;
+        background-color:#EDF1F5;
         line-height: 1.5rem;
     }
     .navMenu.mobileView a:hover:not(:last-child){
-        background-color:#f2c995;
+        background-color:#EDF1F5;
     }
 	.navMenu.mobileView .dropdown{
         float:none;
@@ -188,12 +188,12 @@
         position:relative;   
     }
 	.navMenu.mobileView .dropdown-content a{
-        background-color:#f0e3d7;
+        background-color:#EDF1F5;
         position:relative;   
         width: 200%;
     }
     .navMenu.mobileView .dropdown-content a:hover{
-        background-color:#f2c995;
+        background-color:#EDF1F5;
         border: 0;
     }
 }
@@ -223,7 +223,7 @@
               <div class='dropdown'>
                   <a class='dropbtn'> Content <i>&#9660;</i> </a>
                   <div class='dropdown-content'>
-                      <a href='../Hakim/semakHakim.php'> - Register User </a>
+                      <a href='../Admin/registerUser.php'> - Register User </a>
                       <a href='../Admin/daftarAhli.php'> - Admin Account Maintenance </a>
                       <a href='../Admin/senarai.php'> - Member Account Maintenance </a>
                       <a href='../Admin/import.php'> - Events Management </a>

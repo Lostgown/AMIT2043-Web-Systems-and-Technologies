@@ -130,12 +130,6 @@ ul {
                 </ul>
             </div>
             <div class='footer-col'>
-                <h4>About TARUMT Penang Badminton Club</h4>
-                <ul>
-                    <li><a href='about-us.html'>About Us</a></li>
-                </ul>    
-            </div>
-            <div class='footer-col'>
                 <h4>Club Location</h4>
                 <ul>
                 <li><a href='https://maps.app.goo.gl/UcGTsgyKfvo8GQiS7'>77, Lorong Lembah Permai 3, 11200 Tanjung Bungah, Pulau Pinang</a></li>
@@ -164,12 +158,6 @@ ul {
                     <li><a href='ticket/ticket.html'>Events Details</a></li>
                     <li><a href='hotel/first-world.html'>Event Bookings Details</a></li>
                 </ul>
-            </div>
-            <div class='footer-col'>
-                <h4>About TARUMT Penang Badminton Club</h4>
-                <ul>
-                    <li><a href='about-us.html'>About Us</a></li>
-                </ul>    
             </div>
             <div class='footer-col'>
                 <h4>Club Location</h4>

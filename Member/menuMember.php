@@ -16,12 +16,12 @@
     <link rel = 'stylesheet' type = 'text/css' href = '../css/menuMember.css'>
 <head>
     
-<header class = "heading" style="display:block;">
-            <?php include('../lib/navbar.php'); ?>
-</header>
+
 
 <body>
-        
+        <header class = "heading" style="display:block;">
+            <?php include('../lib/navbar.php'); ?>
+        </header>
 
         <main>
             <div class = "content">

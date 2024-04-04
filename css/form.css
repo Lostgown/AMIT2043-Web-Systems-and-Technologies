@@ -26,7 +26,7 @@
     top: 2rem;
 }
 
-.genderRadio {
+.genderRadio  {
     margin-top: 1rem;
 }
 
@@ -48,7 +48,31 @@
     display: inline-block;
 }
 
-#btnSubmit {
+.userRadio  {
+    margin-top: 1rem;
+}
+
+#user {
+    position: relative;
+    bottom: 20px;
+    display: inline-block;
+}
+
+#btnMember {
+    position: relative;
+    margin-left: 40px;
+    bottom: 20px;
+    display:inline-block;
+}
+
+#btnAdmin {
+    position: relative;
+    bottom: 20px;
+    margin-left: 5px;
+    display:inline-block;
+}
+
+#btnUpdate {
     background: #337ab7;
     border: solid rgb(73, 62, 73) 1px;
     border-radius: 20px;
@@ -59,9 +83,28 @@
     float: left;
 }
 
-#btnSubmit:active {
+#btnUpdate:active {
     position: relative;
     top: 3px;
+}
+
+#btnRegister {
+	background-color:transparent;
+    border:2px solid #3a3b3a;
+	border-radius:5px;
+    color:#000000;
+	cursor:pointer;
+	padding:7px;
+	text-decoration:none;
+    margin-left: 7.5rem;
+}
+#btnRegister:hover {
+	background:linear-gradient(to bottom, #ffce8a 5%, #ffdd8c 100%);
+	background-color:#ffce8a;
+}
+#btnRegister:active {
+	position:relative;
+	top:3px;
 }
 
 :root {
