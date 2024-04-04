@@ -72,7 +72,11 @@
                             $row = mysqli_fetch_assoc($result);
                                 echo $row['email'];
                         ?>
-                        <a href="../General/updateMember.php" class="btn">Edit</a>
+                        <form action = '../General/updateProfile.php' method = 'POST'>
+                            <?php echo "<style>button {float:right;margin-top: 10px;margin-right: 10px;display: block;background: orange;color: #fff;font-size: 17px;border-radius: 30px;border:none;padding: 8px 25px;text-decoration: none;}button:hover{background: rgb(255, 186, 58);transition: all 0.3s ease 0s;}</style>
+                            <button id = 'btnchng' name = 'id' value = '$_SESSION[idUser]'> Update </button></a>"; ?>
+                            <!-- <a href="#popup-box">Click to Open Popup Box!</a> -->
+                        </form>
                     </div>
                 </div>
 
