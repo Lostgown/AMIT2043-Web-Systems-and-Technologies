@@ -19,7 +19,7 @@
         <div class = 'content'>
             <div class = "frm">
                 <div class = 'heading'>
-                    <h1 style="text-align: center;"> Sign Up User </h1>
+                    <h1 style="text-align: center;"> Register New User </h1>
                 </div>  
                 <form name = "f1" action = "../Sys/signup.php" onsubmit = "return validation()" method = "POST" autocomplete="off"> 
                 

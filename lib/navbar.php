@@ -224,8 +224,8 @@
                   <a class='dropbtn'> Content <i>&#9660;</i> </a>
                   <div class='dropdown-content'>
                       <a href='../Admin/registerUser.php'> - Register User </a>
-                      <a href='../Admin/daftarAhli.php'> - Admin Account Maintenance </a>
-                      <a href='../Admin/senarai.php'> - Member Account Maintenance </a>
+                      <a href='../Admin/adminList.php'> - Admin Account Maintenance </a>
+                      <a href='../Admin/memberList.php'> - Member Account Maintenance </a>
                       <a href='../Admin/import.php'> - Events Management </a>
                       <a href='../General/keputusan.php'> - Events Bookings Details </a>
                   </div>

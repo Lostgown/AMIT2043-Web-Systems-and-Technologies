@@ -59,7 +59,7 @@
                                 <div></div>
                                 <script>
                                         alert('Successful Signed Up Member. The Member ID is $id');
-                                        window.location.href = '../Admin/signupAdmin.php';
+                                        window.location.href = '../Admin/memberList.php';
                                 </script>";
                 }
                 else {

@@ -4,6 +4,7 @@
     max-width: 2000px;
     margin-right: auto;
     color: #282A2C;
+    font-family: "Montserrat", sans-serif;
 }
 
 .row {
@@ -146,9 +147,9 @@ ul {
                 <h4>Account Maintenance</h4>
                 <ul>
                     <li><a href='../General/updateProfile.php'>Edit Profile</a></li>
-                    <li><a href='explore/GentingBowl.html'>Member Account Maintenance</a></li>
-                    <li><a href='explore/SkyVR.html'>Admin Account Maintenance</a></li>
-                    <li><a href='explore/SkyVR.html'>Register New User</a></li>
+                    <li><a href='../Admin/memberList.php'>Member Account Maintenance</a></li>
+                    <li><a href='../Admin/adminList.php'>Admin Account Maintenance</a></li>
+                    <li><a href='../Admin/registerUser.php'>Register New User</a></li>
                 </ul>
             </div>
             <div class='footer-col'>
