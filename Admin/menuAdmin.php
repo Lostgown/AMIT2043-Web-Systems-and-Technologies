@@ -18,13 +18,13 @@
     <!-- <link rel = 'stylesheet' type = 'text/css' href = '../css/dashboard.css'> -->
     <!-- <link rel = 'stylesheet' type = 'text/css' href = '../css/popupBox.css'> -->
     <style>
+    .text-color {
+        color: white;
+    }
+
     .container {
         display: flex;
         flex-wrap: wrap;
-    }
-
-    .event-view-button {
-        /* top: 23rem; */
     }
 
     .box-recent-event {
@@ -54,7 +54,7 @@
         /* width: relative; */
         height: 50rem;
         background-color: #ccc;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        /* box-shadow: 0 5px 10px rgba(0, 0, 0, .2); */
         border-radius: 12px;
         overflow: auto;
         overflow-x: hidden;
@@ -65,9 +65,10 @@
     }
 
     .header {
-        background-color: #40445a;
+        background-color: orange;
+        ;
         border-radius: 6px;
-        margin: -10px;
+        margin: -3px;
 
         grid-column: 2 / 3;
         grid-row: 1 / 2;
@@ -75,15 +76,15 @@
 
     .sidebar {
         background-color: #282A2C;
-        border-radius: 12px;
 
         grid-column: 1 / 2;
         grid-row: 1 / 3;
     }
 
     .main {
-        background-color: #c3c5ca;
-        border-radius: 12px;
+        /* background-color: #c3c5ca; */
+        background-color: #555555;
+        padding: 15px;
 
         grid-column: 2 / 3;
         grid-row: 2 / 3;
@@ -112,11 +113,14 @@
                     <!-- <div class="box-profile"> -->
                     <div class="dashboard">
                         <header class="header">
-                            <h1 style="color: white; text-align: center;">Recent Event Hosting</h1>
+                            <h2 style="color: white; text-align: center;">Recent Event Hosting</h2>
                         </header>
+
                         <section class="sidebar">
+
+
                             <div class="box-profile-admin">
-                                <h3>Profile</h3>
+                                <h3 style="text-align: center;">Profile</h3>
                                 <p><b>ID:</b><?php echo $_SESSION['idUser']?>
                                     <br>
                                     <b>Name:</b>
@@ -164,20 +168,21 @@
 
                         <main class="main">
                             <div class="container">
-                                <div class="box-recent-event"> event1
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> view </button>
+                                <div class="box-recent-event">
+                                    <h3 class="text-color"> Event1</h3>
+                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
                                 </div>
-                                <div class="box-recent-event"> event2
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> view </button>
+                                <div class="box-recent-event">
+                                    <h3 class="text-color"> Event2</h3>
+                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
                                 </div>
-                                <div class="box-recent-event"> event3
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> view </button>
+                                <div class="box-recent-event">
+                                    <h3 class="text-color"> Event3</h3>
+                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
                                 </div>
-                                <div class="box-recent-event"> event4
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> view </button>
-                                </div>
-                                <div class="box-recent-event"> event5
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> view </button>
+                                <div class="box-recent-event">
+                                    <h3 class="text-color"> Event4</h3>
+                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
                                 </div>
 
                             </div>
