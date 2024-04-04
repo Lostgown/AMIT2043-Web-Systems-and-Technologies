@@ -65,8 +65,8 @@
     }
 
     .header {
-        background-color: orange;
-        ;
+        background-color: #323949;
+
         border-radius: 6px;
         margin: -3px;
 
@@ -83,7 +83,7 @@
 
     .main {
         /* background-color: #c3c5ca; */
-        background-color: #555555;
+        background-color: #fff;
         padding: 15px;
 
         grid-column: 2 / 3;

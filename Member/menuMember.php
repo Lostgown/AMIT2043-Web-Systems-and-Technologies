@@ -33,7 +33,7 @@
         border-radius: 12px;
         margin: 15px;
         padding: 10px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        /* box-shadow: 0 5px 10px rgba(0, 0, 0, .2); */
     }
 
     .box-profile-admin {
@@ -64,8 +64,8 @@
     }
 
     .header {
-        background-color: purple;
-        ;
+        background-color: #323949;
+
         border-radius: 6px;
         margin: -3px;
 
@@ -82,7 +82,7 @@
 
     .main {
         /* background-color: #c3c5ca; */
-        background-color: #555555;
+        background-color: #fff;
         padding: 15px;
 
         grid-column: 2 / 3;
