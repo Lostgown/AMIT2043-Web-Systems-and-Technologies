@@ -46,15 +46,15 @@
         width: 200px;
         margin-bottom:5px;
         color:black;
-        background-color: #0dcaf0;
+        background-color: #EDF1F5;
         transition: all 0.3s ease 0s;
     }
 
     .box-side-bar-nav button:hover {
-        background-color: #27e4ff;
+        background-color: #F7FBFF;
         scale: 105%;
     }
-
+    
     .text-color {
         color: #555555;
     }

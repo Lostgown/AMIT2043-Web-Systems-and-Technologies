@@ -136,7 +136,7 @@
 
 /* drop down content hover */
 .dropdown-content a:hover {
-    background-color: #EDF1F5;
+    background-color: #F7FBFF;
     color: black;
     /* box-sizing: border-box; */
     /* border: 1px solid #404040; */
