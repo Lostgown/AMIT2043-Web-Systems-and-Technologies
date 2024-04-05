@@ -18,6 +18,37 @@
     <!-- <link rel = 'stylesheet' type = 'text/css' href = '../css/dashboard.css'> -->
     <!-- <link rel = 'stylesheet' type = 'text/css' href = '../css/popupBox.css'> -->
     <style>
+    .side-bar-nav {
+        padding: 12px;
+        text-align: left;
+        list-style-type: none;
+        /* text-decoration: none; */
+    }
+
+    li a {
+        display: block;
+        color: white;
+        padding: 5px;
+        text-decoration: none;
+    }
+
+    /* li a:hover {
+        background-color: #555;
+        color: white;
+        text-decoration: none;
+    } */
+
+    .box-side-bar-nav {
+        width: 15rem;
+        height: 27rem;
+        background-color: transparent;
+        color: white;
+        border-radius: 12px;
+        margin: 15px;
+        padding: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
     .text-color {
         color: white;
     }
@@ -117,6 +148,8 @@
                         </header>
 
                         <section class="sidebar">
+                            <!-- <li< /li> -->
+
 
 
                             <div class="box-profile-admin">
@@ -163,6 +196,38 @@
                             <button id = 'btnchng' name = 'id' value = '$_SESSION[idUser]'> Update </button></a>"; ?>
                                     <!-- <a href="#popup-box">Click to Open Popup Box!</a> -->
                                 </form>
+                            </div>
+
+                            <div class="box-side-bar-nav">
+                                <h3 style="color: white; text-align: center;">Navigation</h3>
+                                <ul class="side-bar-nav">
+                                    <li>
+                                        <a href="">
+                                            <p>- Register User</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <p>- Admin Account Maintenance</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <p>- Member Account Maintenance</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <p>- Events Management</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <p>- Events Bookings Details</p>
+                                        </a>
+                                    </li>
+                                </ul>
+
                             </div>
                         </section>
 
