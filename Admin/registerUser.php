@@ -9,7 +9,7 @@
 <head>
     <title>Register User</title>
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+    <link rel = 'stylesheet' type = 'text/css' href = '../css/formUpdate.css'>
 <head>
 <body>
     <div class = 'main'>
@@ -96,6 +96,8 @@
                     <button id = 'btnRegister' style = 'margin-left:42%;' name ='btn'> Register </button>
 
                 </form>
+                <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
+                    <br>
 
                 <?php $con=null; ?>
                 

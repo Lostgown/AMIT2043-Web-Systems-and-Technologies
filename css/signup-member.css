@@ -51,7 +51,7 @@ body{
 #btncancel{  
     background: #337ab7;  
     border: solid rgb(73, 62, 73) 1px;
-    border-radius: 4px;
+    border-radius: 20px;
     color: rgb(236, 230, 230); 
     position: relative; 
     margin-left: min(17%, 60px);

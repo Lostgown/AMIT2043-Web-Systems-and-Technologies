@@ -11,7 +11,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+    <link rel = 'stylesheet' type = 'text/css' href = '../css/formUpdate.css'>
 <head>
     
 <body>
@@ -60,10 +60,13 @@
                 <p id = "btnFemale"><label><input type = "radio" name = "gender" value = 'Female' required = "required"/> Female </p></label>
                 <br>
             </div>
-
+                    
                     <?php echo "<button id = 'btnUpdate' type = 'submit' name = 'id' value = '$_POST[id]'> Update </button>"; ?>
+                    
 
                 </form>
+                    <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
+                    <br>
 
                 <?php $con=null; ?>
             </div>

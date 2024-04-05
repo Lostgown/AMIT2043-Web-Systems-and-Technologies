@@ -1,9 +1,19 @@
+body{   
+    background-image: url('../photo/login-wallpaper.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center; 
+    overflow: hidden;
+}  
+
 .fixed {
     margin: 0;
     /* top: 200rem; */
     /* position: absolute; */
     /* position: top; */
 }
+
+
 
 .container {
     /* display: block; */
@@ -89,22 +99,19 @@
 }
 
 #btnRegister {
-	background-color:transparent;
-    border:2px solid #3a3b3a;
-	border-radius:5px;
-    color:#000000;
-	cursor:pointer;
-	padding:7px;
-	text-decoration:none;
-    margin-left: 7.5rem;
+    background: #337ab7;
+    border: solid rgb(73, 62, 73) 1px;
+    border-radius: 20px;
+    color: rgb(236, 230, 230);
+    position: relative;
+    margin-left: min(25%, 110px);
+    padding: 7px;
+    float: left;
 }
-#btnRegister:hover {
-	background:linear-gradient(to bottom, #ffce8a 5%, #ffdd8c 100%);
-	background-color:#ffce8a;
-}
+
 #btnRegister:active {
-	position:relative;
-	top:3px;
+    position: relative;
+    top: 3px;
 }
 
 :root {

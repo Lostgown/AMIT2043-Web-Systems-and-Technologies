@@ -5,8 +5,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel = "stylesheet" type = "text/css" href = "css/signupmember.css">  
+    <link rel = "stylesheet" type = "text/css" href = "css/signup-member.css">  
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'> 
+
+    <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
+
 </head>  
 <body>  
     <div class = "frm">  
@@ -73,9 +80,7 @@
                 <p id = "btnFemale"><label><input type = "radio" name = "gender" value = 'Female' required = "required"/> Female </p></label>
                 <br>
             </div>
-
-            
-            
+           
             <button id = "btnSignUp" name = 'regType' value = "member" > Sign Up </button> 
 
         </form>
