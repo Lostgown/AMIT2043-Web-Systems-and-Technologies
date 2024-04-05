@@ -23,14 +23,18 @@
 
 
 <body class="bg-dark">
-    <form method="POST" action="searchResult.php">
-        <input type="text" class="searchBar mt-5 ml-xl-6" name="search" placeholder="Search ID..."
-            onkeyup="this.value = this.value.toUpperCase();">
-    </form>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 me-3">
-        <a href="javascript: history.go(-1)"><button type="button"
-                class=" btn btn-primary btn-lg me-md-2 rounded-pill">Back</button></a>
-    </div>
+        <div class="d-flex justify-content-end">
+                <div class="p-4">
+                    <form method="POST" action="searchResult.php">
+                    <input type="text" class="searchBar " name="search" placeholder="Search ID..."
+                        onkeyup="this.value = this.value.toUpperCase();">
+                    </form>
+                </div>
+                <div class="p-3">
+                    <a href="javascript: history.go(-1)"><button type="button"
+                    class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
+                </div>
+        </div>
     <div class='container'>
         <div class="row mt-2">
             <div class="col">

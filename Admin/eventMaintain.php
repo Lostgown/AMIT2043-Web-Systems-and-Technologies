@@ -1,155 +1,97 @@
 <?php
     session_start();
     include('../Sys/authCheck.php');
-    // validMember();
-    // include ('../Sys/connection.php');
+    validAdmin();
+    include ('../Sys/connection.php');
+
+    $query = "select * from event";
+    $result = mysqli_query($con,$query); 
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
+    <title>Booking List</title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Member Menu</title>
-    <link rel='stylesheet' type='text/css' href='../css/main.css'>
-    <link rel='stylesheet' type='text/css' href='../css/menuMember.css'>
-
-    <style>
-    .container {
-        display: flex;
-        flex-wrap: wrap;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' href='../css/list.css'>
+</head>
 
 
-    .box {
-        width: 35rem;
-        height: 20rem;
-        background-color: #ccc;
-        margin: 15px;
-        padding: 10px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-        border-radius: 12px;
-    }
-
-
-    .box-demo {
-        width: 35rem;
-        height: 20rem;
-        background-color: #ccc;
-        margin: 15px;
-        padding: 10px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-        border-radius: 12px;
-    }
-
-    .dashboard {
-        padding: 50px;
-        margin: 0;
-        width: 120rem;
-        /* width: relative; */
-        height: 45rem;
-        background-color: #282A2C;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-        border-radius: 12px;
-        overflow: auto;
-        overflow-x: hidden;
-        display: grid;
-        grid-template-columns: 300px 1fr;
-        grid-template-rows: 60px 1fr;
-        display: flex;
-        flex-wrap: wrap;
-
-    }
-    </style>
-
-    <head>
-
-        <header class="heading" style="display:block;">
-            <?php include('../lib/navbar.php'); ?>
-        </header>
-
-    <body>
-        <main>
-            <div class="content">
-
-                <div style="display:inline-block;">
-                    <h1 style="color:#555555;margin-top:30px;font-weight: 400px;
-                    font-size: 30px;text-decoration: none;text-align: center;">Admin Event Maintenance<h1>
-                </div>
-                <!-- <div class="container"> -->
-                <div id="container" class="container">
-                    <button id="createEventBtn">create event</button>
-                </div>
-
-                <div id="dashboard" class="dashboard">
-                    <div class="box-demo">
-                        <h2>Cosmic Club</h2>
-                        <p>Welcome to cosmic club! everyone that is registered for this club are given with one free
-                            telesscope for </p>
-                        <button class="deleteBtn">Delete</button>
+<body class="bg-dark">
+    
+        <div class="d-flex justify-content-end">
+            <div class="p-4">
+                <form method="POST" action="searchResult.php">
+                <input type="text" class="searchBar " name="search" placeholder="Search ID..."
+                    onkeyup="this.value = this.value.toUpperCase();">
+                </form>
+            </div>
+            <div class="p-3">
+                <a href="../Event/createEvent.php"><button type="button"
+                class=" btn btn-secondary btn-lg me-md-2">Create</button></a>
+            </div>
+            <div class="p-3">
+                
+                <a href="menuAdmin.php"><button type="button"
+                class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
+            </div>
+        </div>
+    <div class='container'>
+        <div class="row mt-2">
+            <div class="col">
+                <div class="card mt-2">
+                    <div class="card-header">
+                        <h2 class="display-6 text-center">Event List</h2>
                     </div>
-                    <div class="box-demo">
-                        <h2>Cosmic Club</h2>
-                        <p>Welcome to cosmic club! everyone that is registered for this club are given with one free
-                            telesscope for </p>
-                        <button class="deleteBtn">Delete</button>
+                    <div class="card-body">
+                        <table class=" table table-bordered text-center">
+                            <tr class="table-dark">
+                                <td>Event ID</td>
+                                <td>Event Name</td>
+                                <td>Event Date</td>
+                                <td>Event Time</td>
+                                <td>Description</td>
+                                <td>Pax</td>
+                                <td>Edit</td>
+                                <td>Delete</td>
+                            </tr>
+                            <tr>
+                                <?php 
+                                            while($row =mysqli_fetch_assoc($result))
+                                            {
+                                         ?>
+                                <td><?php echo $row['event_id']; ?></td>
+                                <td><?php echo $row['event_name']; ?></td>
+                                <td><?php echo $row['date']; ?></td>
+                                <td><?php echo $row['time']; ?></td>
+                                <td><?php echo $row['description']; ?></td>
+                                <td><?php echo $row['pax']; ?></td>
+                                <td><?php echo "<form action='../Event/updateEvent.php' method='POST'><button class ='btn btn-warning' type='submit' name='id' value='$row[event_id]'>Edit</button></form>"?>
+                                </td>
+                                <td><?php echo "<form action='../Sys/deleteEvent.php' method='POST'><button class ='btn btn-danger' type='submit' name='id' value='$row[event_id]'>Delete</button></form>"?>
+                                </td>
+
+                            </tr>
+                            <?php 
+                                            }
+                                        ?>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
-        </main>
-    </body>
-    <!-- <footer> -->
-    <footer style="padding-bottom: 2.5rem; position: absolute; bottom: 0; width: 100%; height: 2.5rem;">
-        <?php include('../lib/footer.php'); ?>
-    </footer>
-    <script>
-    document.getElementById("createEventBtn").addEventListener("click", function() {
-        createEventBox();
-    });
-
-    function createEventBox() {
-        var dashboard = document.getElementById("dashboard");
-        var eventBox = document.createElement("div");
-        eventBox.className = "box";
-
-        var eventName = prompt("Enter event name:");
-        var eventDetails = prompt("Enter event details:");
-
-        var eventContent = document.createElement("div");
-        eventContent.innerHTML = "<h3>" + eventName + "</h3><p>" + eventDetails + "</p>";
-
-        var deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.className = "delete-btn";
-        deleteButton.addEventListener("click", function() {
-            if (confirm("Are you sure you want to delete this event?")) {
-                dashboard.removeChild(eventBox);
-            }
-        });
-
-        eventContent.appendChild(deleteButton);
-        eventBox.appendChild(eventContent);
-        dashboard.appendChild(eventBox);
-    }
-
-    function deleteBox(event) {
-        // Get the parent div of the delete button
-        var box = event.target.closest('.box-demo');
-
-        // Check if the parent div exists
-        if (box) {
-            // Remove the parent div
-            box.remove();
-        }
-    }
-
-    // Add event listener to delete buttons
-    var deleteButtons = document.querySelectorAll('.deleteBtn');
-    deleteButtons.forEach(function(button) {
-        button.addEventListener('click', deleteBox);
-    });
-    </script>
+        </div>
+    </div>
+    </div>
+</body>
+<!-- <footer> -->
+<footer style="padding-bottom: 2.5rem; position: relative; bottom: 0; width: 100%; height: 2.5rem;">
+    <?php include('../lib/footer.php'); ?>
+</footer>
 
 </html>
