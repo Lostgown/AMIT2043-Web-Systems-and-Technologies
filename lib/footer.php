@@ -120,6 +120,12 @@ ul {
             <div class='footer-col'>
                 <h4>Events Management</h4>
                 <ul>
+                    <li><a href='../General/resetPassword.php'>Reset Password</a></li>
+                </ul>
+            </div>
+            <div class='footer-col'>
+                <h4>Events Management</h4>
+                <ul>
                     <li><a href='ticket/ticket.html'>Events Details</a></li>
                     <li><a href='hotel/first-world.html'>My Bookings</a></li>
                 </ul>
@@ -140,6 +146,7 @@ ul {
             <div class='footer-col'>
                 <h4>Account Maintenance</h4>
                 <ul>
+                    <li><a href='../General/resetPassword.php'>Reset Password</a></li>
                     <li><a href='../Admin/memberList.php'>Member Account Maintenance</a></li>
                     <li><a href='../Admin/adminList.php'>Admin Account Maintenance</a></li>
                     <li><a href='../Admin/registerUser.php'>Register New User</a></li>

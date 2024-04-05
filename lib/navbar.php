@@ -234,6 +234,7 @@ screen and (max-height: 600px) {
               <div class='dropdown'>
                   <button class='dropbtn fixed-position-nav' >Content <i>&#9660;</i></button>
                   <div class='dropdown-content'>
+                      <a href='../General/resetPassword.php'> - Reset Password </a>
                       <a href='../Event/join_event.php'> - Events </a>
                       <a href='../Peserta/keputusanPeserta.php'> - My Bookings </a>
                   </div>
@@ -245,6 +246,7 @@ screen and (max-height: 600px) {
               <div class='dropdown'>
                   <a class='dropbtn fixed-position-nav'> Content <i>&#9660;</i> </a>
                   <div class='dropdown-content'>
+                      <a href='../General/resetPassword.php'> - Reset Password </a>
                       <a href='../Admin/registerUser.php'> - Register User </a>
                       <a href='../Admin/adminList.php'> - Admin Account Maintenance </a>
                       <a href='../Admin/memberList.php'> - Member Account Maintenance </a>
