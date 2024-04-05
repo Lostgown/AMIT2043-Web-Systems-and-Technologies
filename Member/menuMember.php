@@ -27,7 +27,7 @@
     li a {
         display: block;
         color: white;
-        padding: 5px;
+        padding: 0px;
         text-decoration: none;
     }
 
@@ -211,23 +211,25 @@
                             <div class="container">
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
+
+                                    <!-- view button removed -->
                                 </div>
 
                             </div>

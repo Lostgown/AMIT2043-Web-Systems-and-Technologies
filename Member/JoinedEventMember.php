@@ -17,6 +17,14 @@
     <link rel='stylesheet' type='text/css' href='../css/menuMember.css'>
 
     <style>
+    .button-color:nth-of-type(1) {
+        background-color: #FF7F7F;
+    }
+
+    .button-color:nth-of-type(2) {
+        background-color: #90EE90;
+    }
+
     .side-bar-nav {
         padding: 12px;
         text-align: left;
@@ -221,30 +229,33 @@
                             <div class="container">
                                 <div class="box-recent-event-joined">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Cancel </button>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Joined </button>
+                                    <button class="button-color" id='btnchng' name='id' value='$_SESSION[idUser]'>
+                                        Cancel </button>
+                                    <button class="button-color" id='btnchng' name='id' value='$_SESSION[idUser]'>
+                                        Joined </button>
                                 </div>
+
                             </div>
                             <hr>
                             <div class="container">
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
                                     <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
                                 </div>
 

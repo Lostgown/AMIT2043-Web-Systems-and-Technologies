@@ -28,15 +28,9 @@
     li a {
         display: block;
         color: white;
-        padding: 5px;
+        padding: 0.1px;
         text-decoration: none;
     }
-
-    /* li a:hover {
-        background-color: #555;
-        color: white;
-        text-decoration: none;
-    } */
 
     .box-side-bar-nav {
         width: 15rem;

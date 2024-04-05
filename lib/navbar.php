@@ -235,7 +235,7 @@ screen and (max-height: 600px) {
                   <button class='dropbtn fixed-position-nav' >Content <i>&#9660;</i></button>
                   <div class='dropdown-content'>
                       <a href='../Event/join_event.php'> - Events </a>
-                      <a href='../Peserta/keputusanPeserta.php'> - My Bookings </a>
+                      <a href='../Member/JoinedEventMember.php'> - My Bookings </a>
                   </div>
               </div>";
     }
