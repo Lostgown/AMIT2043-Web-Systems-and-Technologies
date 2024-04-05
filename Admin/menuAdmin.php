@@ -45,9 +45,15 @@
 
     .box-side-bar-nav button {
         width: 200px;
+<<<<<<< HEAD
+        margin-bottom: 5px;
+        color: black;
+        background-color: #0dcaf0;
+=======
         margin-bottom:5px;
         color:black;
         background-color: #EDF1F5;
+>>>>>>> 78c25dda0826e91073be8ff16ba11a796b02156f
         transition: all 0.3s ease 0s;
     }
 
