@@ -61,6 +61,16 @@
         /* box-shadow: 0 5px 10px rgba(0, 0, 0, .2); */
     }
 
+    .box-recent-event-joined {
+        width: 31rem;
+        height: 20rem;
+        background-color: #4c5265;
+        border-radius: 12px;
+        margin: 15px;
+        padding: 10px;
+        /* box-shadow: 0 5px 10px rgba(0, 0, 0, .2); */
+    }
+
     .box-profile-admin {
         width: 15rem;
         height: 15rem;
@@ -208,6 +218,14 @@
                         </section>
 
                         <main class="main">
+                            <div class="container">
+                                <div class="box-recent-event-joined">
+                                    <h3 class="text-color"> Event1</h3>
+                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Cancel </button>
+                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Joined </button>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="container">
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
