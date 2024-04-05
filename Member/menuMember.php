@@ -17,6 +17,37 @@
     <link rel='stylesheet' type='text/css' href='../css/menuMember.css'>
 
     <style>
+    .side-bar-nav {
+        padding: 12px;
+        text-align: left;
+        list-style-type: none;
+        /* text-decoration: none; */
+    }
+
+    li a {
+        display: block;
+        color: white;
+        padding: 5px;
+        text-decoration: none;
+    }
+
+    /* li a:hover {
+        background-color: #555;
+        color: white;
+        text-decoration: none;
+    } */
+
+    .box-side-bar-nav {
+        width: 15rem;
+        height: 27rem;
+        background-color: transparent;
+        color: white;
+        border-radius: 12px;
+        margin: 15px;
+        padding: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
     .text-color {
         color: white;
     }
@@ -162,7 +193,23 @@
                             <button id = 'btnchng' name = 'id' value = '$_SESSION[idUser]'> Update </button></a>"; ?>
                                     <!-- <a href="#popup-box">Click to Open Popup Box!</a> -->
                                 </form>
+                            </div>
 
+                            <div class="box-side-bar-nav">
+                                <h3 style="color: white; text-align: center;">Navigation</h3>
+                                <ul class="side-bar-nav">
+                                    <li>
+                                        <a href="">
+                                            <p>- Events Menu</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <p>- Joined Event</p>
+                                        </a>
+                                    </li>
+
+                                </ul>
                             </div>
                         </section>
 
