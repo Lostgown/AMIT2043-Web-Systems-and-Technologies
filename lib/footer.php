@@ -20,10 +20,12 @@ ul {
     background-color: #282A2C;
     padding: 70px 0;   
     position: relative;
+    
 }
 
 .footer-col {
-    width: 25%;
+    
+    width: 30%;
     padding: 0 15px;    
     /* position: relative; */
 }
@@ -126,8 +128,8 @@ ul {
             <div class='footer-col'>
                 <h4>Events Management</h4>
                 <ul>
-                    <li><a href='ticket/ticket.html'>Events Details</a></li>
-                    <li><a href='hotel/first-world.html'>My Bookings</a></li>
+                    <li><a href='../Event/join_event.php'>Events Details</a></li>
+                    <li><a href='../Member/JoinedEventMember.php'>My Bookings</a></li>
                 </ul>
             </div>
             <div class='footer-col'>
@@ -155,9 +157,9 @@ ul {
             <div class='footer-col'>
                 <h4>Events Management</h4>
                 <ul>
-                    <li><a href='ticket/ticket.html'>Register Events</a></li>
-                    <li><a href='ticket/ticket.html'>Events Details</a></li>
-                    <li><a href='hotel/first-world.html'>Event Bookings Details</a></li>
+                    <li><a href='../Admin/eventMaintain.php'>Register Events</a></li>
+                    <li><a href='../Admin/eventMaintain.php'>Events Details</a></li>
+                    <li><a href='../Event/bookingList.php'>Event Bookings Details</a></li>
                 </ul>
             </div>
             <div class='footer-col'>

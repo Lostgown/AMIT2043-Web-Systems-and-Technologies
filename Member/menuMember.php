@@ -33,13 +33,26 @@
 
     .box-side-bar-nav {
         width: 15rem;
-        height: 27rem;
+        height: 30rem;
         background-color: transparent;
         color: white;
         border-radius: 12px;
         margin: 15px;
         padding: 10px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+    .box-side-bar-nav button {
+        width: 200px;
+        margin-bottom:5px;
+        color:black;
+        background-color: #0dcaf0;
+        transition: all 0.3s ease 0s;
+    }
+
+    .box-side-bar-nav button:hover {
+        background-color: #27e4ff;
+        scale: 105%;
     }
 
     .text-color {
@@ -193,13 +206,18 @@
                                 <h3 style="color: white; text-align: center;">Navigation</h3>
                                 <ul class="side-bar-nav">
                                     <li>
-                                        <a href="">
-                                            <p>- Events Menu</p>
+                                        <a href="../General/resetPassword.php">
+                                            <button> Reset Password</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <p>- Joined Event</p>
+                                        <a href="../Event/join_event.php">
+                                            <button> Events Menu</button>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="JoinedEventMember.php">
+                                            <button> Joined Event</button>
                                         </a>
                                     </li>
 

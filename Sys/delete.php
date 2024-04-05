@@ -15,12 +15,12 @@
           <div></div>
           <script>
             alert('You can't delete your own account.')
-            window.location.href = '../Admin/adminList.php'
+            window.location.href = 'javascript: history.go(-1)'
           </script>";
     }
     else {
-      if (substr_replace($id, '', 1, 1) == 'P') {
-        $sql = "DELETE FROM member WHERE member_id='$id'";
+      if (substr_replace($id, '', 1, 1) == 'M') {
+        $sql = "DELETE FROM member  WHERE member_id='$id'";
         $con->query($sql);
       }
 
@@ -28,12 +28,14 @@
         $sql = "DELETE FROM admin WHERE admin_id='$id'";
         $con->query($sql);
       }
-    }
-
-    echo "<link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-          <div></div>
-          <script>
-            alert('$id had been deleted.')
-            window.location.href = '../Admin/adminList.php'
-          </script>";
+    
+  }
+  echo "<link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
+  <div></div>
+  <script>
+    alert('$id had been deleted.')
+    window.location.href = 'javascript: history.go(-1)'
+  </script>";
+  
+        
 ?>

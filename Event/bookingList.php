@@ -4,7 +4,7 @@
     validAdmin();
     include ('../Sys/connection.php');
 
-    $query = "select * from member";
+    $query = "select * from booking";
     $result = mysqli_query($con,$query); 
 ?>
 
@@ -12,12 +12,13 @@
 <html>
 
 <head>
-    <title>Member List</title>
+    <title>Booking List</title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' href='../css/list.css'>
 </head>
 
 
@@ -27,7 +28,7 @@
             onkeyup="this.value = this.value.toUpperCase();">
     </form>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 me-3">
-        <a href="menuAdmin.php"><button type="button"
+        <a href="javascript: history.go(-1)"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 rounded-pill">Back</button></a>
     </div>
     <div class='container'>
@@ -35,16 +36,16 @@
             <div class="col">
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Member List</h2>
+                        <h2 class="display-6 text-center">Event Booking List</h2>
                     </div>
                     <div class="card-body">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark">
+                                <td>Booking ID</td>
+                                <td>Event ID</td>
                                 <td>Member ID</td>
-                                <td>Name</td>
-                                <td>Phone No.</td>
-                                <td>Email</td>
-                                <td>Edit</td>
+                                <td>Booking Date</td>
+                                <td>Booking Time</td>
                                 <td>Delete</td>
                             </tr>
                             <tr>
@@ -52,13 +53,12 @@
                                             while($row =mysqli_fetch_assoc($result))
                                             {
                                          ?>
+                                <td><?php echo $row['booking_id']; ?></td>
+                                <td><?php echo $row['event_id']; ?></td>
                                 <td><?php echo $row['member_id']; ?></td>
-                                <td><?php echo $row['member_name']; ?></td>
-                                <td><?php echo $row['phone_no']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td><?php echo "<form action='../General/updateProfile.php' method='POST'><button class ='btn btn-warning' type='submit' name='id' value='$row[member_id]'>Edit</button></form>"?>
-                                </td>
-                                <td><?php echo "<form action='../Sys/delete.php' method='POST'><button class ='btn btn-danger' type='submit' name='id' value='$row[member_id]'>Delete</button></form>"?>
+                                <td><?php echo $row['booking_date']; ?></td>
+                                <td><?php echo $row['booking_time']; ?></td>
+                                <td><?php echo "<form action='../Sys/deleteBooking.php' method='POST'><button class ='btn btn-danger' type='submit' name='id' value='$row[booking_id]'>Delete</button></form>"?>
                                 </td>
 
                             </tr>

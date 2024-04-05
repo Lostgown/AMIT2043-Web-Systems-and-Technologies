@@ -34,13 +34,26 @@
 
     .box-side-bar-nav {
         width: 15rem;
-        height: 27rem;
+        height: 30rem;
         background-color: transparent;
         color: white;
         border-radius: 12px;
         margin: 15px;
         padding: 10px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+
+    .box-side-bar-nav button {
+        width: 200px;
+        margin-bottom:5px;
+        color:black;
+        background-color: #0dcaf0;
+        transition: all 0.3s ease 0s;
+    }
+
+    .box-side-bar-nav button:hover {
+        background-color: #27e4ff;
+        scale: 105%;
     }
 
     .text-color {
@@ -197,33 +210,33 @@
                                 <h3 style="color: white; text-align: center;">Navigation</h3>
                                 <ul class="side-bar-nav">
                                     <li>
-                                        <a href="">
-                                            <p>- Reset Password</p>
+                                        <a href="../General/resetPassword.php">
+                                            <button> Reset Password</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <p>- Register User</p>
+                                        <a href="../Admin/registerUser.php">
+                                            <button> Register User</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <p>- Admin Account Maintenance</p>
+                                        <a href="../Admin/adminList.php">
+                                            <button> Admin Account Maintenance</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <p>- Member Account Maintenance</p>
+                                        <a href="../Admin/memberList.php">
+                                            <button> Member Account Maintenance</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <p>- Events Management</p>
+                                        <a href="../Admin/eventMaintain.php">
+                                            <button> Events Management</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <p>- Events Bookings Details</p>
+                                        <a href="../Event/bookingList.php">
+                                            <button> Events Bookings Details</button>
                                         </a>
                                     </li>
                                 </ul>

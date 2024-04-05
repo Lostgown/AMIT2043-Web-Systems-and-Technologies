@@ -211,12 +211,12 @@
                                 <h3 style="color: white; text-align: center;">Navigation</h3>
                                 <ul class="side-bar-nav">
                                     <li>
-                                        <a href="">
+                                        <a href="../Event/join_event.php">
                                             <p>- Events Menu</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="JoinedEventMember.php">
                                             <p>- Joined Event</p>
                                         </a>
                                     </li>
