@@ -45,8 +45,8 @@
 
     .box-side-bar-nav button {
         width: 200px;
-        margin-bottom:5px;
-        color:black;
+        margin-bottom: 5px;
+        color: black;
         background-color: #0dcaf0;
         transition: all 0.3s ease 0s;
     }
