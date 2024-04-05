@@ -81,7 +81,8 @@
 
     .dashboard {
         margin: 0;
-        width: 150rem;
+        /* width: 150rem; */
+        width: 100%;
         /* width: relative; */
         height: 50rem;
         background-color: #ccc;
