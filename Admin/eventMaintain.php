@@ -33,6 +33,17 @@
         border-radius: 12px;
     }
 
+
+    .box-demo {
+        width: 35rem;
+        height: 20rem;
+        background-color: #ccc;
+        margin: 15px;
+        padding: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        border-radius: 12px;
+    }
+
     .dashboard {
         padding: 50px;
         margin: 0;
@@ -60,8 +71,6 @@
         </header>
 
     <body>
-
-
         <main>
             <div class="content">
 
@@ -75,9 +84,19 @@
                 </div>
 
                 <div id="dashboard" class="dashboard">
-
+                    <div class="box-demo">
+                        <h2>Cosmic Club</h2>
+                        <p>Welcome to cosmic club! everyone that is registered for this club are given with one free
+                            telesscope for </p>
+                        <button class="deleteBtn">Delete</button>
+                    </div>
+                    <div class="box-demo">
+                        <h2>Cosmic Club</h2>
+                        <p>Welcome to cosmic club! everyone that is registered for this club are given with one free
+                            telesscope for </p>
+                        <button class="deleteBtn">Delete</button>
+                    </div>
                 </div>
-
             </div>
         </main>
     </body>
@@ -101,18 +120,36 @@
         var eventContent = document.createElement("div");
         eventContent.innerHTML = "<h3>" + eventName + "</h3><p>" + eventDetails + "</p>";
 
-        var viewButton = document.createElement("button");
-        viewButton.textContent = "View";
-        viewButton.addEventListener("click", function() {
-            alert("View button clicked for: " + eventName);
-            // Add your view event logic here
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "delete-btn";
+        deleteButton.addEventListener("click", function() {
+            if (confirm("Are you sure you want to delete this event?")) {
+                dashboard.removeChild(eventBox);
+            }
         });
 
-        eventContent.appendChild(viewButton);
+        eventContent.appendChild(deleteButton);
         eventBox.appendChild(eventContent);
         dashboard.appendChild(eventBox);
-
     }
+
+    function deleteBox(event) {
+        // Get the parent div of the delete button
+        var box = event.target.closest('.box-demo');
+
+        // Check if the parent div exists
+        if (box) {
+            // Remove the parent div
+            box.remove();
+        }
+    }
+
+    // Add event listener to delete buttons
+    var deleteButtons = document.querySelectorAll('.deleteBtn');
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', deleteBox);
+    });
     </script>
 
 </html>
