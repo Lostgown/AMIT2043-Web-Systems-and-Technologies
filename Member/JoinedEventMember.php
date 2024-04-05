@@ -228,7 +228,7 @@
                         <main class="main">
                             <div class="container">
                                 <div class="box-recent-event-joined">
-                                    <h3 class="text-color"> Event1</h3>
+                                    <h3 style="color: white;">Event1</h3>
                                     <button class="button-color" id='btnchng' name='id' value='$_SESSION[idUser]'>
                                         Cancel </button>
                                     <button class="button-color" id='btnchng' name='id' value='$_SESSION[idUser]'>
