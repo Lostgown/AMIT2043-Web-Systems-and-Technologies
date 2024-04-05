@@ -198,6 +198,11 @@
                                 <ul class="side-bar-nav">
                                     <li>
                                         <a href="">
+                                            <p>- Reset Password</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
                                             <p>- Register User</p>
                                         </a>
                                     </li>
