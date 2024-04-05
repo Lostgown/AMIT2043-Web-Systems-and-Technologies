@@ -43,7 +43,7 @@
     }
 
     .text-color {
-        color: white;
+        color: #555555;
     }
 
     .container {
@@ -212,22 +212,26 @@
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
                                     <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
+                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
+                                    </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
                                     <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
+                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
+                                    </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
                                     <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
+                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
+                                    </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
                                     <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> Join </button>
+                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
+                                    </button>
 
                                     <!-- view button removed -->
                                 </div>
@@ -249,5 +253,18 @@
     <footer style="padding-bottom: 2.5rem; position: relative; bottom: 0; width: 100%; height: 2.5rem;">
         <?php include('../lib/footer.php'); ?>
     </footer>
+    <script>
+    var i = 0;
 
-</html>
+    function JoinEvent() {
+        if (i < 5) {
+            alert("You have successfully joined the event!!");
+            i++;
+        } else {
+
+            alert("The pax is full");
+        }
+        console.log(i);
+    }
+    </script>
+    < /html>

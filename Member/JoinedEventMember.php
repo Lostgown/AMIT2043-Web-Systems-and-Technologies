@@ -35,7 +35,7 @@
     li a {
         display: block;
         color: white;
-        padding: 5px;
+        padding: 0px;
         text-decoration: none;
     }
 
@@ -51,7 +51,7 @@
     }
 
     .text-color {
-        color: white;
+        color: #555555;
     }
 
     .container {
@@ -234,8 +234,8 @@
                                     <button class="button-color" id='btnchng' name='id' value='$_SESSION[idUser]'>
                                         Joined </button>
                                 </div>
-
                             </div>
+
                             <hr>
                             <div class="container">
                                 <div class="box-recent-event">

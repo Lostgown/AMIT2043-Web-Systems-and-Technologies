@@ -44,7 +44,7 @@
     }
 
     .text-color {
-        color: white;
+        color: #555555;
     }
 
     .container {
@@ -230,37 +230,109 @@
                             <div class="container">
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <button id='btnchng' name='id' value=''><a
+                                            style="text-decoration: none; color: white;" href="#popup-box"> Update
+                                        </a></button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event2</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <button id='btnchng' name='id' value=''> Update </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event3</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <button id='btnchng' name='id' value=''> Update </button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event4</h3>
-                                    <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button>
+                                    <button id='btnchng' name='id' value=''> Update </button>
                                 </div>
 
                             </div>
                         </main>
+
+
+
                     </div>
-
-
-
-
-
                 </div>
                 </p>
             </div>
         </main>
+
+        <div id="popup-box" class="modal" style="z-index: 22;">
+            <div class="contentA">
+                <form action="">
+                    <h2 style="text-align: center; margin: 0px;">
+                        Update Events
+                    </h2>
+
+                    <legend>Event Name:</legend>
+                    <input type="text" id="username" name="username"><br><br>
+
+                    <legend>Description:</legend>
+                    <input type="text" id="email" name="email"><br><br>
+
+                    <legend>Pax:</legend>
+                    <input type="number" id="password" name="password"><br><br>
+
+                    <legend>Date:</legend>
+                    <input type="date" id="password" name="password"><br><br>
+
+                    <legend>Time:</legend>
+                    <input type="time" id="password" name="password"><br><br>
+
+                    <!-- <legend>Gender:</legend>
+                    <input type="radio" name="gender" id="male">
+                    <label for="male">M</label>
+
+                    <input type="radio" name="gender" id="female">
+                    <label for="female">F</label>
+                    >
+                    <label for="others">Others</label>
+                    <input type="text" id="username" name="username" size="4"><br><br> -->
+
+
+                    <input type="reset" value="Reset">
+                    <input type="submit" value="Submit">
+
+                    <a href="#" style="
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    color:coral;
+                    font-size: 30px;
+                    text-decoration: none;
+                ">&times;</a>
+
+                </form>
+            </div>
+        </div>
     </body>
     <!-- <footer> -->
     <footer style="padding-bottom: 2.5rem; position: relative; bottom: 0; width: 100%; height: 2.5rem;">
         <?php include('../lib/footer.php'); ?>
     </footer>
+    <style>
+    .modal {
+        /* background-color: aquamarine; */
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
 
-</html>
+    .contentA {
+        position: absolute;
+        background-color: #3d3e51;
+        color: #fff;
+        padding: 5rem;
+        border-radius: 12px;
+        width: 50rem;
+        height: 23rem;
+    }
+
+    .modal:target {
+        display: flex;
+    }
+    </style>
+    < /html>
