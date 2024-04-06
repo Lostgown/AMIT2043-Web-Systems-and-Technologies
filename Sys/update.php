@@ -83,7 +83,7 @@
         }
 
         function updateGender($type, $x, $gender) {
-                if ($type == 'P') {
+                if ($type == 'M') {
                         $query = "UPDATE `member` SET gender = '$gender' WHERE `member`.`member_id` = '$x'";
                 }
                 else if ($type == 'A') {
