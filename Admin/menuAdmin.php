@@ -249,20 +249,26 @@
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event1</h3>
                                     <button id='btnchng' name='id' value=''><a
-                                            style="text-decoration: none; color: white;" href="#popup-box"> Update
+                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
                                         </a></button>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event2</h3>
-                                    <button id='btnchng' name='id' value=''> Update </button>
+                                    <button id='btnchng' name='id' value=''><a
+                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
+                                        </a>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event3</h3>
-                                    <button id='btnchng' name='id' value=''> Update </button>
+                                    <button id='btnchng' name='id' value=''><a
+                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
+                                        </a>
                                 </div>
                                 <div class="box-recent-event">
                                     <h3 class="text-color"> Event4</h3>
-                                    <button id='btnchng' name='id' value=''> Update </button>
+                                    <button id='btnchng' name='id' value=''><a
+                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
+                                        </a>
                                 </div>
 
                             </div>
