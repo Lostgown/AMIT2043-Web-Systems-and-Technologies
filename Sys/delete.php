@@ -28,9 +28,9 @@
         $sql = "DELETE FROM admin WHERE admin_id='$id'";
         $con->query($sql);
       }
-    
+     
   }
-  echo "<link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
+ echo "<link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
   <div></div>
   <script>
     alert('$id had been deleted.')

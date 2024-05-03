@@ -8,12 +8,6 @@
     <link rel = "stylesheet" type = "text/css" href = "css/signup-member.css">  
     <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'> 
 
-    <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
-
 </head>  
 <body>  
     <div class = "frm">  
