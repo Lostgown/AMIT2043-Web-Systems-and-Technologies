@@ -1,43 +1,33 @@
-// function validation() {
-//     var ps = document.getElementById('pass').value;
-//     // var ps = document.f1.pass.value;
-//     var pscfm = document.getElementById('passcfn').value;
-//     // var pscfm = document.f1.passcfm.value;
 
-//     if (ps != pscfm) {
-//         // alert("Please make your password is same!");
-//         return false;
-//     }
-//     else if (ps == pscfm) {
-//         return true;
-//     }
-// }
 function overall() {
+
+    
     function passwordValidation(inputField, minLength) {
         inputField.addEventListener('input', function () {
             var a = minLength - inputField.value.length;
             if (inputField.value.length < minLength) {
                 inputField.setCustomValidity('Please enter at least ' + a + ' more characters.');
+                // password must be in within 10 character
             } else {
                 inputField.setCustomValidity('');
             }
         });
     }
 
-    // Usage:
     var inputField = document.getElementById('pass');
     var minLength = 10;
 
     passwordValidation(inputField, minLength);
-
+    // password validation
 
 
     function nameValidation() {
         var nameInput = document.getElementById('name');
         var name = nameInput.value.trim();
 
-        // to match only English letters
         var englishLetters = /^[A-Za-z @,\'\.\-\/]+$/;
+        // to match only english letters
+        // check name format no special character e.g $ & % * # @
 
         if (!englishLetters.test(name)) {
             nameInput.setCustomValidity('Only English letters are allowed.');
@@ -46,7 +36,8 @@ function overall() {
         } else {
             nameInput.setCustomValidity('');
         }
-    }
+    } // name validation
+
 
     function passwordCfnValidation() {
         var password = document.getElementById('pass').value;
@@ -58,7 +49,8 @@ function overall() {
         } else {
             nameInput.setCustomValidity('');
         }
-    }
+    } // password confirmation validation
+
 
     function telNumValidation() {
         var telInput = document.getElementById('phone_no');
@@ -66,25 +58,29 @@ function overall() {
         // to remove space exiting in the number (if there is any)
 
         var telNumReq = /^(?:\+?6?01(?:\d{7}|\d{8}))$/;
-        // var telNumReq = /^01[0-9]-\d{7,8}$/;
+        // check telephone in malaysia phone format 60+
+        // var telNumReq = /^01[0-9]-\d{7,8}$/; - PHP method
 
         if (!telNumReq.test(tel)) {
             telInput.setCustomValidity('Your telephone number must be in the Malaysia phone number format.');
         } else {
             telInput.setCustomValidity('');
         }
-    }
+    } // telephone number validation
+
 
     function mailValidation() {
         var mailInput = document.getElementById('email');
         var mail = mailInput.value.trim();
 
         var mailReq = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // check email format 
 
         if (!mailReq.test(mail)) {
             mailInput.setCustomValidity('Your email must be in the correct email format.');
         } else {
             mailInput.setCustomValidity('');
         }
-    }
+    }// email validation
+
 }
