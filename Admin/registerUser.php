@@ -21,33 +21,31 @@
                 <div class = 'heading'>
                     <h1 style="text-align: center;"> Register New User </h1>
                 </div>  
-                <form name = "f1" action = "../Sys/signup.php" onsubmit = "return validation()" method = "POST" autocomplete="off"> 
+                <form name = "f1" action = "../Sys/signup.php" onsubmit = "return overall()" method = "POST" autocomplete="off"> 
                 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "text" id ="name" name  = "name" 
-                            autofocus="autofocus" placeholder= " " required
+                            <input class="input_field" type="text" id="name" name ="name" autofocus="autofocus" placeholder= " " required
                             oninvalid="this.setCustomValidity('Fill in the name.')"
-                            oninput="this.setCustomValidity('')" />   
+                            oninput="nameValidation()" />   
                             <span class="input_label">Full Name</span>
                         </label>
                     </div>
 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "password" name  = "pass" 
-                                placeholder= " " required
+                            <input class = "input_field" type = "password" name  = "pass"  id = "pass" placeholder= " " required
                                 oninvalid="this.setCustomValidity('Fill in the password.')"
-                                oninput="this.setCustomValidity('')" />  
+                                oninput="passwordValidation()" />  
                             <span class="input_label">Password</span>
                         </label>
                     </div>
 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "password" name  = "passcfm" placeholder= " " required
+                            <input class="input_field" type="password" name ="passcfm" id = "passcfn" placeholder= " " required
                                 oninvalid="this.setCustomValidity('Fill in your password again..')"
-                                oninput="this.setCustomValidity('')" />
+                                oninput="passwordCfnValidation()" />
                             <span class="input_label">Password Confirmation</span>
                         </label>
                     </div>
@@ -55,18 +53,18 @@
 
                     <div class = 'input_box'>
                         <label class="input">
-                                <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no" placeholder= " " required
+                                <input class = "input_field" type = "tel" name = "phone_no" id ="phone_no" placeholder= "60+" required
                                     oninvalid="this.setCustomValidity('Fill in your phone number.')"
-                                    oninput="this.setCustomValidity('')" />  
+                                    oninput = "telNumValidation()" />  
                                 <span class="input_label">Phone Number</span>
                         </label>
                     </div>
                     
                     <div class = 'input_box'>
                         <label class="input">
-                                <input class = "input_field" type = "text" id ="email" name  = "email" placeholder= " " required
+                                <input class = "input_field" type = "email" id ="email" name  = "email" placeholder= "" required
                                 oninvalid="this.setCustomValidity('Fill in your email.')"
-                                oninput="this.setCustomValidity('')" />  
+                                oninput="mailValidation()" />  
                             <span class="input_label">Email</span>
                         </label>
                     </div>
@@ -85,13 +83,12 @@
                         <p id = "user"> User Type: </p>
                         <p id = "btnMember"><label>
                             <input type = "radio" name = "regType" value = 'member' required = "required" 
-                        oninvalid="this.setCustomValidity('Please choose the user type that you want to register.')" oninput="this.setCustomValidity('')" /> Member </label></p>
+                        oninvalid="this.setCustomValidity('Please choose the user type that you want to register.')"
+                         oninput="this.setCustomValidity('')" /> Member </label></p>
                         <p id = "btnAdmin"><label><input type = "radio" name = "regType" value = 'admin' required = "required" /> Admin </label></p>
                         <br>
                     </div>
-
-
-
+    
 
                     <button id = 'btnRegister' style = 'margin-left:42%;' name ='btn'> Register </button>
 
@@ -106,19 +103,19 @@
     </div>
 </body>
 
-<script>  
-        function validation() {  
-            var ps=document.f1.pass.value;  
-            var pscfm=document.f1.passcfm.value; 
+<script src="../validation/registerUser.js">  
+        // function validation() {  
+        //     var ps=document.f1.pass.value;  
+        //     var pscfm=document.f1.passcfm.value; 
             
-            if(ps != pscfm) {  
-                alert("Please confirm your password is same!");  
-                return false;
-            }
-            else if (ps == pscfm) {
-                return true;
-            }     
-        }                              
+        //     if(ps != pscfm) {  
+        //         alert("Please confirm your password is same!");  
+        //         return false;
+        //     }
+        //     else if (ps == pscfm) {
+        //         return true;
+        //     }     
+        // }                              
     </script>
 
 </html> 
