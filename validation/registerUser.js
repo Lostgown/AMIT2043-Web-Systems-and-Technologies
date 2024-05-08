@@ -11,7 +11,7 @@ function passwordValidation(inputField, minLength) {
     });
 }
 
-var inputField = document.getElementById('pass');
+var inputField = document.getElementById('pass').value;
 var minLength = 10;
 
 passwordValidation(inputField, minLength);
@@ -19,9 +19,8 @@ passwordValidation(inputField, minLength);
 
 
 function nameValidation() {
-    var nameInput = document.getElementById('name');
+    var nameInput = document.getElementById('name').value;
     var name = nameInput.value.trim();
-
 
     var nameReq = /^[A-Za-z @,\'\.\-\/]+$/;
     // to match only english letters
@@ -51,7 +50,7 @@ function passwordCfnValidation() {
 
 
 function telNumValidation() {
-    var telInput = document.getElementById('phone_no');
+    var telInput = document.getElementById('phone_no').value;
     var tel = telInput.value.trim();
     // to remove space exiting in the number (if there is any)
 
@@ -68,7 +67,7 @@ function telNumValidation() {
 
 
 function mailValidation() {
-    var mailInput = document.getElementById('email');
+    var mailInput = document.getElementById('email').value;
     var mail = mailInput.value.trim();
 
     var mailReq = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
