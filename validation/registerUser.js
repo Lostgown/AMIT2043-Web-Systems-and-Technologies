@@ -22,7 +22,7 @@ function nameValidation() {
     var nameInput = document.getElementById('name');
     var name = nameInput.value.trim();
 
-    
+
     var nameReq = /^[A-Za-z @,\'\.\-\/]+$/;
     // to match only english letters
     // check name format no special character e.g $ & % * # @
@@ -39,7 +39,7 @@ function nameValidation() {
 
 function passwordCfnValidation() {
     var password = document.getElementById('pass').value;
-    var passwordCfn = document.getElementById('passcfn').value
+    var passwordCfn = document.getElementById('passcfn').value;
     var nameInput = document.getElementById('passcfn');
 
     if (passwordCfn != password) {
