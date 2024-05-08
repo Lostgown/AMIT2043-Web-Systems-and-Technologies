@@ -21,7 +21,7 @@
                 <div class = 'heading'>
                     <h1 style="text-align: center;"> Register New User </h1>
                 </div>  
-                <form name = "f1" action = "../Sys/signup.php" onsubmit = "return overall()" method = "POST" autocomplete="off"> 
+                <form name = "f1" action = "../Sys/signup.php" onsubmit = "" method = "POST" autocomplete="off"> 
                 
                     <div class = 'input_box'>
                         <label class="input">
@@ -83,12 +83,10 @@
                         <p id = "user"> User Type: </p>
                         <p id = "btnMember"><label>
                             <input type = "radio" name = "regType" value = 'member' required = "required" 
-                        oninvalid="this.setCustomValidity('Please choose the user type that you want to register.')"
-                         oninput="this.setCustomValidity('')" /> Member </label></p>
+                        oninvalid="this.setCustomValidity('Please choose the user type that you want to register.')" oninput="this.setCustomValidity('')" /> Member </label></p>
                         <p id = "btnAdmin"><label><input type = "radio" name = "regType" value = 'admin' required = "required" /> Admin </label></p>
                         <br>
                     </div>
-    
 
                     <button id = 'btnRegister' style = 'margin-left:42%;' name ='btn'> Register </button>
 
