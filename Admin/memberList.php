@@ -11,7 +11,11 @@
 $header = array(
     "member_id"=>"Member ID",
     "member_name"=>"Name",
+    "phone_no"=>"Phone Number",
+    "gender"=>"Gender",
+    "email"=>"Email"
 );
+//every header has the ability to do ascending and decending
 
 //retrieve sort parameter from URL
 if(isset($_GET["sort"])){
@@ -74,9 +78,9 @@ if (isset($_GET["order"])){
                                     }
                                 }
                                 ?>
-                                <th>Phone Number</th>
-                                <th>Gender</th>
-                                <th>Email</th>
+                                <!-- <th>Phone Number</th> -->
+                                <!-- <th>Gender</th> -->
+                                <!-- <th>Email</th> -->
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>

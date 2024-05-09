@@ -9,6 +9,9 @@
 $header = array(
     "admin_id"=>"Admin ID",
     "admin_name"=>"Name",
+    "phone_no"=>"Phone Number",
+    "gender"=>"Gender",
+    "email"=>"Email"
 );
 
 //retrieve sort parameter from URL
@@ -72,9 +75,9 @@ if (isset($_GET["order"])){
                                     }
                                 }
                                 ?>
-                                <th>Phone Number</th>
-                                <th>Gender</th>
-                                <th>Email</th>
+                                <!-- <th>Phone Number</th> -->
+                                <!-- <th>Gender</th> -->
+                                <!-- <th>Email</th> -->
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
