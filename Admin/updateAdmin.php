@@ -67,8 +67,8 @@
                        
                 //1.2 validate input
                 $error["name"] = validateName($name);
-                $error["phone_no"] = validatePhone($phone);
-                $error["email"] = validateEmail($email);
+                //$error["phone_no"] = validatePhone($phone);
+                //$error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
 
                 //filter out empty error
@@ -109,11 +109,9 @@
                     $con -> close();
                 }else{
                     //with error
-                    echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet'
-                    integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'>";
-                    echo "<ul class='list-group'>";
+                    echo "<ul class='error'>";
                     foreach ($error as $value) {
-                        echo "<li list-group-item list-group-item-danger>$value</li>";
+                        echo "<li list-group-item>$value</li>";
                     }
                     echo "</ul>";
                 }

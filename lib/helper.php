@@ -1,7 +1,7 @@
 <?php      
 
 //create function - validate student gender
-function validateStudentGender($gender){
+function validateGender($gender){
     if($gender == null){
         return "Please enter <b>gender</b>!";
     }else if(!array_key_exists($gender, allGender())){
@@ -10,7 +10,7 @@ function validateStudentGender($gender){
 }
 
 //create function - check student name
-function validateStudentName($name){
+function validateName($name){
     if($name == null){
         return "Please enter your <b>Name</b>!";
     }else if(strlen($name) > 30){
@@ -25,8 +25,8 @@ function validateStudentName($name){
 function validateAdminId($id){
     if($id== null){
         return "Please enter your <b>student id!</b>";
-    }else if(!preg_match ("/^[0-9]{2}[A-Z]{3}[0-9]{5}$/", $id)){
-        return "Invalid <b>student id!</b>";
+    }else if(!preg_match ("/^M\d+/", $id)){
+        return "Invalid <b>Admin ID!</b>";
     }
 
 }

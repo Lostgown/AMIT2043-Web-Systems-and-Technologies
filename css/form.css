@@ -184,3 +184,25 @@ body{
     transform: translate(0.25rem, -65%) scale(0.8);
     color: var(--color-accent);
 }
+
+.error, .info
+{
+    padding: 5px;
+    margin: 5px;
+    font-size: 0.9em;
+    list-style-position: inside;
+}
+
+.error
+{
+    border: 2px solid #FBC2C4;
+    background-color: #FBE3E4;
+    color: #8A1F11;
+}
+
+.info
+{
+    border: 2px solid #92CAE4;
+    background-color: #D5EDF8;
+    color: #205791;
+}
