@@ -38,13 +38,13 @@ function validationTel($phone) {
     }
 }
 
-function validatePass($password) {
-    if($password == null) {
-        return "Please enter your password";
-    } else if (!preg_match("/^[A-Za-z0-9]{10}$/"), $password) {
-        return "please enter atleast 10 character of password";
-    }
-}
+// function validatePass($password) {
+//     if($password == null) {
+//         return "Please enter your password";
+//     } else if (!preg_match("/^[A-Za-z0-9]{10}$/"), $password) {
+//         return "please enter atleast 10 character of password";
+//     }
+// }
 
 
 //create function - return all gender

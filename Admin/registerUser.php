@@ -128,10 +128,11 @@
                     </div>
 
                     <button id = 'btnRegister' style = 'margin-left:42%;' name ='btnRegister'> Register </button>
-                    <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
+                    
                 </form>
-                
-                    <br>
+                <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
+                <!--do not put this statementt inside form tag-->
+                <br>
 
                 <?php $con=null; ?>
                 
