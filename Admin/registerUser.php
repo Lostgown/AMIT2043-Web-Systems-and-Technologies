@@ -53,7 +53,7 @@
                 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class="input_field" type="text" id="txtname" name="txtname" autofocus="autofocus" placeholder= "" required
+                            <input class="input_field" type="text" id="name" name="name" autofocus="autofocus" placeholder= "" required
                             oninvalid="this.setCustomValidity('Fill in the name.')"
                             //oninput="this.setCustomValidity('')"
                             oninput="validation()"
