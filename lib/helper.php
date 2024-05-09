@@ -51,9 +51,22 @@ function validatePhone($phone) {
 
 function validatePass($password) {
     if($password == null) {
-        return "Please enter your <b>Password</b>";
-    } else if (!preg_match("/^[A-Za-z0-9]{10}$/", $password)) {
-        return "please enter at least 10 character of password";
+        return 'Please enter your password.';
+    } else if (strlen($password) != 10) {
+        return 'Your password should in within 10 character only.';
+    } else {
+        return '';
+    }
+}
+
+function validateCfnPass($passwordCfn, $password) {
+    if($passwordCfn == null) {
+        return 'Please enter your password.';
+    }
+    else if($passwordCfn != $password) {
+        return 'Your password confirmation must be the same as password.';
+    } else {
+        return '';
     }
 }
 
