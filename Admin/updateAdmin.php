@@ -67,8 +67,8 @@
                        
                 //1.2 validate input
                 $error["name"] = validateName($name);
-                //$error["phone_no"] = validatePhone($phone);
-                //$error["email"] = validateEmail($email);
+                $error["phone_no"] = validatePhone($phone);
+                $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
 
                 //filter out empty error

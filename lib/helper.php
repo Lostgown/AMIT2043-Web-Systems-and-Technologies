@@ -3,10 +3,21 @@
 //create function - validate student gender
 function validateGender($gender){
     if($gender == null){
-        return "Please enter <b>gender</b>!";
+        return "Please enter <b>Gender</b>!";
     }else if(!array_key_exists($gender, allGender())){
         return "Invalid <b>Gender</b>";
     }
+}
+
+//create function validateEmail
+function validateEmail($email) {
+    if($email == null){
+        return "Please enter your <b>Email</b>!";
+    }else if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
+        // Use filter_var() function with FILTER_VALIDATE_EMAIL filter
+        return "Invalid <b>Email</b>!";
+    }
+    
 }
 
 //create function - check student name
@@ -24,25 +35,25 @@ function validateName($name){
 //create function - check student id
 function validateAdminId($id){
     if($id== null){
-        return "Please enter your <b>student id!</b>";
+        return "Please enter your <b>Admin ID!</b>";
     }else if(!preg_match ("/^M\d+/", $id)){
         return "Invalid <b>Admin ID!</b>";
     }
 }
 
-function validationTel($phone) {
+function validatePhone($phone) {
     if ($phone == null) {
-        return "Please enter your <b>phone number</b>";
+        return "Please enter your <b>Phone Number</b>";
     } else if (!preg_match("/^01[0-9]-\d{7,8}$/", $phone)) {
-        return "Invalid <b>Phone number</b>";
+        return "Invalid <b>Phone Number</b>";
     }
 }
 
 function validatePass($password) {
     if($password == null) {
-        return "Please enter your password";
-    } else if (!preg_match("/^[A-Za-z0-9]{10}$/"), $password) {
-        return "please enter atleast 10 character of password";
+        return "Please enter your <b>Password</b>";
+    } else if (!preg_match("/^[A-Za-z0-9]{10}$/", $password)) {
+        return "please enter at least 10 character of password";
     }
 }
 
