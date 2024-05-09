@@ -5,17 +5,20 @@
         <meta charset="UTF-8">
         <title>Update Admin</title>
         <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-        <link rel = 'stylesheet' type = 'text/css' href = '../css/formUpdate.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+        
     </head>
     <body>
         <?php
-        include './lib/navbar.php';
-        require_once './lib/helper.php';
+        require_once '../lib/helper.php';
         ?>
         
         <form action="" method="POST">
-            <h1>Update Admin</h1>
-
+        <div class = 'fixed'>     
+            <div class = 'content'>
+            <div>
+            <div class = "frm" style="text-align:left;">  
+            <h1 style="text-align:center"> Edit Profile </h1>
         <?php 
         //using GET method and POST method together
         if($_SERVER["REQUEST_METHOD"] == "GET"){
@@ -40,7 +43,8 @@
                 $id = $row -> admin_id;
                 $name = $row -> admin_name;
                 $phone = $row -> phone_no;
-                $gender = $row -> email;
+                $gender = $row -> gender;
+                $email = $row -> email;
             }else{
                 //unable to fetch record from DB
                 echo "<div class='error'>Unable to retrieve record.
@@ -51,20 +55,22 @@
         }else{
             //POST METHOD - update DB record
             //1.1 receive user input from student form
-                $id = strtoupper(trim($_POST["hdID"]));
-                $name = trim($_POST["txtStudentName"]);
-                if(isset($_POST["rbgender"])){
-                    $gender = trim($_POST["rbgender"]);
+                $id = (trim($_POST["hdID"]));
+                $name = trim($_POST["name"]);
+                $phone = trim($_POST["phone_no"]);
+                $email = trim($_POST["email"]);
+                if(isset($_POST["gender"])){
+                    $gender = trim($_POST["gender"]);
                 }else{
                     $gender = NULL;
                 }
-                $program = trim($_POST["ddlProgramme"]);
-                        
+                       
                 //1.2 validate input
-                $error["name"] = validateStudentName($name);
-                $error["gender"] = validateStudentGender($gender);
-                $error["program"] = validateStudentProgram($program);
-                
+                $error["name"] = validateName($name);
+                $error["phone_no"] = validatePhone($phone);
+                $error["email"] = validateEmail($email);
+                $error["gender"] = validateGender($gender);
+
                 //filter out empty error
                 $error = array_filter($error);
                 
@@ -74,16 +80,16 @@
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "UPDATE Student SET StudentName = ?, Gender =?, Program = ? WHERE StudentId = ?";
+                    $sql = "UPDATE admin SET admin_name = ?, phone_no =?, gender = ? , email = ? WHERE admin_id = ?";
                     
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
                     //NOTE: $con -> prepare() => when there is "?" parameter in above sql satatement
                     $stmt = $con -> prepare($sql);
                     
-                    //step 3.1: PAss parameter into SQL
+                    //step 3.1: Pass parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt -> bind_param("ssss", $name, $gender, $program, $id);
+                    $stmt -> bind_param("sssss", $name, $phone, $gender, $email,$id);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -91,67 +97,69 @@
                     if($stmt -> affected_rows >0){
                         //insert successful
                         printf("<div class='info'>
-                                Student <b>%s</b> has been updated.[<a href='list-student.php'>Back to list</a>]
+                                Admin <b>%s</b> has been updated.[<a href='adminList.php'>Back to list</a>]
                                 </div>", $name);
                     }else{
                         //GG: unable to insert
                         echo "<div class='error'>Unable to update.
-                              <a href='insert.php'>Try Again</a></div>";
+                              <a href='updateAdmin.php'>Try Again</a></div>";
                     }
                     
                     $stmt -> close();
                     $con -> close();
                 }else{
                     //with error
-                    //oh no got error
-                    echo "<ul class='error'>";
+                    echo "<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' rel='stylesheet'
+                    integrity='sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH' crossorigin='anonymous'>";
+                    echo "<ul class='list-group'>";
                     foreach ($error as $value) {
-                        echo "<li>$value</li>";
+                        echo "<li list-group-item list-group-item-danger>$value</li>";
                     }
                     echo "</ul>";
                 }
         }
         ?>
-            <table cellpadding="5">
-                <tr>
-                    <td>Student Id: </td>
-                    <td><input type="hidden" name="hdID" value="<?php echo (isset($id))? $id:""; ?>"/>
-                        <?php echo (isset($id))? $id:""; ?></td>
-                </tr>
+            
+
+                    <input class = "input_field" type = "hidden" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>"/>         
                 
-                <tr>
-                    <td>Student Name: </td>
-                    <td><input type="text" name="txtStudentName" value="<?php echo (isset($name))?$name: ""; ?>" /></td>
-                </tr>
-                
-                <tr>
-                    <td>Gender: </td>
-                    <td><input type="radio" name="rbgender" value="M" <?php echo (isset($gender) && $gender == "M")?"checked":"" ?> />Male</td>
-                    <td><input type="radio" name="rbgender" value="F" <?php echo (isset($gender) && $gender == "F")?"checked":"" ?> />Female</td>
-                </tr>
-                
-                <tr>
-                    <td>Programme: </td>
-                    <td><select name="ddlProgramme">
-                            <?php 
-                                    foreach (allProgramme() as $key => $value) {
-                                        if(isset($program) && $program == $key){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected = "";
-                                        }
-                                        echo "<option value='$key' $selected >$value</option>";
-                                    }
-                            ?>
-                </tr>
-            </table>
+                    <div class = 'input_box'>
+                        <label class="input">
+                            <input class = "input_field" type = "text" name  = "name" value="<?php echo (isset($name))?$name: ""; ?>"/>
+                            <span class="input_label">Name</span>
+                        </label>
+                    </div>
+
+                    <div class = 'input_box'>
+                        <label class="input">
+                            <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  value="<?php echo (isset($phone))?$phone: ""; ?>"/>  
+                    <span class="input_label">Phone Number</span>
+                </label>
+            </div>
+            
+            <div class = 'input_box'>
+                <label class="input">
+                    <input class = "input_field" type = "text" id ="email" name  = "email"  value="<?php echo (isset($email))?$email: ""; ?>"/>  
+                    <span class="input_label">Email</span>
+                </label>
+            </div>
+
+            <div class = "genderRadio">
+                <p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>      
+                <p id = "btnMale"><label>
+                    <input type = "radio" name = "gender" value = 'M' 
+                    <?php echo (isset($gender) && $gender == "M")?"checked":"" ?> /> Male &nbsp </label>
+                </p>
+                <p id = "btnFemale"><label>
+                    <input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female </p></label>
+                <br>
+            </div>
             <br/>
-            <input type="submit" value="update" name="btnUpdate" />
-            <input type="button" value="cancel" name="btnCancel" onclick="location='list-student.php'"/>
-        </form>
+            <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
+            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='adminList.php'" />
+            </form>
+            <br/>
+
         
-        <?php
-        include './general/footer.php';
-        ?>
     </body>
 </html>

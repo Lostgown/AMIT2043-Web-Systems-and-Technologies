@@ -105,13 +105,13 @@ if (isset($_GET["order"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td><a href='update.php?id=%s'>Edit</a></td>  
-                                                    <td><a href='delete.php?id=%s'>Delete</a></td>
+                                                    <td><button class ='btn btn-warning'><a href='updateAdmin.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
+                                                    <td><button class ='btn btn-danger'><a href='deleteAdmin.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
                                                     , $row->admin_id
                                                     , $row->admin_name
                                                     , $row->phone_no
-                                                    , $row->gender
+                                                    , allGender()[$row->gender]
                                                     , $row->email
                                                     , $row->admin_id, $row->admin_id);
                                         }

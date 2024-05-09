@@ -15,10 +15,6 @@ body{
 
 
 
-.container {
-    /* display: block; */
-}
-
 .content {
     /* margin-bottom: 10px; */
     text-align: left;
@@ -84,16 +80,35 @@ body{
 
 #btnUpdate {
     background: #337ab7;
-    border: solid rgb(73, 62, 73) 1px;
+    border: 0px;
     border-radius: 20px;
     color: rgb(236, 230, 230);
     position: relative;
     margin-left: min(25%, 110px);
     padding: 7px;
     float: left;
+    transition: all 0.3s ease 0s;
 }
 
+
 #btnUpdate:active {
+    position: relative;
+    top: 3px;
+}
+
+#btnCancel {
+    background: #6c757d;
+    border: 0px;
+    border-radius: 20px;
+    color: rgb(236, 230, 230);
+    position: relative;
+    margin-left: min(25%, 110px);
+    padding: 7px;
+    float: left;
+    transition: all 0.3s ease 0s;
+}
+
+#btnCancel:active {
     position: relative;
     top: 3px;
 }
