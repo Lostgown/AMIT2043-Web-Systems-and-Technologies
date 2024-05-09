@@ -108,7 +108,7 @@ if (isset($_GET["order"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td><button class ='btn btn-warning'><a href='updateAdmin.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
+                                                    <td><button class ='btn btn-warning'><a href='../Member/updateMember.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
                                                     <td><button class ='btn btn-danger'><a href='deleteAdmin.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
                                                     , $row->member_id
