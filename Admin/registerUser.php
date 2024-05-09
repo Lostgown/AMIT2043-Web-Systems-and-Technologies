@@ -21,7 +21,7 @@
                 <div class = 'heading'>
                     <h1 style="text-align: center;"> Register New User </h1>
                 </div>  
-                <form name = "f1" action = "../Sys/signup.php" onsubmit = "return passwordCfnValidation()" method = "POST" autocomplete="off"> 
+                <form name = "f1" action = "../Sys/signup.php" onsubmit = "return validation()" method = "POST" autocomplete="off"> 
                 
                     <div class = 'input_box'>
                         <label class="input">
