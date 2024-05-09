@@ -28,8 +28,24 @@ function validateAdminId($id){
     }else if(!preg_match ("/^M\d+/", $id)){
         return "Invalid <b>Admin ID!</b>";
     }
-
 }
+
+function validationTel($phone) {
+    if ($phone == null) {
+        return "Please enter your <b>phone number</b>";
+    } else if (!preg_match("/^01[0-9]-\d{7,8}$/", $phone)) {
+        return "Invalid <b>Phone number</b>";
+    }
+}
+
+function validatePass($password) {
+    if($password == null) {
+        return "Please enter your password";
+    } else if (!preg_match("/^[A-Za-z0-9]{10}$/"), $password) {
+        return "please enter atleast 10 character of password";
+    }
+}
+
 
 //create function - return all gender
 function allGender(){
