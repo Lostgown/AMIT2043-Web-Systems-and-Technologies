@@ -2,10 +2,30 @@
     session_start();
     include('../Sys/authCheck.php');
     validAdmin();
-    include ('../Sys/connection.php');
+    include ('../lib/helper.php');
+?>
 
-    $query = "select * from admin";
-    $result = mysqli_query($con,$query); 
+<?php 
+$header = array(
+    "admin_id"=>"Admin ID",
+    "admin_name"=>"Name",
+);
+
+//retrieve sort parameter from URL
+if(isset($_GET["sort"])){
+    $sort = $_GET["sort"];
+}else{
+    $sort="admin_id";
+}
+
+//retrive order
+if (isset($_GET["order"])){
+    $order = $_GET["order"];
+}else{
+    $order = "ASC";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -21,17 +41,10 @@
     <link rel='stylesheet' type='text/css' href='../css/list.css'>
 </head>
 
-
-<body class="bg-dark">
+<body class="bg-dark ">
         <div class="d-flex justify-content-end">
-            <div class="p-4">
-                <form method="POST" action="searchResult.php">
-                <input type="text" class="searchBar " name="search" placeholder="Search ID..."
-                    onkeyup="this.value = this.value.toUpperCase();">
-                </form>
-            </div>
             <div class="p-3">
-                <a href="javascript: history.go(-1)"><button type="button"
+                <a href="menuAdmin.php"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
             </div>
         </div>
@@ -43,35 +56,80 @@
                         <h2 class="display-6 text-center">Admin List</h2>
                     </div>
                     <div class="card-body">
+                        <form action="" method="POST">
                         <table class=" table table-bordered text-center">
-                            <tr class="table-dark">
-                                <td>Admin ID</td>
-                                <td>Name</td>
-                                <td>Phone No.</td>
-                                <td>Email</td>
-                                <td>Edit</td>
-                                <td>Delete</td>
-                            </tr>
-                            <tr>
+                            <tr class="table-dark ">
                                 <?php 
-                                            while($row =mysqli_fetch_assoc($result))
-                                            {
-                                         ?>
-                                <td><?php echo $row['admin_id']; ?></td>
-                                <td><?php echo $row['admin_name']; ?></td>
-                                <td><?php echo $row['phone_no']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td><?php echo "<form action='../General/updateProfile.php' method='POST'><button class ='btn btn-warning' type='submit' name='id' value='$row[admin_id]'>Edit</button></form>"?>
-                                </td>
-                                <td><?php echo "<form action='../Sys/delete.php' method='POST'><button class ='btn btn-danger' type='submit' name='id' value='$row[admin_id]'>Delete</button></form>"?>
-                                </td>
+                                    foreach($header as $key=> $value){
+                                    if($key == $sort){
+                                        //user can click on the column
+                                        //for sorting
+                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
+                                    }else{
+                                        //user never click anything
+                                        //default
+                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
+                                    }
+                                }
+                                ?>
+                                <th>Phone Number</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            <?php
+                                //step 1: create DB connection
+                                //NOTE: arrangement of input in mysqli is important
+                                //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
+                                $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                                if($con -> connect_error){
+                                    //wth error
+                                    die("Connection error: ". $con->connect_error);
+                                }else{
+                                    //no error
+                                    //step 2: sql statement
+                                    $sql = "SELECT * FROM admin ORDER BY $sort $order ";
 
-                            </tr>
-                            <?php 
-                                            }
-                                        ?>
-                            </tr>
+                                    //step 3: ask connection, to processs sql
+                                    $result = $con -> query($sql);//object - a list of admin record
+
+                                    //NOTE: for DB we use "->"
+                                    //NOTE: for associative array we use "=>"
+                                    if($result->num_rows > 0){
+                                        //record found
+                                        while($row = $result->fetch_object()){
+                                            printf("<tr>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td><a href='update.php?id=%s'>Edit</a></td>  
+                                                    <td><a href='delete.php?id=%s'>Delete</a></td>
+                                                    </tr>"
+                                                    , $row->admin_id
+                                                    , $row->admin_name
+                                                    , $row->phone_no
+                                                    , $row->gender
+                                                    , $row->email
+                                                    , $row->admin_id, $row->admin_id);
+                                        }
+                                    }
+
+                                    printf("<tr><td colspan='7'>
+                                            <b>%d</b> record(s) returned.
+                                            <a href='insert.php'>Insert Admin</a>
+                                            </td></tr>", $result->num_rows);
+
+                                    $con -> close(); //safety and security
+                                    $result -> free(); //to clean the result fetched or will use RAM
+                                }
+
+                                ?>
+
                         </table>
+                        </form>
                     </div>
                 </div>
             </div>

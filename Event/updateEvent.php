@@ -2,6 +2,7 @@
     session_start();
     include('../Sys/authCheck.php');
     validAdmin();
+    include('../Sys/connection.php')
 ?>
 
 <!DOCTYPE html>
