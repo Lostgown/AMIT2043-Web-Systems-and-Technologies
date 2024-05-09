@@ -59,7 +59,7 @@ if (isset($_GET["order"])){
             <div class="col">
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Admin List</h2>
+                        <h2 class="display-6 text-center">Member List</h2>
                     </div>
                     <div class="card-body">
                         <form action="" method="POST">
