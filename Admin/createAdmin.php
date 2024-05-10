@@ -118,42 +118,42 @@
             ?>
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "text" name  = "name" value=""/>
+        <input class = "input_field" type = "text" name  = "name" value="" placeholder=""/>
         <span class="input_label">Name</span>
     </label>
 </div>
 
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "text" name  = "ic_no" value=""/>
+        <input class = "input_field" type = "text" name  = "ic_no" value="" placeholder=""/>
         <span class="input_label">IC Number</span>
     </label>
 </div>
 
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "password" name  = "pass" value=""/>
+        <input class = "input_field" type = "password" name  = "pass" value="" placeholder=""/>
         <span class="input_label">Password</span>
     </label>
 </div>
 
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  value=""/>  
+        <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  value="" placeholder=""/>  
         <span class="input_label">Phone Number</span>
     </label>
 </div>
 
 <div class = 'input_box'>
 <label class="input">
-<input class = "input_field" type = "text" id ="email" name  = "email"  value=""/>  
+<input class = "input_field" type = "text" id ="email" name  = "email"  value="" placeholder=""/>  
 <span class="input_label">Email</span>
 </label>
 </div>
 
 <div class = 'input_box'>
 <label class="input">
-    <input class = "input_field" type="date" name  = "birth_date"  value=""/>  
+    <input class = "input_field" type="date" name  = "birth_date"  value="" placeholder=""/>  
     <span class="input_label">Birth Date</span>
 </label>
 </div>
