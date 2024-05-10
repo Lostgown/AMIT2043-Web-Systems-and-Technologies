@@ -1,15 +1,15 @@
 <?php      
 
 //create function - validate birth date
-function validateBirthDate($birth){
-    if($birth == null){
-        return "Please enter your <b>Name</b>!";
-    }else if(strlen($birth) > 30){
-        return "Your <b>Name</b> exceeded 30 characters!";
-    }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $birth)){
-        return "Invalid <b>Name</b>!";
-    }
-}
+// function validateBirthDate($birth){
+//     if($birth == null){
+//         return "Please enter your <b>Name</b>!";
+//     }else if(strlen($birth) > 30){
+//         return "Your <b>Name</b> exceeded 30 characters!";
+//     }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $birth)){
+//         return "Invalid <b>Name</b>!";
+//     }
+// }
 
 //create function - validate ic no
 function validateIC($ic){
@@ -37,7 +37,6 @@ function validateEmail($email) {
         // Use filter_var() function with FILTER_VALIDATE_EMAIL filter
         return "Invalid <b>Email</b>!";
     }
-    
 }
 
 //create function - check name
@@ -64,7 +63,7 @@ function validateAdminId($id){
 function validatePhone($phone) {
     if ($phone == null) {
         return "Please enter your <b>Phone Number</b>";
-    } else if (!preg_match("/^01[0-9]-\d{7,8}$/", $phone)) {
+    } else if (!preg_match("/^01[0-9]\d{7,8}$/", $phone)) {
         return "Invalid <b>Phone Number</b>";
     }
 }
