@@ -49,7 +49,7 @@ function validateName($name){
         return "Invalid user <b>Name</b>.";
     }
 }
-
+// add check uppercase 
 
 //create function - check admin id
 function validateAdminId($id){

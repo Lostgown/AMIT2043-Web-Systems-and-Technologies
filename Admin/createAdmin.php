@@ -119,42 +119,42 @@
             ?>
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "text" name  = "name" value="" placeholder=""/>
+        <input class = "input_field" type = "text" name  = "name" value="<?php echo (isset($id))?$name: ""; ?>"" placeholder=""/>
         <span class="input_label">Name</span>
     </label>
 </div>
 
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "text" name  = "ic_no" value="" placeholder=""/>
+        <input class = "input_field" type = "text" name  = "ic_no" value="<?php echo (isset($id))?$ic: ""; ?>"" placeholder=""/>
         <span class="input_label">IC Number</span>
     </label>
 </div>
 
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "password" name  = "pass" value="" placeholder=""/>
+        <input class = "input_field" type = "password" name  = "pass" value="<?php echo (isset($id))?$pass: ""; ?>"" placeholder=""/>
         <span class="input_label">Password</span>
     </label>
 </div>
 
 <div class = 'input_box'>
     <label class="input">
-        <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  value="" placeholder=""/>  
+        <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  value="<?php echo (isset($id))?$phone: ""; ?>"" placeholder=""/>  
         <span class="input_label">Phone Number</span>
     </label>
 </div>
 
 <div class = 'input_box'>
 <label class="input">
-<input class = "input_field" type = "text" id ="email" name  = "email"  value="" placeholder=""/>  
+<input class = "input_field" type = "text" id ="email" name  = "email"  value="<?php echo (isset($id))?$email: ""; ?>"" placeholder=""/>  
 <span class="input_label">Email</span>
 </label>
 </div>
 
 <div class = 'input_box'>
 <label class="input">
-    <input class = "input_field" type="date" name  = "birth_date"  value="" placeholder=""/>  
+    <input class = "input_field" type="date" name  = "birth_date"  value="<?php echo (isset($id))?$birth: ""; ?>"" placeholder=""/>  
     <span class="input_label">Birth Date</span>
 </label>
 </div>
