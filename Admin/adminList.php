@@ -9,9 +9,11 @@
 $header = array(
     "admin_id"=>"Admin ID",
     "admin_name"=>"Name",
+    "ic_no"=>"IC Number",
     "phone_no"=>"Phone Number",
     "gender"=>"Gender",
-    "email"=>"Email"
+    "email"=>"Email",
+    "birth_date"=>"Birth Date"
 );
 
 //retrieve sort parameter from URL
@@ -27,9 +29,8 @@ if (isset($_GET["order"])){
 }else{
     $order = "ASC";
 }
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -43,9 +44,34 @@ if (isset($_GET["order"])){
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' href='../css/list.css'>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#searchInput').on('input', function() {
+        var searchValue = $(this).val(); // Get search query
+        if (searchValue.trim() !== '') { // Check if the search query is not empty
+            $.ajax({
+                type: 'POST',
+                url: 'searchAdmin.php',
+                data: { searchQuery: searchValue },
+                success: function(response) {
+                    $('#searchResults').html(response); // Display search results
+                }
+            });
+        } else {
+            $('#searchResults').html(''); // Clear search results if search query is empty
+        }
+    });
+});
+</script>
+
 
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
+            <div class="p-3">
+                <a href="createAdmin.php"><button type="button"
+                class=" btn btn-secondary btn-lg me-md-2 ">Create New Admin</button></a>
+            </div>
             <div class="p-3">
                 <a href="menuAdmin.php"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
@@ -59,6 +85,13 @@ if (isset($_GET["order"])){
                         <h2 class="display-6 text-center">Admin List</h2>
                     </div>
                     <div class="card-body">
+
+                    <form id="searchForm">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Name...">
+                    </form>
+                    <div id="searchResults"></div>
+
+                    <br/>
                         <form action="" method="POST">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark ">
@@ -75,9 +108,6 @@ if (isset($_GET["order"])){
                                     }
                                 }
                                 ?>
-                                <!-- <th>Phone Number</th> -->
-                                <!-- <th>Gender</th> -->
-                                <!-- <th>Email</th> -->
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -92,7 +122,11 @@ if (isset($_GET["order"])){
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM admin ORDER BY $sort $order ";
+                                    $sql = "SELECT * FROM admin";
+                                    if (!empty($searchQuery)) {
+                                        $sql .= " WHERE admin_name LIKE '%$searchQuery%'";
+                                    }
+                                    $sql .= " ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record
@@ -108,21 +142,24 @@ if (isset($_GET["order"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
                                                     <td><button class ='btn btn-warning'><a href='updateAdmin.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
                                                     <td><button class ='btn btn-danger'><a href='deleteAdmin.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
                                                     , $row->admin_id
                                                     , $row->admin_name
+                                                    , $row->ic_no
                                                     , $row->phone_no
                                                     , allGender()[$row->gender]
                                                     , $row->email
+                                                    , $row->birth_date
                                                     , $row->admin_id, $row->admin_id);
                                         }
                                     }
 
-                                    printf("<tr><td colspan='7'>
+                                    printf("<tr><td colspan='9'>
                                             <b>%d</b> record(s) returned.
-                                            <a href='insert.php'>Insert Admin</a>
                                             </td></tr>", $result->num_rows);
 
                                     $con -> close(); //safety and security

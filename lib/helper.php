@@ -1,9 +1,31 @@
 <?php      
 
-//create function - validate student gender
+//create function - validate birth date
+function validateBirthDate($birth){
+    if($birth == null){
+        return "Please enter your <b>Name</b>!";
+    }else if(strlen($birth) > 30){
+        return "Your <b>Name</b> exceeded 30 characters!";
+    }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $birth)){
+        return "Invalid <b>Name</b>!";
+    }
+}
+
+//create function - validate ic no
+function validateIC($ic){
+    if($ic == null){
+        return "Please enter your <b>Name</b>!";
+    }else if(strlen($ic) > 30){
+        return "Your <b>Name</b> exceeded 30 characters!";
+    }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $ic)){
+        return "Invalid <b>Name</b>!";
+    }
+}
+
+//create function - validate gender
 function validateGender($gender){
     if($gender == null){
-        return "Please enter <b>Gender</b>!";
+        return "Please enter your<b>Gender</b>!";
     }else if(!array_key_exists($gender, allGender())){
         return "Invalid <b>Gender</b>";
     }
@@ -20,7 +42,7 @@ function validateEmail($email) {
     
 }
 
-//create function - check student name
+//create function - check name
 function validateName($name){
     if($name == null){
         return "Please enter your <b>Name</b>!";
@@ -32,7 +54,7 @@ function validateName($name){
 }
 
 
-//create function - check student id
+//create function - check admin id
 function validateAdminId($id){
     if($id== null){
         return "Please enter your <b>Admin ID!</b>";
@@ -61,7 +83,7 @@ function validatePass($password) {
 
 function validateCfnPass($passwordCfn, $password) {
     if($passwordCfn == null) {
-        return 'Please enter your password.';
+        return 'Please enter your password Confirmation.';
     }
     else if($passwordCfn != $password) {
         return 'Your password confirmation must be the same as password.';

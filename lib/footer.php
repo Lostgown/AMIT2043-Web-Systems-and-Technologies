@@ -149,16 +149,15 @@ ul {
                 <h4>Account Maintenance</h4>
                 <ul>
                     <li><a href='../General/resetPassword.php'>Reset Password</a></li>
-                    <li><a href='../Admin/memberList.php'>Member Account Maintenance</a></li>
+                    <li><a href='../Member/memberList.php'>Member Account Maintenance</a></li>
                     <li><a href='../Admin/adminList.php'>Admin Account Maintenance</a></li>
-                    <li><a href='../Admin/registerUser.php'>Register New User</a></li>
                 </ul>
             </div>
             <div class='footer-col'>
                 <h4>Events Management</h4>
                 <ul>
-                    <li><a href='../Admin/eventMaintain.php'>Register Events</a></li>
-                    <li><a href='../Admin/eventMaintain.php'>Events Details</a></li>
+                    <li><a href='../Event/eventCreate.php'>Register Events</a></li>
+                    <li><a href='../Event/eventList.php'>Events Details</a></li>
                     <li><a href='../Event/bookingList.php'>Event Bookings Details</a></li>
                 </ul>
             </div>

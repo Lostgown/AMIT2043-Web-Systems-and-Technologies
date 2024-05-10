@@ -4,16 +4,16 @@
     validAdmin();
     include ('../lib/helper.php');
 
-    // $query = "select * from member";
-    // $result = mysqli_query($con,$query); 
 ?>
 <?php 
 $header = array(
     "member_id"=>"Member ID",
     "member_name"=>"Name",
+    "ic_no"=>"IC Number",
     "phone_no"=>"Phone Number",
     "gender"=>"Gender",
-    "email"=>"Email"
+    "email"=>"Email",
+    "birth_date"=>"Birth Date"
 );
 //every header has the ability to do ascending and decending
 
@@ -50,7 +50,7 @@ if (isset($_GET["order"])){
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
             <div class="p-3">
-                <a href="menuAdmin.php"><button type="button"
+                <a href="../Admin/menuAdmin.php"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
             </div>
         </div>
@@ -78,9 +78,6 @@ if (isset($_GET["order"])){
                                     }
                                 }
                                 ?>
-                                <!-- <th>Phone Number</th> -->
-                                <!-- <th>Gender</th> -->
-                                <!-- <th>Email</th> -->
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -112,14 +109,18 @@ if (isset($_GET["order"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
                                                     <td><button class ='btn btn-warning'><a href='../Member/updateMember.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
-                                                    <td><button class ='btn btn-danger'><a href='deleteAdmin.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
+                                                    <td><button class ='btn btn-danger'><a href='deleteMember.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
                                                     , $row->member_id
                                                     , $row->member_name
+                                                    , $row->ic_no
                                                     , $row->phone_no
                                                     , allGender()[$row->gender]
                                                     , $row->email
+                                                    , $row->birth_date
                                                     , $row->member_id, $row->member_id);
                                         }
                                     }
