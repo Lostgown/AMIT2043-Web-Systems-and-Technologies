@@ -74,6 +74,7 @@
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
+                $error["ic_no"] = validateIC($ic);
 
                 //filter out empty error
                 $error = array_filter($error);

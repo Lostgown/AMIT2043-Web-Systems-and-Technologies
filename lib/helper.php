@@ -1,24 +1,24 @@
 <?php      
 
 //create function - validate birth date
-function validateBirthDate($birth){
-    if($birth == null){
-        return "Please enter your <b>Name</b>!";
-    }else if(strlen($birth) > 30){
-        return "Your <b>Name</b> exceeded 30 characters!";
-    }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $birth)){
-        return "Invalid <b>Name</b>!";
-    }
-}
+// function validateBirthDate($birth){
+//     if($birth == null){
+//         return "Please enter your <b>Name</b>!";
+//     }else if(strlen($birth) > 30){
+//         return "Your <b>Name</b> exceeded 30 characters!";
+//     }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $birth)){
+//         return "Invalid <b>Name</b>!";
+//     }
+// }
 
 //create function - validate ic no
 function validateIC($ic){
     if($ic == null){
-        return "Please enter your <b>Name</b>!";
-    }else if(strlen($ic) > 30){
-        return "Your <b>Name</b> exceeded 30 characters!";
-    }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $ic)){
-        return "Invalid <b>Name</b>!";
+        return "Please enter your IC number.";
+    }else if(strlen($ic) != 12){
+        return "Your <b>IC</b> should in within 12 character";
+    }else if(!preg_match("/^[0-9]{6}-[0-9]{2}-[0-9]{4}$/", $ic)){
+        return "Invalid IC foma.";
     }
 }
 
