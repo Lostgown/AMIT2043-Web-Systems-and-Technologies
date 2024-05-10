@@ -14,16 +14,16 @@
 //create function - validate ic no
 function validateIC($ic){
     if($ic == null){
-        return "Please enter your <b>IC</b>!";
+        return "Please provide your <b>IC</b>.";
     }else if(!preg_match("/^\d{6}\d{2}\d{4}$/", $ic)){
-        return "Invalid <b>IC</b>!";
+        return "Invalid <b>IC</b>.";
     }
 }
 
 //create function - validate gender
 function validateGender($gender){
     if($gender == null){
-        return "Please enter your<b>Gender</b>!";
+        return "Please select a <b>Gender</b>.";
     }else if(!array_key_exists($gender, allGender())){
         return "Invalid <b>Gender</b>";
     }
@@ -32,21 +32,21 @@ function validateGender($gender){
 //create function validateEmail
 function validateEmail($email) {
     if($email == null){
-        return "Please enter your <b>Email</b>!";
+        return "Please provide your <b>Email</b>.";
     }else if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
         // Use filter_var() function with FILTER_VALIDATE_EMAIL filter
-        return "Invalid <b>Email</b>!";
+        return "Invalid <b>Email</b>.";
     }
 }
 
 //create function - check name
 function validateName($name){
     if($name == null){
-        return "Please enter your <b>Name</b>!";
+        return "Please provide your <b>Name</b>.";
     }else if(strlen($name) > 30){
-        return "Your <b>Name</b> exceeded 30 characters!";
+        return "Your <b>Name</b> exceeded 30 characters.";
     }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $name)){
-        return "Invalid <b>Name</b>!";
+        return "Invalid user <b>Name</b>.";
     }
 }
 
@@ -54,15 +54,15 @@ function validateName($name){
 //create function - check admin id
 function validateAdminId($id){
     if($id== null){
-        return "Please enter your <b>Admin ID!</b>";
+        return "Please provide your <b>Admin ID.</b>";
     }else if(!preg_match ("/^M\d+/", $id)){
-        return "Invalid <b>Admin ID!</b>";
+        return "Invalid <b>Admin ID.</b>";
     }
 }
 
 function validatePhone($phone) {
     if ($phone == null) {
-        return "Please enter your <b>Phone Number</b>";
+        return "Please provide your <b>Phone Number</b>.";
     } else if (!preg_match("/^01[0-9]\d{7,8}$/", $phone)) {
         return "Invalid <b>Phone Number</b>";
     }
@@ -70,9 +70,9 @@ function validatePhone($phone) {
 
 function validatePass($password) {
     if($password == null) {
-        return 'Please enter your password.';
+        return 'Please enter your <b>Password</b>.';
     } else if (strlen($password) != 10) {
-        return 'Your password should in within 10 character only.';
+        return 'Your <b>Password</b> must in within <b>10</b> character only.';
     } else {
         return '';
     }
@@ -80,7 +80,7 @@ function validatePass($password) {
 
 function validateCfnPass($passwordCfn, $password) {
     if($passwordCfn == null) {
-        return 'Please enter your password Confirmation.';
+        return 'Please your password Confirmation.';
     }
     else if($passwordCfn != $password) {
         return 'Your password confirmation must be the same as password.';

@@ -64,6 +64,7 @@
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
+                $error["pass"] = validatePass($pass);
 
                 
                 //filter out empty error
