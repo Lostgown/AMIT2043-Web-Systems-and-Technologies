@@ -15,7 +15,7 @@
 function validateIC($ic){
     if($ic == null){
         return "Please enter your <b>IC</b>!";
-    }else if(!preg_match("/^\d{6}-\d{2}-\d{4}$/", $ic)){
+    }else if(!preg_match("/^\d{6}\d{2}\d{4}$/", $ic)){
         return "Invalid <b>IC</b>!";
     }
 }

@@ -60,7 +60,7 @@
                 //1.2 validate input
                 //no validation for password as is TEMP pass
                 $error["name"] = validateName($name);
-                $error["ic"] = validateIC($ic);
+                $error["ic_no"] = validateIC($ic);
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
@@ -116,8 +116,59 @@
                 
             }
             ?>
+<div class = 'input_box'>
+    <label class="input">
+        <input class = "input_field" type = "text" name  = "name" value=""/>
+        <span class="input_label">Name</span>
+    </label>
+</div>
 
-                <div class = 'input_box'>
+<div class = 'input_box'>
+    <label class="input">
+        <input class = "input_field" type = "text" name  = "ic_no" value=""/>
+        <span class="input_label">IC Number</span>
+    </label>
+</div>
+
+<div class = 'input_box'>
+    <label class="input">
+        <input class = "input_field" type = "password" name  = "pass" value=""/>
+        <span class="input_label">Password</span>
+    </label>
+</div>
+
+<div class = 'input_box'>
+    <label class="input">
+        <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  value=""/>  
+        <span class="input_label">Phone Number</span>
+    </label>
+</div>
+
+<div class = 'input_box'>
+<label class="input">
+<input class = "input_field" type = "text" id ="email" name  = "email"  value=""/>  
+<span class="input_label">Email</span>
+</label>
+</div>
+
+<div class = 'input_box'>
+<label class="input">
+    <input class = "input_field" type="date" name  = "birth_date"  value=""/>  
+    <span class="input_label">Birth Date</span>
+</label>
+</div>
+
+<div class = "genderRadio">
+<p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>      
+<p id = "btnMale"><label>
+<input type = "radio" name = "gender" value = 'M' 
+<?php echo (isset($gender) && $gender == "M")?"checked":"" ?> /> Male &nbsp </label>
+</p>
+<p id = "btnFemale"><label>
+<input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female </p></label>
+<br>
+</div>
+                <!-- <div class = 'input_box'>
                     <label class="input">
                         <input class="input_field" type="text" id="name" name="name" autofocus="autofocus" placeholder= "" required
                             oninvalid="this.setCustomValidity('Fill in the name.')" oninput="this.setCustomValidity('')"/>
@@ -172,7 +223,7 @@
                 </p>
                 <p id = "btnFemale"><label>
                 <input type = "radio" name = "gender" value="F" required = "required"/> Female </p></label>
-                </div>
+                </div> -->
 
             
             <input type="submit" value="insert" id="btnRegister" name="btnInsert" />
