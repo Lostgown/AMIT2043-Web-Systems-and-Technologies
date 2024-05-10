@@ -52,6 +52,7 @@
                 </form>
                     <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
                     <br>
+                    <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Member/memberList.php'" />
 
                 <?php $con=null; ?>
             </div>
