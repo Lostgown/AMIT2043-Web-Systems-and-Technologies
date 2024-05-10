@@ -3,6 +3,7 @@
     include('../Sys/authCheck.php');
     validAdmin();
     include('../Sys/connection.php');
+    require_once('../lib/helper.php');
 ?>
 
 <!DOCTYPE html>
@@ -76,8 +77,8 @@
     }
 
     .box-profile-admin {
-        width: 15rem;
-        height: 15rem;
+        width: 16rem;
+        height: 16rem;
         background-color: transparent;
         color: white;
         border-radius: 12px;
@@ -173,6 +174,15 @@
                                 echo $row['admin_name'];
                         ?>
                                     <br>
+                                    <b>IC No:</b>
+                                    <?php
+                            $sql = "SELECT ic_no FROM admin WHERE admin_id = '$_SESSION[idUser]'";
+
+                            $result= $con->query($sql);  
+                            $row = mysqli_fetch_assoc($result);
+                                echo $row['ic_no'];
+                        ?>
+                                    <br>
                                     <b>Phone No:</b>
                                     <?php
                             $sql = "SELECT phone_no FROM admin WHERE admin_id = '$_SESSION[idUser]'";
@@ -188,7 +198,8 @@
 
                             $result= $con->query($sql);  
                             $row = mysqli_fetch_assoc($result);
-                                echo $row['gender'];
+                                $gender = $row['gender'];
+                                echo allGender()[$gender];
                         ?>
                                     <br>
                                     <b>Email:</b>
@@ -199,11 +210,22 @@
                             $row = mysqli_fetch_assoc($result);
                                 echo $row['email'];
                         ?>
-                                <form action='../General/updateProfile.php' method='POST'>
-                                    <?php echo "<style>button {float:right;margin-top: 10px;margin-right: 10px;display: block;background: orange;color: #fff;font-size: 17px;border-radius: 30px;border:none;padding: 8px 25px;text-decoration: none;}button:hover{background: rgb(255, 186, 58);transition: all 0.3s ease 0s;}</style>
-                            <button id = 'btnchng' name = 'id' value = '$_SESSION[idUser]'> Update </button></a>"; ?>
-                                    <!-- <a href="#popup-box">Click to Open Popup Box!</a> -->
-                                </form>
+                                    <br>
+                                    <b>Birth Date:</b>
+                                    <?php
+                            $sql = "SELECT birth_date FROM admin WHERE admin_id = '$_SESSION[idUser]'";
+
+                            $result= $con->query($sql);  
+                            $row = mysqli_fetch_assoc($result);
+                                echo $row['birth_date'];
+                        ?>
+
+                            <?php 
+                            echo "<style>button {float:right;margin-top: 10px;margin-right: 10px;display: block;background: orange;color: #fff;font-size: 17px;border-radius: 30px;border:none;padding: 8px 25px;text-decoration: none;}button:hover{background: rgb(255, 186, 58);transition: all 0.3s ease 0s;}</style>"
+                            ?>
+                            <?php
+                            printf("<button class ='btn'><a href='updateAdmin.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button>",$_SESSION['idUser']);
+                            ?> 
                             </div>
 
                             <div class="box-side-bar-nav">
@@ -215,22 +237,17 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../Admin/registerUser.php">
-                                            <button> Register User</button>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="../Admin/adminList.php">
+                                        <a href="adminList.php">
                                             <button> Admin Account Maintenance</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../Admin/memberList.php">
+                                        <a href="../Member/memberList.php">
                                             <button> Member Account Maintenance</button>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../Admin/eventMaintain.php">
+                                        <a href="../Event/eventList.php">
                                             <button> Events Management</button>
                                         </a>
                                     </li>
@@ -282,54 +299,6 @@
             </div>
         </main>
 
-        <div id="popup-box" class="modal" style="z-index: 22;">
-            <div class="contentA">
-                <form action="">
-                    <h2 style="text-align: center; margin: 0px;">
-                        Update Events
-                    </h2>
-
-                    <legend>Event Name:</legend>
-                    <input type="text" id="username" name="username"><br><br>
-
-                    <legend>Description:</legend>
-                    <input type="text" id="email" name="email"><br><br>
-
-                    <legend>Pax:</legend>
-                    <input type="number" id="password" name="password"><br><br>
-
-                    <legend>Date:</legend>
-                    <input type="date" id="password" name="password"><br><br>
-
-                    <legend>Time:</legend>
-                    <input type="time" id="password" name="password"><br><br>
-
-                    <!-- <legend>Gender:</legend>
-                    <input type="radio" name="gender" id="male">
-                    <label for="male">M</label>
-
-                    <input type="radio" name="gender" id="female">
-                    <label for="female">F</label>
-                    >
-                    <label for="others">Others</label>
-                    <input type="text" id="username" name="username" size="4"><br><br> -->
-
-
-                    <input type="reset" value="Reset">
-                    <input type="submit" value="Submit">
-
-                    <a href="#" style="
-                    position: absolute;
-                    top: 10px;
-                    right: 10px;
-                    color:coral;
-                    font-size: 30px;
-                    text-decoration: none;
-                ">&times;</a>
-
-                </form>
-            </div>
-        </div>
     </body>
     <!-- <footer> -->
     <footer style="padding-bottom: 2.5rem; position: relative; bottom: 0; width: 100%; height: 2.5rem;">
