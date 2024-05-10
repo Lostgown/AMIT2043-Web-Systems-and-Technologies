@@ -39,7 +39,6 @@ function validateEmail($email) {
         // Use filter_var() function with FILTER_VALIDATE_EMAIL filter
         return "Invalid <b>Email</b>!";
     }
-    
 }
 
 //create function - check name
