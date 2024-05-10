@@ -17,7 +17,7 @@ function validateIC($ic){
         return "Please enter your IC number.";
     }else if(strlen($ic) != 12){
         return "Your <b>IC</b> should in within 12 character";
-    }else if(!preg_match("/^[0-9]{6}-[0-9]{2}-[0-9]{4}$/", $ic)){
+    }else if(!preg_match("/^[0-9]{6}[0-9]{2}[0-9]{4}$/", $ic)){
         return "Invalid IC foma.";
     }
 }
@@ -65,7 +65,7 @@ function validateAdminId($id){
 function validatePhone($phone) {
     if ($phone == null) {
         return "Please enter your <b>Phone Number</b>";
-    } else if (!preg_match("/^01[0-9]-\d{7,8}$/", $phone)) {
+    } else if (!preg_match("/^01[0-9]\d{7,8}$/", $phone)) {
         return "Invalid <b>Phone Number</b>";
     }
 }
