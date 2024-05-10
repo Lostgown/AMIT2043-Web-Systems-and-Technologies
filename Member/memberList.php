@@ -46,9 +46,33 @@ if (isset($_GET["order"])){
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' href='../css/list.css'>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#searchInput').on('input', function() {
+        var searchValue = $(this).val(); // Get search query
+        if (searchValue.trim() !== '') { // Check if the search query is not empty
+            $.ajax({
+                type: 'POST',
+                url: 'searchMember.php',
+                data: { searchQuery: searchValue },
+                success: function(response) {
+                    $('#searchResults').html(response); // Display search results
+                }
+            });
+        } else {
+            $('#searchResults').html(''); // Clear search results if search query is empty
+        }
+    });
+});
+</script>
 
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
+            <div class="p-3">
+                <a href="createMember.php"><button type="button"
+                class=" btn btn-secondary btn-lg me-md-2 ">Create New Member</button></a>
+            </div>
             <div class="p-3">
                 <a href="../Admin/menuAdmin.php"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
@@ -62,6 +86,12 @@ if (isset($_GET["order"])){
                         <h2 class="display-6 text-center">Member List</h2>
                     </div>
                     <div class="card-body">
+                        <form id="searchForm">
+                            <input type="text" id="searchInput" name="searchInput" placeholder="Search Name...">
+                        </form>
+                        <div id="searchResults"></div>
+                        <br/>
+                        
                         <form action="" method="POST">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark ">
@@ -125,9 +155,8 @@ if (isset($_GET["order"])){
                                         }
                                     }
 
-                                    printf("<tr><td colspan='7'>
+                                    printf("<tr><td colspan='9'>
                                             <b>%d</b> record(s) returned.
-                                            <a href='insert.php'>Insert member</a>
                                             </td></tr>", $result->num_rows);
 
                                     $con -> close(); //safety and security
