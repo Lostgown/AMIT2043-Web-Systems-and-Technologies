@@ -7,11 +7,14 @@
     <head>
         <meta charset="UTF-8">
         <title>Delete</title>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/delete.css'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     </head>
     <body class="bg-dark ">
-        <div class='container'>
+        <div class='container-sm' style="width: 700px;">
         <div class="row mt-2">
             <div class="col">
                 <div class="card mt-2">
@@ -48,8 +51,8 @@
                 $email = $row -> email;
                 $birth = $row -> birth_date;
                 
-                printf("<p>Are you sure you want to delete the following Admin?</p>
-                        <table class='table table-bordered text-center'>
+                printf("<h5 style='color: red;'>Are you sure you want to delete the following Admin?</h5>
+                        <table class='table table-dark table-striped text-center' style='width:600px;'>
                            <tr>
                                 <td>Admin ID:</td>
                                 <td>%s</td>
@@ -83,10 +86,12 @@
                         <form action='' method='POST'>
                             <input type='hidden' name='hdID' value='%s' />
                             <input type='hidden' name='hdName' value='%s' />
-                            <input type='submit' name='btnYes' value='Yes' />
-                            <input type='button' name='bthCancel' value='Cancel' onclick='location=\"adminList.php\"' />
+                            <div class='d-flex justify-content-around'>
+                            <input type='submit' id='btnYes' name='btnYes' value='Yes' class/>
+                            <input type='button' id='btnCancel' name='btnCancel' value='Cancel' onclick='location=\"adminList.php\"' />
+                            </div>
                         </form>
-                        
+                        <br/>
                         "
                         , $id
                         , $name
@@ -128,27 +133,29 @@
             if($stmt -> affected_rows > 0){
                 //successfully deleted
                 printf("<div class='info'>Admin <b>%s</b> has been deleted.
-                       [ <a href='listAdmin.php'>Back to list</a> ]
+                       [ <a href='adminList.php'>Back to list</a> ]
                         </div>", $name);
             }else{
                 //unable to delete
                 echo "<div class='error'>Unable to delete.
-                [ <a href='listAdmin.php'>Back to list</a> ]</div>";
+                [ <a href='adminList.php'>Back to list</a> ]</div>";
                 
             }
            $con -> close();
            $stmt -> close();
         }
         ?>
-        
-        
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <br/>
         <?php
         include '../lib/footer.php';
         ?>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+        
+        
     </body>
 </html>

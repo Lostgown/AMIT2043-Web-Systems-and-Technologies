@@ -1,0 +1,28 @@
+#btnCancel {
+    background: #6c757d;
+    border: 0px;
+    border-radius: 5px;
+    color: rgb(236, 230, 230);
+    position: relative;
+    width: 70px;
+    transition: all 0.3s ease 0s;
+}
+
+#btnCancel:active {
+    position: relative;
+    top: 3px;
+}
+
+#btnYes {
+    background: red  ;
+    border: 0px;
+    border-radius: 5px;
+    color: rgb(236, 230, 230);
+    position: relative;
+    width: 70px;
+}
+
+#btnYes:active {
+    position: relative;
+    top: 3px;
+}

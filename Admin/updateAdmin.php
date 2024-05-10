@@ -71,6 +71,7 @@
 
                 //1.2 validate input
                 $error["name"] = validateName($name);
+                $error["ic"] = validateIC($ic);
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
