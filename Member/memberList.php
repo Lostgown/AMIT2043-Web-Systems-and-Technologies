@@ -70,8 +70,12 @@ if (isset($_GET["order"])){
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
             <div class="p-3">
+                <a href="importMember.php"><button type="button"
+                class=" btn btn-secondary btn-lg me-md-2 ">Import</button></a>
+            </div>
+            <div class="p-3">
                 <a href="createMember.php"><button type="button"
-                class=" btn btn-secondary btn-lg me-md-2 ">Create New Member</button></a>
+                class=" btn btn-success btn-lg me-md-2 ">Create New Member</button></a>
             </div>
             <div class="p-3">
                 <a href="../Admin/menuAdmin.php"><button type="button"
@@ -91,6 +95,12 @@ if (isset($_GET["order"])){
                         </form>
                         <div id="searchResults"></div>
                         <br/>
+
+                        <form action="upload.php" method="post" enctype="multipart/form-data">
+                            <label for="file">Choose a file to upload:</label>
+                            <input type="file" id="file" name="file">
+                            <button type="submit">Upload</button>
+                        </form>
                         
                         <form action="" method="POST">
                         <table class=" table table-bordered text-center">

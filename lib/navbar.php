@@ -249,7 +249,7 @@ screen and (max-height: 600px) {
                       <a href='../Admin/adminList.php'> - Admin Account Maintenance </a>
                       <a href='../Member/memberList.php'> - Member Account Maintenance </a>
                       <a href='../Event/eventList.php'> - Events Management </a>
-                      <a href='../Event/bookingList.php'> - Events Bookings Details </a>
+                      <a href='../Booking/bookingList.php'> - Events Bookings Details </a>
                   </div>
               </div>";
     }
