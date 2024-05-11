@@ -1,6 +1,8 @@
 <?php
+
     if(isset($_POST['name'])){
-        include('../Sys/connection.php');               
+        session_start(); 
+        include('Sys/connection.php');               
 
                                                                                       
         $sql = "SELECT member_id FROM member ORDER BY member_id DESC LIMIT 1";
@@ -21,14 +23,14 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Create Admin</title>
-        <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-        <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+        <title>Create Member</title>
+        <link rel = 'stylesheet' type = 'text/css' href = 'css/main.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = 'css/form.css'>
     </head>
     <body>
         <?php
-        include '../Sys/authCheck.php';
-        require_once '../lib/helper.php';
+        // include 'Sys/authCheck.php';
+        require_once 'lib/helper.php';
         ?>
         
         <form action="" method="POST">
@@ -36,7 +38,7 @@
             <div class = 'content'>
             <div>
             <div class = "frm" style="text-align:left;">  
-            <h1 style="text-align:center"> Create Member </h1>
+            <h1 style="text-align:center"> Member Signup </h1>
             
             <?php 
             if(empty($_POST)){
@@ -95,7 +97,7 @@
                     if($stmt -> affected_rows >0){
                         //insert successful
                         printf("<div class='info'>
-                                Admin <b>%s</b> has been inserted.\nID is <b>%s</b>[<a href='memberList.php'>Back to list</a>]
+                                Member <b>%s</b> has been created.\nID is <b>%s</b>[<a href='index.php'>Back to list</a>]
                                 </div>", $name, $id);
                     }else{
                         //GG: unable to insert
@@ -125,6 +127,7 @@
         <span class="input_label">Name</span>
     </label>
 </div>
+
 
 <div class = 'input_box'>
     <label class="input">
@@ -173,10 +176,9 @@
 </div>
 
             
-            <input type="submit" value="Insert" id="btnRegister" name="btnInsert" />
-            <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='memberList.php'"/>
+            <input type="submit" value="Create" id="btnRegister" name="btnInsert" onclick="<?php include 'Sys/authCheck.php'; ?>"/>
+            <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='index.php'"/>
             <br/>
         </form>
-        
     </body>
 </html>
