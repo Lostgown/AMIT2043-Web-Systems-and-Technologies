@@ -7,13 +7,13 @@
 
 <?php 
 $header = array(
-    "admin_id"=>"Admin ID",
-    "admin_name"=>"Name",
-    "ic_no"=>"IC Number",
-    "phone_no"=>"Phone Number",
-    "gender"=>"Gender",
-    "email"=>"Email",
-    "birth_date"=>"Birth Date"
+    "booking_id"=>"Booking ID",
+    "event_id"=>"Event ID",
+    "member_id"=>"Member ID",
+    "category"=>"Category",
+    "level"=>"Level",
+    "booking_date"=>"Booking Date",
+    "booking_time"=>"Booking Time"
 );
 
 //retrieve sort parameter from URL
@@ -49,11 +49,7 @@ if (isset($_GET["order"])){
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
             <div class="p-3">
-                <a href="createAdmin.php"><button type="button"
-                class=" btn btn-secondary btn-lg me-md-2 ">Create New Booking</button></a>
-            </div>
-            <div class="p-3">
-                <a href="menuAdmin.php"><button type="button"
+                <a href="../Admin/menuAdmin.php"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
             </div>
         </div>
@@ -115,8 +111,8 @@ if (isset($_GET["order"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td><button class ='btn btn-warning'><a href='updateAdmin.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
-                                                    <td><button class ='btn btn-danger'><a href='deleteAdmin.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
+                                                    <td><button class ='btn btn-warning'><a href='updateBooking.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
+                                                    <td><button class ='btn btn-danger'><a href='deleteBooking.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
                                                     , $row->booking_id
                                                     , $row->event_id
