@@ -3,7 +3,7 @@
 date_default_timezone_set("Asia/Kuala_Lumpur");
 
 $now = date("Y/m/d");
-
+//test
 // create function - validate birth date
 function validateBirthDate($birth){
     if($birth == null){
