@@ -1,15 +1,19 @@
-<?php      
+<?php     
 
-//create function - validate birth date
-// function validateBirthDate($birth){
-//     if($birth == null){
-//         return "Please enter your <b>Name</b>!";
-//     }else if(strlen($birth) > 30){
-//         return "Your <b>Name</b> exceeded 30 characters!";
-//     }else if(!preg_match("/^[A-Za-z \'@\.]+$/", $birth)){
-//         return "Invalid <b>Name</b>!";
-//     }
-// }
+date_default_timezone_set("Asia/Kuala_Lumpur");
+
+$now = date("Y/m/d");
+
+// create function - validate birth date
+function validateBirthDate($birth){
+    if($birth == null){
+        return "Please provide your <b>Birth date</b>!";
+    }else if($birth > $now) {
+        return "Your <b>Birth date</b> cannot exceended current time";
+    }else {
+        return "Invalid <b>Birth date</b>!";
+    }
+}
 
 //create function - validate ic no
 function validateIC($ic){
