@@ -6,9 +6,9 @@ Run code index.php;
 "TEMP"
 Sign In:
 Role:Admin
-ID:A1
-Pass:abcde12345
+ID:A0001
+Pass:abcde
 
 Role:Member
-ID:M1
+ID:M0001
 Pass:abcde
