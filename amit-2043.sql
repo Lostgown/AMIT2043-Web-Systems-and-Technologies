@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2024 at 08:39 AM
+-- Generation Time: May 11, 2024 at 08:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,9 +44,11 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `admin_name`, `ic_no`, `admin_pass`, `phone_no`, `gender`, `email`, `birth_date`, `recovery_no`) VALUES
-('A1', 'Lim Shiow Yi', '050409-07-0654', 'abcde', '010-1199110', 'F', 'limsy-pm23@student.tarc.edu.my', '2005-04-09', 568742),
-('A2', 'Teoh Ming Geng', '050409-07-0653', 'abcde', '010-1119901', 'M', 'teohmg@gmail.com', '2005-05-10', 984357),
-('A3', 'Raymond Goh Cheng Chen', '050207-07-0563', 'aaaa', '014-2429675', 'M', 'gohchengchen98@gmail.con', '2005-02-07', 666741);
+('A0001', 'Lim Shiow Yi', '050409-07-0654', 'abcde', '010-1199110', 'F', 'limsy-pm23@student.tarc.edu.my', '2005-04-09', 568742),
+('A0002', 'Teoh Ming Geng', '050409-07-0653', 'abcde', '010-1119901', 'M', 'teohmg@gmail.com', '2005-05-10', 984357),
+('A0003', 'Raymond Goh Cheng Chen', '050207-07-0563', 'aaaa', '014-2429675', 'M', 'gohchengchen98@gmail.con', '2005-02-07', 666741),
+('A0004', 'Ng Jun Wei', '050409-07-0654', 'abcde12345', '011-1234567', 'M', 'junwei27@gmail.com', '2005-02-08', 222311),
+('A0005', 'Yew Zi Jian', '050409-07-0653', 'abcde12345', '016-5450219', 'M', 'zijian0613yew@gmail.com', '2005-07-01', 220126);
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,7 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`booking_id`, `event_id`, `member_id`, `category`, `level`, `booking_date`, `booking_time`) VALUES
-('B1', 'E1', 'M1', '', '', '2024-04-05', '18:59:19');
+('B0001', 'E0001', 'M0001', 'MS', 'Beginner', '2024-04-05', '18:59:19');
 
 -- --------------------------------------------------------
 
@@ -86,15 +88,16 @@ CREATE TABLE `event` (
   `end_time` time NOT NULL,
   `description` longtext NOT NULL,
   `pax` int(3) NOT NULL,
-  `remaining_pax` int(3) NOT NULL
+  `remaining_pax` int(3) NOT NULL,
+  `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`event_id`, `imgpath`, `event_name`, `date`, `start_time`, `end_time`, `description`, `pax`, `remaining_pax`) VALUES
-('E1', '', 'Training', '2024-04-23', '16:00:00', '18:00:00', 'Usual Training', 30, 15);
+INSERT INTO `event` (`event_id`, `imgpath`, `event_name`, `date`, `start_time`, `end_time`, `description`, `pax`, `remaining_pax`, `status`) VALUES
+('E0001', 'event-1.png', 'Training', '2024-04-23', '16:00:00', '18:00:00', 'Usual Training', 30, 0, 'Completed');
 
 -- --------------------------------------------------------
 
@@ -119,7 +122,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`member_id`, `member_name`, `ic_no`, `member_pass`, `phone_no`, `gender`, `email`, `birth_date`, `recovery_no`) VALUES
-('M1', 'Woo Yee Ping', '051223-07-0532', 'abcde', '012-3445444', 'M', 'wyp@gmail.com', '2005-12-23', 123456);
+('M0001', 'Woo Yee Ping', '051223-07-0532', 'abcde', '012-3445444', 'M', 'wyp@gmail.com', '2005-12-23', 123456);
 
 --
 -- Indexes for dumped tables
