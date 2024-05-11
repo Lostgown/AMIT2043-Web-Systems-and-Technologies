@@ -20,7 +20,7 @@ $header = array(
 if(isset($_GET["sort"])){
     $sort = $_GET["sort"];
 }else{
-    $sort="admin_id";
+    $sort="event_id";
 }
 
 //retrive order
@@ -36,7 +36,7 @@ if (isset($_GET["order"])){
 <html>
 
 <head>
-    <title>Member List</title>
+    <title>Booking List</title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,7 @@ if (isset($_GET["order"])){
         <div class="d-flex justify-content-end">
             <div class="p-3">
                 <a href="createAdmin.php"><button type="button"
-                class=" btn btn-secondary btn-lg me-md-2 ">Create New Admin</button></a>
+                class=" btn btn-secondary btn-lg me-md-2 ">Create New Booking</button></a>
             </div>
             <div class="p-3">
                 <a href="menuAdmin.php"><button type="button"
@@ -62,7 +62,7 @@ if (isset($_GET["order"])){
             <div class="col">
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Admin List</h2>
+                        <h2 class="display-6 text-center">Booking List</h2>
                     </div>
                     <div class="card-body">
 
@@ -118,14 +118,14 @@ if (isset($_GET["order"])){
                                                     <td><button class ='btn btn-warning'><a href='updateAdmin.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
                                                     <td><button class ='btn btn-danger'><a href='deleteAdmin.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
-                                                    , $row->admin_id
-                                                    , $row->admin_name
-                                                    , $row->ic_no
-                                                    , $row->phone_no
-                                                    , allGender()[$row->gender]
-                                                    , $row->email
-                                                    , $row->birth_date
-                                                    , $row->admin_id, $row->admin_id);
+                                                    , $row->booking_id
+                                                    , $row->event_id
+                                                    , $row->member_id
+                                                    , $row->category
+                                                    , $row->level
+                                                    , $row->booking_date
+                                                    , $row->booking_time
+                                                    , $row->booking_id, $row->booking_id);
                                         }
                                     }
 
