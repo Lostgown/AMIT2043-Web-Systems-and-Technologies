@@ -64,7 +64,7 @@
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
-                $error["pass"] = validateTempPass($pass);
+                $error["pass"] = validatePass($pass);
                 $error["birth_date"] = validateBirthDate($birth);
 
                 

@@ -1,18 +1,22 @@
 <?php     
 
 date_default_timezone_set("Asia/Kuala_Lumpur");
-
-$now = date("Y/m/d");
 //test
 // create function - validate birth date
 function validateBirthDate($birth){
+    // Get current date
+    $now = date("m/d/Y");
+    // Convert birth date and current date to timestamps for comparison
+    $birth_timestamp = strtotime($birth);
+    $now_timestamp = strtotime($now);
+
     if($birth == null){
         return "Please provide your <b>Birth date</b>!";
-    }else if($birth > $now) {
-        return "Your <b>Birth date</b> cannot exceended current time";
-    }else {
-        return "Invalid <b>Birth date</b>!";
-    }
+    } else if($birth_timestamp > $now_timestamp) {
+        return "Your <b>Birth date</b> cannot exceed the current date.";
+    } else {
+        return "";
+    } 
 }
 
 //create function - validate ic no
@@ -72,21 +76,30 @@ function validatePhone($phone) {
     }
 }
 
-function validateTempPass($password) {
-    if($password == null) {
-        return 'Please enter your <b>Password</b>.';
-    } 
-}
+// function validateTempPass($password) {
+//     if($password == null) {
+//         return 'Please enter your <b>Password</b>.';
+//     } 
+// }
+// ?????? 
 
 function validatePass($password) {
     if($password == null) {
         return 'Please enter your <b>Password</b>.';
-    } else if (strlen($password) != 10) {
+    } else if (strlen($password) !== 10) {
         return 'Your <b>Password</b> must in within <b>10</b> character only.';
+    } else if (!preg_match("/[A-Z]/", $password)) {
+        return 'Your password should contain atleast one <b>Uppercase</b>.';
+    } else if (!preg_match("/[0-9]/", $password)) {
+        return 'Your password should contain atleast one <b>Number</b>';
     } else {
         return '';
+        // $pattern = '/^(?=.*[A-Z])(?=.*\d).+$/';
+        // suprisingly.. this format are not working 
     }
 }
+
+
 
 function validateCfnPass($passwordCfn, $password) {
     if($passwordCfn == null) {
@@ -98,7 +111,6 @@ function validateCfnPass($passwordCfn, $password) {
         return '';
     }
 }
-
 
 //create function - return all gender
 function allGender(){
