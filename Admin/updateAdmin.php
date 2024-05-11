@@ -71,11 +71,11 @@
 
                 //1.2 validate input
                 $error["name"] = validateName($name);
-                $error["ic"] = validateIC($ic);
+                $error["ic_no"] = validateIC($ic);
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
-                $error["ic_no"] = validateIC($ic);
+                //$error["da"] = validateIC($ic);
 
                 //filter out empty error
                 $error = array_filter($error);

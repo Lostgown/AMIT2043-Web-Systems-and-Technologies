@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2024 at 02:12 PM
+-- Generation Time: May 11, 2024 at 08:21 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,18 +30,23 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `admin_id` varchar(5) NOT NULL,
   `admin_name` varchar(30) NOT NULL,
+  `ic_no` varchar(14) NOT NULL,
   `admin_pass` varchar(50) NOT NULL,
   `phone_no` varchar(12) NOT NULL,
-  `gender` varchar(10) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `gender` char(1) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `birth_date` date NOT NULL,
+  `recovery_no` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `admin_name`, `admin_pass`, `phone_no`, `gender`, `email`) VALUES
-('A1', 'Lim Shiow Yi', 'abcde12345', '010-1119900', 'Female', ' limsy-pm23@student.tarc.edu.my');
+INSERT INTO `admin` (`admin_id`, `admin_name`, `ic_no`, `admin_pass`, `phone_no`, `gender`, `email`, `birth_date`, `recovery_no`) VALUES
+('A1', 'Lim Shiow Yi', '050409-07-0654', 'abcde', '010-1199110', 'F', 'limsy-pm23@student.tarc.edu.my', '2005-04-09', 568742),
+('A2', 'Teoh Ming Geng', '050409-07-0653', 'abcde', '010-1119901', 'M', 'teohmg@gmail.com', '2005-05-10', 984357),
+('A3', 'Raymond Goh Cheng Chen', '050207-07-0563', 'aaaa', '014-2429675', 'M', 'gohchengchen98@gmail.con', '2005-02-07', 666741);
 
 -- --------------------------------------------------------
 
@@ -57,6 +62,13 @@ CREATE TABLE `booking` (
   `booking_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`booking_id`, `event_id`, `member_id`, `booking_date`, `booking_time`) VALUES
+('B1', 'E1', 'M1', '2024-04-05', '18:59:19');
+
 -- --------------------------------------------------------
 
 --
@@ -65,12 +77,22 @@ CREATE TABLE `booking` (
 
 CREATE TABLE `event` (
   `event_id` varchar(5) NOT NULL,
+  `imgpath` varchar(100) NOT NULL,
   `event_name` varchar(40) NOT NULL,
   `date` date NOT NULL,
-  `time` time NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
   `description` longtext NOT NULL,
-  `pax` int(3) NOT NULL
+  `pax` int(3) NOT NULL,
+  `remaining_pax` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `imgpath`, `event_name`, `date`, `start_time`, `end_time`, `description`, `pax`, `remaining_pax`) VALUES
+('E1', '', 'Training', '2024-04-23', '16:00:00', '18:00:00', 'Usual Training', 30, 15);
 
 -- --------------------------------------------------------
 
@@ -81,19 +103,21 @@ CREATE TABLE `event` (
 CREATE TABLE `member` (
   `member_id` varchar(5) NOT NULL,
   `member_name` varchar(30) NOT NULL,
+  `ic_no` varchar(14) NOT NULL,
   `member_pass` varchar(50) NOT NULL,
   `phone_no` varchar(12) NOT NULL,
-  `gender` varchar(10) NOT NULL,
-  `email` varchar(30) NOT NULL
+  `gender` char(1) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `birth_date` date NOT NULL,
+  `recovery_no` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`member_id`, `member_name`, `member_pass`, `phone_no`, `gender`, `email`) VALUES
-('M1', 'Woo Yee Ping', 'abcde', '0123445444', 'Male', 'wooyp-pm23@student.tarc.edu.my'),
-('M2', 'Ng Jun Wei', '0000Abcd', '0111234567', 'Male', 'junwei27@gmail.com');
+INSERT INTO `member` (`member_id`, `member_name`, `ic_no`, `member_pass`, `phone_no`, `gender`, `email`, `birth_date`, `recovery_no`) VALUES
+('M1', 'Woo Yee Ping', '051223-07-0532', 'abcde', '012-3445444', 'M', 'wyp@gmail.com', '2005-12-23', 123456);
 
 --
 -- Indexes for dumped tables
