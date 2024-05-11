@@ -31,7 +31,7 @@
 
         <?php 
           
-        $loginType = $_SESSION['loginType']; 
+        // $id = $_SESSION['idUser'];  
 
         //using GET method and POST method together
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -52,26 +52,7 @@
 
             $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             
-            // if($_SESSION['id'] == 'admin') {
-            //     $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
-            // } else if($_SESSION['id'] == 'member') {
-            //     $sql = "UPDATE member SET member_pass = ? WHERE member_id = ?";
-            // } else {
-            //     //ERROR MESSAGE
-            //     echo "<div class='error'>Invalid user role.</div>";
-            //     exit;
-            // }
-
-        if ($loginType == 'member') {
-            $sql = "UPDATE member SET member_pass = ? WHERE member_ id = ?";
-        }
-        else if ($loginType == 'admin') {
             $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
-        }
-        else {
-            echo "<div class='error'>Invalid login type.</div>";
-            exit;
-        }
 
             $stmt = $con->prepare($sql);
             $stmt->bind_param("ss", $password, $id);
@@ -102,17 +83,27 @@
         
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "text" name  = "pass" value="" placeholder=""/>
+                            <input class = "input_field" type = "password" name = "pass" id="pass" value="" placeholder=""/>
                             <span class="input_label">Password</span>
-                        </label>
+                            <label for="chkShowPassword">
                     </div>
 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type="text" name="passCfn"  value="" placeholder=""/>  
+                            <input class = "input_field" type="password" name="passCfn" id="passCfn" value="" placeholder=""/>  
                             <span class="input_label">Password Confirmation</span>
                         </label>
                     </div>
+
+                    <div class = "genderRadio">
+                    <p id = "gender" style="text-align: left;"> 
+                    <!-- &nbspShow password: &nbsp &nbsp  -->
+                </p>    
+                    <p id = "btnMale"><label>
+                    <input type = "checkbox" name = "passVisibility" value="" onclick="showPassword()" /> Show password &nbsp 
+                    </label>
+                    </p>
+                 </div>
 
             <br/>
             <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
@@ -122,4 +113,21 @@
 
         
     </body>
+    <script>
+
+// function password vibility 
+function showPassword() {
+
+    var password = document.getElementById("pass");
+    var passwordCfn = document.getElementById("passCfn");
+
+    if (password.type === "password" || passwordCfn.type === "password") {
+        password.type = "text";
+        passwordCfn.type = "text";
+    } else {
+        password.type = "password";
+        passwordCfn.type = "password";
+    }
+}
+    </script>
 </html>

@@ -165,14 +165,18 @@
 </div>
 
 <div class = "genderRadio">
-<p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>      
+<p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>    
+
 <p id = "btnMale"><label>
-<input type = "radio" name = "gender" value = 'M' 
-<?php echo (isset($gender) && $gender == "M")?"checked":"" ?> /> Male &nbsp </label>
+<input type = "radio" name = "gender" value = 'M' <?php echo (isset($gender) && $gender == "M")?"checked":"" ?> /> Male &nbsp 
+</label>
 </p>
+
 <p id = "btnFemale"><label>
-<input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female </p></label>
-<br>
+<input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female 
+</p>
+</label><br />
+
 </div>
 
             
