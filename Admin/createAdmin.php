@@ -65,6 +65,7 @@
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
                 $error["pass"] = validatePass($pass);
+                $error["birth_date"] = validateBirthDate($birth);
 
                 
                 //filter out empty error
