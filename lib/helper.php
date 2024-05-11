@@ -4,8 +4,9 @@ date_default_timezone_set("Asia/Kuala_Lumpur");
 //test
 // create function - validate birth date
 function validateBirthDate($birth){
-    // Get current date
+
     $now = date("m/d/Y");
+
     // Convert birth date and current date to timestamps for comparison
     $birth_timestamp = strtotime($birth);
     $now_timestamp = strtotime($now);
@@ -60,7 +61,7 @@ function validateName($name){
 // add check uppercase 
 
 //create function - check admin id
-function validateAdminId($id){
+function validateAdminId($id) {
     if($id== null){
         return "Please provide your <b>Admin ID.</b>";
     }else if(!preg_match ("/^M\d+/", $id)){
