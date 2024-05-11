@@ -1,65 +1,99 @@
 <!DOCTYPE html>
+
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Update Admin</title>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+        
+    </head>
+    <body>
 
-<head>
-    <title>Reset Password</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/formUpdate.css'>
-</head>
-<script>
-    function noti(){
-        alert('Password had been reset.Login Again.');
-        window.location.href = "../index.php";
-    }
 
-</script>
-<body class="bg-dark">
-<div class = 'fixed'>     
-        <div class = 'content'>
+        <?php
+        require_once '../lib/helper.php';
+        ?>
+        
+        <form action="" method="POST">
+        <div class = 'fixed'>     
+            <div class = 'content'>
             <div>
             <div class = "frm" style="text-align:left;">  
-            <h1 style="text-align:center"> Reset Password </h1>
-                <form name = 'f1' action = '../index.php' onsubmit = 'return validation()' method = 'POST' autocomplete='off'>
+            <h1 style="text-align:center"> Password reset </h1>
+            <input class = "input_field" type = "hidden" name  = "hdID" value=""/> 
 
+
+        <?php 
+        //using GET method and POST method together
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id = strtoupper(trim($_POST["id"]));
+            $password = trim($_POST["pass"]);
+            $passwordCfn = trim($_POST["passCfn"]);
+            // Validate the new password format
+            $errorA = validatePass($password);
+            $errorB = validateCfnPass($passwordCfn, $password);
+        
+            if (!empty($errorA)) {
+                // If there's an error in the password format, display it
+                echo "<div class='error'>$errorA</div>";
+            } else if(!empty($errorB)) {
+                echo "<div class='error'>$errorB</div>";
+            }
+             else {
+                // Update the password in the database
+                $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        
+                $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
+                //NOTE: query() no "?" in sql
+                //NOTE: prepare() "?" in sql 
+                $stmt = $con->prepare($sql);
+                $stmt->bind_param("ss", $password, $id);
+                $stmt->execute();
+        
+                if ($stmt->affected_rows > 0) {
+                    // Password reset successful
+                    echo "<div class='info'>Password reset successfully for Admin ID: $id.</div>";
+                } else {
+                    // Unable to update password
+                    echo "<div class='error'>Unable to reset password. Please try again.</div>";
+                }
+        
+                $stmt->close();
+                $con->close();
+            }
+        }
+        ?>
+        
+        
+
+        <div class = 'input_box'>
+                        <label class="input">
+                            <input class = "input_field" type = "text" name  = "id" value=""/>
+                            <span class="input_label">Id</span>
+                        </label>
+                    </div>
+        
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "text" name  = "id" placeholder= " "/>
-                            <span class="input_label">User ID</span>
+                            <input class = "input_field" type = "text" name  = "pass" value=""/>
+                            <span class="input_label">Password</span>
                         </label>
                     </div>
 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "password" name  = "pass" placeholder= " "/>
-                            <span class="input_label">New Password</span>
+                            <input class = "input_field" type="text" name="passCfn"  value=""/>  
+                            <span class="input_label">Password Confirmation</span>
                         </label>
                     </div>
 
-                    <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "password" name  = "passNew" placeholder= " "/>
-                            <span class="input_label">New Password Confirmation</span>
-                        </label>
-                    </div>
-                    <br>
-                    
-                    <button id="btnUpdate" name ='btn' onclick="noti()"> Reset </button>
-                    
+            <br/>
+            <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
+            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='adminList.php'" />
+            </form>
+            <br/>
 
-                </form>
-                    <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
-                    <br>
-                    <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Member/memberList.php'" />
-
-                <?php $con=null; ?>
-            </div>
-        </div>
-    </div>
-</div>
-
-</body>
-
+        
+    </body>
 </html>

@@ -1,4 +1,5 @@
 <?php     
+// include('../css/form.css'); 
 
 date_default_timezone_set("Asia/Kuala_Lumpur");
 //test
@@ -82,10 +83,10 @@ function validatePhone($phone) {
 //         return 'Please enter your <b>Password</b>.';
 //     } 
 // }
-// ?????? 
 
 function validatePass($password) {
     if($password == null) {
+        // echo 'Please enter your <b>Password</b>.';
         return 'Please enter your <b>Password</b>.';
     } else if (strlen($password) !== 10) {
         return 'Your <b>Password</b> must in within <b>10</b> character only.';
@@ -110,16 +111,18 @@ function validatePassTemp($password) {
 
 function validateCfnPass($passwordCfn, $password) {
     if($passwordCfn == null) {
-        return 'Please your password Confirmation.';
+        return 'Please enter your <b>Password Confirmation</b>.';
+    } else if($password == null) {
+        return 'Your <b>Password</b> is null.';
     }
-    else if($passwordCfn != $password) {
-        return 'Your password confirmation must be the same as password.';
+    else if(strcmp($passwordCfn, $password)) {
+        return 'Your <b>Password Confirmation</b> must be the same as <b>Password</b>.';
     } else {
         return '';
     }
 }
 
-//create function - return all gender
+//create function - return all gender 
 function allGender(){
     return array(
         "M" => "Male",
