@@ -1,3 +1,8 @@
+<?php 
+        session_start();
+        include('../Sys/connection.php');   
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -25,11 +30,15 @@
 
 
         <?php 
+          
+        // $id = $_SESSION['idUser'];  
+
         //using GET method and POST method together
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $id = strtoupper(trim($_POST["id"]));
             $password = trim($_POST["pass"]);
             $passwordCfn = trim($_POST["passCfn"]);
+
             // Validate the new password format
             $errorA = validatePass($password);
             $errorB = validateCfnPass($passwordCfn, $password);
@@ -39,28 +48,26 @@
                 echo "<div class='error'>$errorA</div>";
             } else if(!empty($errorB)) {
                 echo "<div class='error'>$errorB</div>";
+            } else {
+
+            $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+            
+            $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
+
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("ss", $password, $id);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                // Password reset successful
+                echo "<div class='info'>Password reset successfully for ID: $id.</div>";
+            } else {
+                // Unable to update password
+                echo "<div class='error'>Unable to reset password. Please try again.</div>";
             }
-             else {
-                // Update the password in the database
-                $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        
-                $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
-                //NOTE: query() no "?" in sql
-                //NOTE: prepare() "?" in sql 
-                $stmt = $con->prepare($sql);
-                $stmt->bind_param("ss", $password, $id);
-                $stmt->execute();
-        
-                if ($stmt->affected_rows > 0) {
-                    // Password reset successful
-                    echo "<div class='info'>Password reset successfully for Admin ID: $id.</div>";
-                } else {
-                    // Unable to update password
-                    echo "<div class='error'>Unable to reset password. Please try again.</div>";
-                }
-        
-                $stmt->close();
-                $con->close();
+            
+            $stmt->close();
+            $con->close();
             }
         }
         ?>
@@ -69,31 +76,58 @@
 
         <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "text" name  = "id" value=""/>
+                            <input class = "input_field" type = "text" name  = "id" value="" placeholder=""/>
                             <span class="input_label">Id</span>
                         </label>
                     </div>
         
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "text" name  = "pass" value=""/>
+                            <input class = "input_field" type = "password" name = "pass" id="pass" value="" placeholder=""/>
                             <span class="input_label">Password</span>
-                        </label>
+                            <label for="chkShowPassword">
                     </div>
 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type="text" name="passCfn"  value=""/>  
+                            <input class = "input_field" type="password" name="passCfn" id="passCfn" value="" placeholder=""/>  
                             <span class="input_label">Password Confirmation</span>
                         </label>
                     </div>
 
+                    <div class = "genderRadio">
+                    <p id = "gender" style="text-align: left;"> 
+                    <!-- &nbspShow password: &nbsp &nbsp  -->
+                </p>    
+                    <p id = "btnMale"><label>
+                    <input type = "checkbox" name = "passVisibility" value="" onclick="showPassword()" /> Show password &nbsp 
+                    </label>
+                    </p>
+                 </div>
+
             <br/>
             <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
-            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='adminList.php'" />
+            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
             </form>
             <br/>
 
         
     </body>
+    <script>
+
+// function password vibility 
+function showPassword() {
+
+    var password = document.getElementById("pass");
+    var passwordCfn = document.getElementById("passCfn");
+
+    if (password.type === "password" || passwordCfn.type === "password") {
+        password.type = "text";
+        passwordCfn.type = "text";
+    } else {
+        password.type = "password";
+        passwordCfn.type = "password";
+    }
+}
+    </script>
 </html>
