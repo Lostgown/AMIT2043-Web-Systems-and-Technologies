@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Update Admin</title>
+        <title>Password Reset</title>
         <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
         <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
         
@@ -20,7 +20,7 @@
             <div class = 'content'>
             <div>
             <div class = "frm" style="text-align:left;">  
-            <h1 style="text-align:center"> Password reset </h1>
+            <h1 style="text-align:center"> Password Reset </h1>
             <input class = "input_field" type = "hidden" name  = "hdID" value=""/> 
 
 

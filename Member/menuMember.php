@@ -3,6 +3,7 @@
     include('../Sys/authCheck.php');
     validMember();
     include ('../Sys/connection.php');
+    require_once('../lib/helper.php');
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +75,7 @@
         /* box-shadow: 0 5px 10px rgba(0, 0, 0, .2); */
     }
 
-    .box-profile-admin {
+    .box-profile-member {
         width: 15rem;
         height: 15rem;
         background-color: transparent;
@@ -155,7 +156,7 @@
                         <section class="sidebar">
 
 
-                            <div class="box-profile-admin">
+                        <div class="box-profile-member">
                                 <h3 style="text-align: center;">Profile</h3>
                                 <p><b>ID:</b><?php echo $_SESSION['idUser']?>
                                     <br>
@@ -166,6 +167,15 @@
                             $result= $con->query($sql);  
                             $row = mysqli_fetch_assoc($result);
                                 echo $row['member_name'];
+                        ?>
+                                    <br>
+                                    <b>IC No:</b>
+                                    <?php
+                            $sql = "SELECT ic_no FROM member WHERE member_id = '$_SESSION[idUser]'";
+
+                            $result= $con->query($sql);  
+                            $row = mysqli_fetch_assoc($result);
+                                echo $row['ic_no'];
                         ?>
                                     <br>
                                     <b>Phone No:</b>
@@ -183,8 +193,8 @@
 
                             $result= $con->query($sql);  
                             $row = mysqli_fetch_assoc($result);
-                                echo $row['gender'];
-                            
+                                $gender = $row['gender'];
+                                echo allGender()[$gender];
                         ?>
                                     <br>
                                     <b>Email:</b>
@@ -195,11 +205,22 @@
                             $row = mysqli_fetch_assoc($result);
                                 echo $row['email'];
                         ?>
-                                <form action='../General/updateProfile.php' method='POST'>
-                                    <?php echo "<style>button {float:right;margin-top: 10px;margin-right: 10px;display: block;background: orange;color: #fff;font-size: 17px;border-radius: 30px;border:none;padding: 8px 25px;text-decoration: none;}button:hover{background: rgb(255, 186, 58);transition: all 0.3s ease 0s;}</style>
-                            <button id = 'btnchng' name = 'id' value = '$_SESSION[idUser]'> Update </button></a>"; ?>
-                                    <!-- <a href="#popup-box">Click to Open Popup Box!</a> -->
-                                </form>
+                                    <br>
+                                    <b>Birth Date:</b>
+                                    <?php
+                            $sql = "SELECT birth_date FROM member WHERE member_id = '$_SESSION[idUser]'";
+
+                            $result= $con->query($sql);  
+                            $row = mysqli_fetch_assoc($result);
+                                echo $row['birth_date'];
+                        ?>
+
+                            <?php 
+                            echo "<style>button {float:right;margin-top: 10px;margin-right: 10px;display: block;background: orange;color: #fff;font-size: 17px;border-radius: 30px;border:none;padding: 8px 25px;text-decoration: none;}button:hover{background: rgb(255, 186, 58);transition: all 0.3s ease 0s;}</style>"
+                            ?>
+                            <?php
+                            printf("<button class ='btn'><a href='updateMember.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button>",$_SESSION['idUser']);
+                            ?> 
                             </div>
 
                             <div class="box-side-bar-nav">
@@ -217,7 +238,7 @@
                                     </li>
                                     <li>
                                         <a href="JoinedEventMember.php">
-                                            <button> Joined Event</button>
+                                            <button> My Bookings</button>
                                         </a>
                                     </li>
 
