@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2024 at 08:21 AM
+-- Generation Time: May 11, 2024 at 08:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,6 +58,8 @@ CREATE TABLE `booking` (
   `booking_id` varchar(5) NOT NULL,
   `event_id` varchar(5) NOT NULL,
   `member_id` varchar(5) NOT NULL,
+  `category` varchar(2) NOT NULL,
+  `level` varchar(20) NOT NULL,
   `booking_date` date NOT NULL,
   `booking_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -66,8 +68,8 @@ CREATE TABLE `booking` (
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`booking_id`, `event_id`, `member_id`, `booking_date`, `booking_time`) VALUES
-('B1', 'E1', 'M1', '2024-04-05', '18:59:19');
+INSERT INTO `booking` (`booking_id`, `event_id`, `member_id`, `category`, `level`, `booking_date`, `booking_time`) VALUES
+('B1', 'E1', 'M1', '', '', '2024-04-05', '18:59:19');
 
 -- --------------------------------------------------------
 
