@@ -8,10 +8,10 @@
         $row = mysqli_fetch_assoc($result); 
         if (isset($row['admin_id'])) {
                 $number = ltrim($row['admin_id'],'A')+1;  
-                $id = 'A' . $number;   
+                $id = 'A' . sprintf('%04d', $number);   
         }
         else {
-                $id = "A1";
+                $id = "A0001";
         }
     }
 
@@ -64,7 +64,7 @@
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
-                $error["pass"] = validatePass($pass);
+                $error["pass"] = validateTempPass($pass);
 
                 
                 //filter out empty error

@@ -72,6 +72,12 @@ function validatePhone($phone) {
     }
 }
 
+function validateTempPass($password) {
+    if($password == null) {
+        return 'Please enter your <b>Password</b>.';
+    } 
+}
+
 function validatePass($password) {
     if($password == null) {
         return 'Please enter your <b>Password</b>.';
