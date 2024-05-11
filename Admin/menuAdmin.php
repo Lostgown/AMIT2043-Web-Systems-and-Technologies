@@ -252,7 +252,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../Event/bookingList.php">
+                                        <a href="../Booking/bookingList.php">
                                             <button> Events Bookings Details</button>
                                         </a>
                                     </li>

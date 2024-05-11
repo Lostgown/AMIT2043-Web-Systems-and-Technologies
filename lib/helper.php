@@ -100,6 +100,12 @@ function validatePass($password) {
     }
 }
 
+function validatePassTemp($password) {
+    if($password == null) {
+        return 'Please enter your <b>Password</b>.';
+    } 
+}
+
 
 
 function validateCfnPass($passwordCfn, $password) {
@@ -119,6 +125,20 @@ function allGender(){
         "M" => "Male",
         "F" => "Female"              
     );
+}
+
+function allCategory(){
+    return array(
+        "MS" => "Men's Single",
+        "MD" => "Men's Doubles",
+        "WS" => "Women's Single",
+        "WD" => "Women's Doubles",
+        "XD" => "Mixes Doubles"
+    );
+}
+
+function generateRecovery(){
+    return rand(100000,999999);
 }
 
 
