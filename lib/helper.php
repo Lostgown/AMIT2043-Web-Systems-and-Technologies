@@ -110,7 +110,7 @@ function validatePassTemp($password) {
 
 function validateCfnPass($passwordCfn, $password) {
     if($passwordCfn == null) {
-        return 'Please your password Confirmation.';
+        return 'Please enteryour password Confirmation.';
     }
     else if($passwordCfn != $password) {
         return 'Your password confirmation must be the same as password.';
