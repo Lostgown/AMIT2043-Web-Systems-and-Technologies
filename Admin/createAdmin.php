@@ -8,10 +8,10 @@
         $row = mysqli_fetch_assoc($result); 
         if (isset($row['admin_id'])) {
                 $number = ltrim($row['admin_id'],'A')+1;  
-                $id = 'A' . $number;   
+                $id = 'A' . sprintf('%04d', $number);   
         }
         else {
-                $id = "A1";
+                $id = "A0001";
         }
     }
 
@@ -29,6 +29,8 @@
         <?php
         include '../Sys/authCheck.php';
         require_once '../lib/helper.php';
+
+        $recoveryNum = generateRecovery();
         ?>
         
         <form action="" method="POST">
@@ -64,7 +66,8 @@
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
-                $error["pass"] = validatePass($pass);
+                $error["pass"] = validatePassTemp($pass);
+                $error["birth_date"] = validateBirthDate($birth);
 
                 
                 //filter out empty error
@@ -76,8 +79,7 @@
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "INSERT INTO admin (admin_id, admin_name, ic_no, admin_pass, phone_no, gender, email, birth_date)
-                            VALUES(?,?,?,?,?,?,?,?)";
+                    $sql = "INSERT INTO admin (admin_id, admin_name, ic_no, admin_pass, phone_no, gender, email, birth_date, recovery_no) VALUES(?,?,?,?,?,?,?,?,?)";
                     
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -86,7 +88,7 @@
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt -> bind_param("ssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth);
+                    $stmt -> bind_param("sssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth, $recoveryNum);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -169,64 +171,7 @@
 <input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female </p></label>
 <br>
 </div>
-                <!-- <div class = 'input_box'>
-                    <label class="input">
-                        <input class="input_field" type="text" id="name" name="name" autofocus="autofocus" placeholder= "" required
-                            oninvalid="this.setCustomValidity('Fill in the name.')" oninput="this.setCustomValidity('')"/>
-                        <span class="input_label">Full Name</span>
-                    </label>
-                </div>
-
-                <div class = 'input_box'>
-                    <label class="input">
-                        <input class = "input_field" type = "text" name  = "ic_no" autofocus="autofocus" placeholder= "" required
-                            oninvalid="this.setCustomValidity('Fill in your IC number.')" oninput="this.setCustomValidity('')"/>
-                        <span class="input_label">IC Number</span>
-                    </label>
-                </div>
-
-                <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "password" name  = "pass"  id = "pass" placeholder= " " required
-                                oninvalid="this.setCustomValidity('Fill in the password.')" oninput="this.setCustomValidity('')"
-                                />  
-                            <span class="input_label">Password</span>
-                        </label>
-                    </div>
-
-                <div class = 'input_box'>
-                    <label class="input">
-                        <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  autofocus="autofocus" placeholder= "" required oninvalid="this.setCustomValidity('Fill in your Phone Number.')" oninput="this.setCustomValidity('')"/>  
-                        <span class="input_label">Phone Number</span>
-                    </label>
-                </div>
-
-                <div class = 'input_box'>
-                <label class="input">
-                <input class = "input_field" type = "text" id ="email" name  = "email"  autofocus="autofocus" placeholder= "" required
-                oninvalid="this.setCustomValidity('Fill in your Email.')" oninput="this.setCustomValidity('')"/>  
-                <span class="input_label">Email</span>
-                </label>
-                </div>
-
-                <div class = 'input_box'>
-                <label class="input">
-                    <input class = "input_field" type="date" name  = "birth_date"  autofocus="autofocus" placeholder= "" required
-                            oninvalid="this.setCustomValidity('Enter your Birth Date.')" oninput="this.setCustomValidity('')"/>  
-                    <span class="input_label">Birth Date</span>
-                </label>
-                </div>
-
-                <div class = "genderRadio">
-                <p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>      
-                <p id = "btnMale"><label>
-                <input type = "radio" name = "gender" value = 'M' required = "required" oninvalid="this.setCustomValidity('Choose your gender.')"oninput="this.setCustomValidity('')"  /> Male &nbsp </label>
-                </p>
-                <p id = "btnFemale"><label>
-                <input type = "radio" name = "gender" value="F" required = "required"/> Female </p></label>
-                </div> -->
-
-            
+         
             <input type="submit" value="Insert" id="btnRegister" name="btnInsert" />
             <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='adminList.php'"/>
             <br/>

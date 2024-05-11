@@ -36,7 +36,7 @@ body{
 
 #btnlogin{  
     background: #337ab7;  
-    border: solid rgb(73, 62, 73);
+    border: 0px;
     border-radius: 4px;
     color: rgb(236, 230, 230);  
     position: relative;

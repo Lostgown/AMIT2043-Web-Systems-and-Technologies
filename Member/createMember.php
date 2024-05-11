@@ -8,10 +8,10 @@
         $row = mysqli_fetch_assoc($result); 
         if (isset($row['member_id'])) {
                 $number = ltrim($row['member_id'],'M')+1;  
-                $id = 'M' . $number;   
+                $id = 'M' . sprintf('%04d', $number);   
         }
         else {
-                $id = "M1";
+                $id = "M0001";
         }
     }
 
@@ -29,6 +29,8 @@
         <?php
         include '../Sys/authCheck.php';
         require_once '../lib/helper.php';
+
+        $recoveryNum = generateRecovery();
         ?>
         
         <form action="" method="POST">
@@ -64,7 +66,8 @@
                 $error["phone_no"] = validatePhone($phone);
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
-                $error["pass"] = validatePass($pass);
+                $error["pass"] = validatePassTemp($pass);
+                $error["birth_date"] = validateBirthDate($birth);
 
                 
                 //filter out empty error
@@ -76,8 +79,7 @@
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date)
-                            VALUES(?,?,?,?,?,?,?,?)";
+                    $sql = "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date, recovery_no) VALUES(?,?,?,?,?,?,?,?,?)";
                     
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -86,7 +88,7 @@
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt -> bind_param("ssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth);
+                    $stmt -> bind_param("sssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth, $recoveryNum);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();

@@ -1,65 +1,133 @@
+<?php 
+        session_start();
+        include('../Sys/connection.php');   
+?>
+
 <!DOCTYPE html>
+
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Password Reset</title>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+        
+    </head>
+    <body>
 
-<head>
-    <title>Reset Password</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/formUpdate.css'>
-</head>
-<script>
-    function noti(){
-        alert('Password had been reset.Login Again.');
-        window.location.href = "../index.php";
-    }
 
-</script>
-<body class="bg-dark">
-<div class = 'fixed'>     
-        <div class = 'content'>
+        <?php
+        require_once '../lib/helper.php';
+        ?>
+        
+        <form action="" method="POST">
+        <div class = 'fixed'>     
+            <div class = 'content'>
             <div>
             <div class = "frm" style="text-align:left;">  
-            <h1 style="text-align:center"> Reset Password </h1>
-                <form name = 'f1' action = '../index.php' onsubmit = 'return validation()' method = 'POST' autocomplete='off'>
+            <h1 style="text-align:center"> Password Reset </h1>
+            <input class = "input_field" type = "hidden" name  = "hdID" value=""/> 
 
+
+        <?php 
+          
+        // $id = $_SESSION['idUser'];  
+
+        //using GET method and POST method together
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $id = strtoupper(trim($_POST["id"]));
+            $password = trim($_POST["pass"]);
+            $passwordCfn = trim($_POST["passCfn"]);
+
+            // Validate the new password format
+            $errorA = validatePass($password);
+            $errorB = validateCfnPass($passwordCfn, $password);
+        
+            if (!empty($errorA)) {
+                // If there's an error in the password format, display it
+                echo "<div class='error'>$errorA</div>";
+            } else if(!empty($errorB)) {
+                echo "<div class='error'>$errorB</div>";
+            } else {
+
+            $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+            
+            $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
+
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("ss", $password, $id);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                // Password reset successful
+                echo "<div class='info'>Password reset successfully for ID: $id.</div>";
+            } else {
+                // Unable to update password
+                echo "<div class='error'>Unable to reset password. Please try again.</div>";
+            }
+            
+            $stmt->close();
+            $con->close();
+            }
+        }
+        ?>
+        
+        
+
+        <div class = 'input_box'>
+                        <label class="input">
+                            <input class = "input_field" type = "text" name  = "id" value="" placeholder=""/>
+                            <span class="input_label">Id</span>
+                        </label>
+                    </div>
+        
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "text" name  = "id" placeholder= " "/>
-                            <span class="input_label">User ID</span>
-                        </label>
+                            <input class = "input_field" type = "password" name = "pass" id="pass" value="" placeholder=""/>
+                            <span class="input_label">Password</span>
+                            <label for="chkShowPassword">
                     </div>
 
                     <div class = 'input_box'>
                         <label class="input">
-                            <input class = "input_field" type = "password" name  = "pass" placeholder= " "/>
-                            <span class="input_label">New Password</span>
+                            <input class = "input_field" type="password" name="passCfn" id="passCfn" value="" placeholder=""/>  
+                            <span class="input_label">Password Confirmation</span>
                         </label>
                     </div>
 
-                    <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "password" name  = "passNew" placeholder= " "/>
-                            <span class="input_label">New Password Confirmation</span>
-                        </label>
-                    </div>
-                    <br>
-                    
-                    <button id="btnUpdate" name ='btn' onclick="noti()"> Reset </button>
-                    
+                    <div class = "genderRadio">
+                    <p id = "gender" style="text-align: left;"> 
+                    <!-- &nbspShow password: &nbsp &nbsp  -->
+                </p>    
+                    <p id = "btnMale"><label>
+                    <input type = "checkbox" name = "passVisibility" value="" onclick="showPassword()" /> Show password &nbsp 
+                    </label>
+                    </p>
+                 </div>
 
-                </form>
-                    <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
-                    <br>
-                    <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Member/memberList.php'" />
+            <br/>
+            <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
+            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
+            </form>
+            <br/>
 
-                <?php $con=null; ?>
-            </div>
-        </div>
-    </div>
-</div>
+        
+    </body>
+    <script>
 
-</body>
+// function password vibility 
+function showPassword() {
 
+    var password = document.getElementById("pass");
+    var passwordCfn = document.getElementById("passCfn");
+
+    if (password.type === "password" || passwordCfn.type === "password") {
+        password.type = "text";
+        passwordCfn.type = "text";
+    } else {
+        password.type = "password";
+        passwordCfn.type = "password";
+    }
+}
+    </script>
 </html>

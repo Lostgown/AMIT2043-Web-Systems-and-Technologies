@@ -1,18 +1,24 @@
 <?php     
+// include('../css/form.css'); 
 
 date_default_timezone_set("Asia/Kuala_Lumpur");
-
-$now = date("Y/m/d");
-
+//test
 // create function - validate birth date
 function validateBirthDate($birth){
+
+    $now = date("m/d/Y");
+
+    // Convert birth date and current date to timestamps for comparison
+    $birth_timestamp = strtotime($birth);
+    $now_timestamp = strtotime($now);
+
     if($birth == null){
         return "Please provide your <b>Birth date</b>!";
-    }else if($birth > $now) {
-        return "Your <b>Birth date</b> cannot exceended current time";
-    }else {
-        return "Invalid <b>Birth date</b>!";
-    }
+    } else if($birth_timestamp > $now_timestamp) {
+        return "Your <b>Birth date</b> cannot exceed the current date.";
+    } else {
+        return "";
+    } 
 }
 
 //create function - validate ic no
@@ -56,7 +62,7 @@ function validateName($name){
 // add check uppercase 
 
 //create function - check admin id
-function validateAdminId($id){
+function validateAdminId($id) {
     if($id== null){
         return "Please provide your <b>Admin ID.</b>";
     }else if(!preg_match ("/^M\d+/", $id)){
@@ -72,34 +78,70 @@ function validatePhone($phone) {
     }
 }
 
+// function validateTempPass($password) {
+//     if($password == null) {
+//         return 'Please enter your <b>Password</b>.';
+//     } 
+// }
+
 function validatePass($password) {
     if($password == null) {
+        // echo 'Please enter your <b>Password</b>.';
         return 'Please enter your <b>Password</b>.';
-    } else if (strlen($password) != 10) {
+    } else if (strlen($password) !== 10) {
         return 'Your <b>Password</b> must in within <b>10</b> character only.';
+    } else if (!preg_match("/[A-Z]/", $password)) {
+        return 'Your password should contain atleast one <b>Uppercase</b>.';
+    } else if (!preg_match("/[0-9]/", $password)) {
+        return 'Your password should contain atleast one <b>Number</b>';
     } else {
         return '';
+        // $pattern = '/^(?=.*[A-Z])(?=.*\d).+$/';
+        // suprisingly.. this format are not working 
     }
 }
+
+function validatePassTemp($password) {
+    if($password == null) {
+        return 'Please enter your <b>Password</b>.';
+    } 
+}
+
+
 
 function validateCfnPass($passwordCfn, $password) {
     if($passwordCfn == null) {
-        return 'Please your password Confirmation.';
+        return 'Please enter your <b>Password Confirmation</b>.';
+    } else if($password == null) {
+        return 'Your <b>Password</b> is null.';
     }
-    else if($passwordCfn != $password) {
-        return 'Your password confirmation must be the same as password.';
+    else if(strcmp($passwordCfn, $password)) {
+        return 'Your <b>Password Confirmation</b> must be the same as <b>Password</b>.';
     } else {
         return '';
     }
 }
 
-
-//create function - return all gender
+//create function - return all gender 
 function allGender(){
     return array(
         "M" => "Male",
         "F" => "Female"              
     );
+}
+
+function allCategory(){
+    return array(
+        "MS" => "Men's Single",
+        "MD" => "Men's Doubles",
+        "WS" => "Women's Single",
+        "WD" => "Women's Doubles",
+        "XD" => "Mixes Doubles"
+    );
+}
+
+function generateRecovery(){
+    return rand(100000,999999);
 }
 
 

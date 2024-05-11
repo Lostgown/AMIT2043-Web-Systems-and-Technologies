@@ -23,7 +23,7 @@
         function validnotMember() {
             if ($_SESSION['userType'] == 'member') {
                 header("location:../Member/menuMember.php");
-            }
+            } 
         } 
     }
     else {

@@ -252,7 +252,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="../Event/bookingList.php">
+                                        <a href="../Booking/bookingList.php">
                                             <button> Events Bookings Details</button>
                                         </a>
                                     </li>
@@ -268,24 +268,6 @@
                                     <button id='btnchng' name='id' value=''><a
                                             style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
                                         </a></button>
-                                </div>
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event2</h3>
-                                    <button id='btnchng' name='id' value=''><a
-                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
-                                        </a>
-                                </div>
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event3</h3>
-                                    <button id='btnchng' name='id' value=''><a
-                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
-                                        </a>
-                                </div>
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event4</h3>
-                                    <button id='btnchng' name='id' value=''><a
-                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
-                                        </a>
                                 </div>
 
                             </div>
