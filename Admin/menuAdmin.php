@@ -282,11 +282,18 @@
                                         while($row = $result->fetch_object()){
                                             printf("<div class='box-recent-event'>
                                                         <h3 class='text-color'> %s</h3>
+                                                        <img src='../photo/%s'>
                                                         <button class ='btn btn-warning'><a href='updateEvent.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></div>"
                                                     , $row->event_name
+                                                    , $row->imgpath
                                                     , $row->event_id 
                                                     );
                                         }
+                                    } else {
+                                        printf("<h3>No Recent Hosting Event</h3>
+                                        <a href='../Event/createEvent.php'>
+                                        <button type='button'
+                                        style='color:white; background-color:green; margin-left:20px;'>Create Event</button></a>");
                                     }
 
                                     $con -> close(); //safety and security

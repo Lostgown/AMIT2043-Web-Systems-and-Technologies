@@ -25,7 +25,7 @@
 
 
         <?php 
-          
+         session_start(); 
         // $id = $_SESSION['idUser'];  
 
         //using GET method and POST method together
@@ -47,10 +47,10 @@
 
             $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             
-            $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = $id";
+            $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
 
             $stmt = $con->prepare($sql);
-            $stmt->bind_param("s", $password);
+            $stmt->bind_param("ss", $password, $id);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
@@ -92,7 +92,7 @@
                  </div>
 
 
-            <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
+            <input type="submit" value="Reset" id="btnUpdate" name="btnUpdate" />
             <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
             </form>
             <br/>

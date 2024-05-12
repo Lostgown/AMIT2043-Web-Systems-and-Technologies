@@ -1,7 +1,8 @@
 <?php
         include '../Sys/authCheck.php';
         require_once '../lib/helper.php';
-        ?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 
 <html>
     <head>
@@ -20,7 +21,7 @@
                 <div class="card mt-2">
                     <div class="card-header">
         
-        <h1 class="display-6 text-center">Delete Booking</h1>
+        <h1 class="display-6 text-center">Delete Event</h1>
         <div class="card-body">
         <?php 
         //using GET method and POST method together
@@ -34,7 +35,7 @@
             $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             
             //step 2: SQL statement
-            $sql = "SELECT * FROM booking WHERE booking_id = '$id'";
+            $sql = "SELECT * FROM event WHERE event_id = '$id'";
             
             //step 2.1: Remove special character
             $id = $con ->real_escape_string($id);
@@ -43,42 +44,47 @@
             $result = $con -> query($sql);
             
             if($row = $result->fetch_object()){
-                $id = $row -> booking_id;
-                $event = $row -> event_id;
-                $member = $row -> member_id;
-                $category = $row -> category;
-                $level = $row -> level;
-                $date = $row -> booking_date;
-                $time = $row -> booking_time;
-                
-                printf("<h5 style='color: red;'>Are you sure you want to delete the following Booking?</h5>
+                $id = $row -> event_id;
+                $name = $row -> event_name;
+                $date = $row -> date;
+                $start = $row -> start_time;
+                $end = $row -> end_time;
+                $desc = $row -> description;
+                $pax = $row -> pax;
+                $status = $row -> status;
+
+                printf("<h5 style='color: red;'>Are you sure you want to delete the following Event?</h5>
                         <table class='table table-dark table-striped text-center' style='width:600px;'>
-                           <tr>
-                                <td>Booking ID:</td>
-                                <td>%s</td>
-                           </tr>
                            <tr>
                                 <td>Event ID:</td>
                                 <td>%s</td>
                            </tr>
                            <tr>
-                                <td>Member ID:</td>
+                                <td>Event Name:</td>
                                 <td>%s</td>
                            </tr>
                            <tr>
-                                <td>Category:</td>
+                                <td>Date:</td>
+                                <td>%s</td>
+                           </tr>
+                           <tr>
+                                <td>Start Time:</td>
                                 <td>%s</td>
                            </tr>
                             <tr>
-                                <td>Level:</td>
+                                <td>End Time:</td>
                                 <td>%s</td>
                            </tr>
                            <tr>
-                                <td>Booking Date:</td>
+                                <td>Description:</td>
                                 <td>%s</td>
                            </tr>
                            <tr>
-                                <td>Booking Time:</td>
+                                <td>Pax:</td>
+                                <td>%s</td>
+                           </tr>
+                           <tr>
+                                <td>Status:</td>
                                 <td>%s</td>
                            </tr>
                         </table>
@@ -88,20 +94,21 @@
                             <input type='hidden' name='hdName' value='%s' />
                             <div class='d-flex justify-content-around'>
                             <input type='submit' id='btnYes' name='btnYes' value='Yes' class/>
-                            <input type='button' id='btnCancel' name='btnCancel' value='Cancel' onclick='location=\"bookingList.php\"' />
+                            <input type='button' id='btnCancel' name='btnCancel' value='Cancel' onclick='location=\"eventList.php\"' />
                             </div>
                         </form>
                         <br/>
                         "
                         , $id
-                        , $event
-                        , $member
-                        , allCategory()[$category]
-                        , allLevel()[$level]
+                        , $name
                         , $date
-                        , $time
+                        , $start
+                        , $end
+                        , $desc
+                        , $pax
+                        , $status
                         , $id
-                        , $event);
+                        , $name);
             }
             //to prevent security breach
             $con -> close();
@@ -110,12 +117,12 @@
             //POST method - delete function when the user click yes button
             //retrieve admin id from hidden field
             $id = (trim($_POST["hdID"]));
-            $event = trim($_POST["hdName"]);
+            $name = trim($_POST["hdName"]);
             //step 1: create connection
             $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             
             //step 2: sql(parameterized query)
-            $sql = "DELETE FROM booking WHERE booking_id = ?";
+            $sql = "DELETE FROM event WHERE event_id = ?";
             
             //step 2.1: pass in value into sql parameter
             //NOTE: $con -> query() is used when sql has no "?"(no param)
@@ -132,13 +139,13 @@
             
             if($stmt -> affected_rows > 0){
                 //successfully deleted
-                printf("<div class='info'><b>%s</b> has been deleted.
-                       [ <a href='bookingList.php'>Back to list</a> ]
-                        </div>", $id);
+                printf("<div class='info'>Event <b>%s</b> has been deleted.
+                       [ <a href='eventList.php'>Back to list</a> ]
+                        </div>", $name);
             }else{
                 //unable to delete
                 echo "<div class='error'>Unable to delete.
-                [ <a href='bookingList.php'>Back to list</a> ]</div>";
+                [ <a href='eventList.php'>Back to list</a> ]</div>";
                 
             }
            $con -> close();

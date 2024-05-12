@@ -65,7 +65,7 @@
 
                 //1.2 validate input
                 $error["name"] = validateName($name);
-                $error["ic_no"] = validateIC($ic);
+                //$error["ic_no"] = validateIC($ic);
 
                 //filter out empty error
                 $error = array_filter($error);
@@ -115,6 +115,7 @@
         ?>
             
 
+            <div>    
                 <div class = 'input_box'>
                         <label class="input">
                             <input class = "input_field" type = "text" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>" readonly/>
@@ -149,22 +150,34 @@
                                         }
                                         echo "<option value='$key' $selected >$value</option>";
                                     }
-                            ?>  
+                            ?>
+                        </select>  
+                        </label>
+                        </div>
+                    </div>
+
+                    <div class = 'input_box'>
+                        <div class="level">
+                        <label> Level:
+                        <select name="level">
+                            <?php 
+                                    foreach (allLevel() as $key => $value) {
+                                        if(isset($level) && $level == $key){
+                                            $selected = "selected";
+                                        }else{
+                                            $selected = "";
+                                        }
+                                        echo "<option value='$key' $selected >$value</option>";
+                                    }
+                            ?>
+                        </select>  
                         </label>
                         </div>
                     </div>
 
             </div>
 
-            
-            </p>    
-                    <p id = "btnMale"><label>
-                    <input type = "checkbox" name = "passVisibility" value="" onclick="showPassword()" /> Show password &nbsp 
-                    </label>
-                    </p>
-                 </div>
-
-
+            <br/>
             <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
             <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
             </form>

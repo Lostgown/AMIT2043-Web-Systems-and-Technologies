@@ -1,7 +1,20 @@
 <?php
-    session_start();
-    include('../Sys/authCheck.php');
-    validAdmin();
+    if(isset($_POST['name'])){
+        include('../Sys/connection.php');               
+
+                                                                                      
+        $sql = "SELECT event_id FROM admin ORDER BY event_id DESC LIMIT 1";
+        $result= $con->query($sql);  
+        $row = mysqli_fetch_assoc($result); 
+        if (isset($row['event_id'])) {
+                $number = ltrim($row['event_id'],'E')+1;  
+                $id = 'E' . sprintf('%04d', $number);   
+        }
+        else {
+                $id = "E0001";
+        }
+    }
+
 ?>
 
 <?php
@@ -9,166 +22,164 @@
 ?>
 
 <!DOCTYPE html>
-<html> 
-<head>
-    <title>Create New Event</title>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
-    <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
-<head>
-<body>
-    <div class = 'main'>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Create Admin</title>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
+    </head>
+    <body>
+        <?php
+        include '../Sys/authCheck.php';
+        require_once '../lib/helper.php';
+        ?>
+        
+        <form action="" method="POST">
+        <div class = 'fixed'>     
+            <div class = 'content'>
+            <div>
+            <div class = "frm" style="text-align:left;">  
+            <h1 style="text-align:center"> Create Event </h1>
             
-        
-        
-        <div class = 'content'>
-            <div class = "frm">
-                <div class = 'heading'>
-                    <h1 style="text-align: center;"> Create New Event </h1>
-
-                <?php
-                if(empty($_POST)){
-                    //user never click or perform anything
-                    
+            <?php 
+            if(empty($_POST)){
+                //user never click or perform anything
+                
+            }else{
+                //user click
+                //1.1 receive user input from student form
+                $name = trim($_POST["name"]);
+                $ic = trim($_POST["ic_no"]);
+                $pass = trim($_POST["pass"]);
+                $phone = trim($_POST["phone_no"]);
+                if(isset($_POST["gender"])){
+                    $gender = trim($_POST["gender"]);
                 }else{
-                    //user click
-                    //1.1 receive user input 
-                    $eventname = trim($_POST["event_name"]);
-                    $date = trim($_POST["date"]);
-                    $starttime = trim($_POST["start_time"]);
-                    $endtime = trim($_POST["end_time"]);
-                    $description = trim($_POST["description"]);
-                    $pax = trim($_POST["pax"]);
-                            
-                    //1.2 validate input
-                    //no validation for password as is TEMP pass
-                    // $error["event_name"] = validateEventName($eventname);
-                    // $error["date"] = validateDate($date);
-                    // $error["start_time"] = validateStartTime($starttime);
-                    // $error["end_time"] = validateEndTime($endtime);
-                    // $error["description"] = validateDescription($description);
-                    // $error["pax"] = validatePax($pax);
-    
+                    $gender = NULL;
+                }
+                $email = trim($_POST["email"]);
+                $birth = trim($_POST["birth_date"]);
+                        
+                //1.2 validate input
+                //no validation for password as is TEMP pass
+                $error["name"] = validateName($name);
+                $error["ic_no"] = validateIC($ic);
+                $error["phone_no"] = validatePhone($phone);
+                $error["email"] = validateEmail($email);
+                $error["gender"] = validateGender($gender);
+                $error["pass"] = validatePassTemp($pass);
+                $error["birth_date"] = validateBirthDate($birth);
+
+                
+                //filter out empty error
+                $error = array_filter($error);
+                
+                //check id $error contains value
+                if(empty($error)){
+                    //yay no error
+                    $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
-                    //filter out empty error
-                    // $error = array_filter($error);
+                    //step 2: SQL
+                    $sql = "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES(?,?,?,?,?,?,?,?,?,'Pending')";
                     
-                    //check id $error contains value
-                    if(empty($error)){
-                        //yay no error
-                        $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                        
-                        //step 2: SQL
-                        $sql = "INSERT INTO event (event_id, event_name, date, start_time, end_time, description,pax) VALUES(?,?,?,?,?,?,?)";
-                        
-                        //step 3: Process SQL
-                        //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
-                        //NOTE: $con -> prepare() => when there is "?" parameter in above sql satatement
-                        $stmt = $con -> prepare($sql);
-                        
-                        //step 3.1: Pass parameter into SQL
-                        //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                        $stmt -> bind_param("sssssss", $id, $eventname, $date, $starttime, $endtime, $description, $pax);
-                        
-                        //step 3.2: Executer SQL
-                        $stmt -> execute();
-                        
-                        if($stmt -> affected_rows >0){
-                            //insert successful
-                            printf("<div class='info'>
-                                    New event <b>%s</b> has been inserted.\nID is <b>%s</b>[<a href='eventList.php'>Back to list</a>]
-                                    </div>", $name, $id);
-                        }else{
-                            //GG: unable to insert
-                            echo "<div class='error'>Unable to insert.
-                                  <a href='createEvent.php'>Try Again</a></div>";
-                        }
-                        
-                        $stmt -> close();
-                        $con -> close();
-                        
+                    //step 3: Process SQL
+                    //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
+                    //NOTE: $con -> prepare() => when there is "?" parameter in above sql satatement
+                    $stmt = $con -> prepare($sql);
+                    
+                    //step 3.1: PAss parameter into SQL
+                    //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
+                    $stmt -> bind_param("sssssssss", $id, $path, $name, $date, $start, $end, $desc, $pax, $pax);
+                    
+                    //step 3.2: Executer SQL
+                    $stmt -> execute();
+                    
+                    if($stmt -> affected_rows >0){
+                        //insert successful
+                        printf("<div class='info'>
+                                Event <b>%s</b> has been inserted.\nID is <b>%s</b>[<a href='eventList.php'>Back to list</a>]
+                                </div>", $name, $id);
                     }else{
-                        //oh no got error
-                        echo "<ul class='error'>";
-                        foreach ($error as $value) {
-                            echo "<li>$value</li>";
-                        }
-                        echo "</ul>";
-                        
+                        //GG: unable to insert
+                        echo "<div class='error'>Unable to insert.
+                              <a href='createEvent.php'>Try Again</a></div>";
                     }
                     
-                }                
-                ?>
-
-
-                </div>  
-                <form name = "f1" action = "" method = "POST" autocomplete="off"> 
+                    $stmt -> close();
+                    $con -> close();
+                    
+                }else{
+                    //oh no got error
+                    echo "<ul class='error'>";
+                    foreach ($error as $value) {
+                        echo "<li>$value</li>";
+                    }
+                    echo "</ul>";
+                    
+                }
                 
-                    <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "text" id ="name" name  = "event_name" 
-                            autofocus="autofocus" placeholder= " " required
-                            oninvalid="this.setCustomValidity('Fill in the event name.')"
-                            oninput="this.setCustomValidity('')" />   
-                            <span class="input_label">Event Name</span>
-                        </label>
-                    </div>
+            }
+            ?>
+            <div>
+                <div class = 'input_box'>
+                    <label class="input">
+                        <input class = "input_field" type = "text" name = "name" value="<?php echo (isset($id))?$name: ""; ?>" placeholder=""/>
+                        <span class="input_label">Name</span>
+                    </label>
+                </div>
 
-                    <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type="date" name  = "date" 
-                                placeholder= " " required
-                                oninvalid="this.setCustomValidity('Choose the event date.')"
-                                oninput="this.setCustomValidity('')" />  
-                            <span class="input_label">Event Date</span>
-                        </label>
-                    </div>
+                <div class = 'input_box'>
+                  
+                <label class="input">
+                        <input class = "input_field" type = "text" name = "ic_no" value="<?php echo (isset($id))?$ic: ""; ?>" placeholder=""/>
+                        <span class="input_label">Image</span>
+                    </label>
+                </div>
 
-                    <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "time" name  = "start_time" placeholder= " " required
-                                oninvalid="this.setCustomValidity('Choose the event starting time.')"
-                                oninput="this.setCustomValidity('')" />
-                            <span class="input_label">Starting Time</span>
-                        </label>
-                    </div>
+                <div class = 'input_box'>
+                <label class="input">
+                    <input class = "input_field" type="date" name = "date"  value="<?php echo (isset($id))?$date: ""; ?>" placeholder=""/>  
+                    <span class="input_label">Event Date</span>
+                </label>
+                </div>
 
-                    <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "time" name  = "end_time" placeholder= " " required
-                                oninvalid="this.setCustomValidity('Choose the event ending time.')"
-                                oninput="this.setCustomValidity('')" />
-                            <span class="input_label">Ending Time</span>
-                        </label>
-                    </div>
+                <div class = 'input_box'>
+                    <label class="input">
+                        <input class = "input_field" type = "time" name = "start"  value="<?php echo (isset($id))?$start: ""; ?>" placeholder=""/>  
+                        <span class="input_label">Start Time</span>
+                    </label>
+                </div>
 
-                    <div class = 'input_box'>
+                <div class = 'input_box'>
+                    <label class="input">
+                        <input class = "input_field" type = "time" name = "end"  value="<?php echo (isset($id))?$end: ""; ?>" placeholder=""/>  
+                        <span class="input_label">End Time</span>
+                    </label>
+                </div>
+
+                <div class = 'input_box'>
                         <label class="input">
-                                <textarea class = "input_field" type = "" id ="description" name  = "description" placeholder= " " required ></textarea>  
+                                <textarea class = "input_field" type = "" name  = "desc" placeholder= " " value="<?php echo (isset($id))?$desc: ""; ?>" ></textarea>  
                                 <span class="input_label">Description</span>
                         </label>
-                    </div>
-                    
-                    <div class = 'input_box'>
-                        <label class="input">
-                                <input class = "input_field" type = "number" id ="pax" name  = "pax" placeholder= " " required
-                                oninvalid="this.setCustomValidity('Event pax.')"
-                                oninput="this.setCustomValidity('')" />  
-                            <span class="input_label">Pax</span>
-                        </label>
-                    </div>
-                    <br>
+                </div>
 
-                    <button id = 'btnRegister' style = 'margin-left:42%;' name ='btn'> Create </button>
-
-                </form>
-                <a href='javascript: history.go(-1)'><button id="btnUpdate" name ='btn'> Back </button></a>
-                    <br>
-
-                <?php $con=null; ?>
-                
+                <div class = 'input_box'>
+                    <label class="input">
+                        <input class = "input_field" type = "number" name = "pax"  value="<?php echo (isset($id))?$pax: ""; ?>" placeholder=""/>  
+                        <span class="input_label">Pax</span>
+                    </label>
+                </div>
             </div>
-        </div>
-    </div>
-</body>
+            <br/>
 
+
+         
+            <input type="submit" value="Insert" id="btnRegister" name="btnInsert" />
+            <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='eventList.php'"/>
+            <br/>
+        </form>
+        
+    </body>
 </html> 

@@ -29,6 +29,14 @@ if (isset($_GET["order"])){
 }else{
     $order = "ASC";
 }
+
+//retrieve gender
+if(isset($_GET["gender"])){
+    $gender = $_GET["gender"];
+}else{
+    $gender = "%";//retrieve everything
+    //select * from admin where gender LIKE "M"
+}
 ?>
 
 
@@ -44,33 +52,12 @@ if (isset($_GET["order"])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-    $('#searchInput').on('input', function() {
-        var searchValue = $(this).val(); // Get search query
-        if (searchValue.trim() !== '') { // Check if the search query is not empty
-            $.ajax({
-                type: 'POST',
-                url: 'searchAdmin.php',
-                data: { searchQuery: searchValue },
-                success: function(response) {
-                    $('#searchResults').html(response); // Display search results
-                }
-            });
-        } else {
-            $('#searchResults').html(''); // Clear search results if search query is empty
-        }
-    });
-});
-</script>
-
 
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
             <div class="p-3">
                 <a href="createAdmin.php"><button type="button"
-                class=" btn btn-secondary btn-lg me-md-2 ">Create New Admin</button></a>
+                class=" btn btn-success btn-lg me-md-2 ">Create New Admin</button></a>
             </div>
             <div class="p-3">
                 <a href="menuAdmin.php"><button type="button"
@@ -86,12 +73,23 @@ if (isset($_GET["order"])){
                     </div>
                     <div class="card-body">
 
-                    <form id="searchForm">
+                    <form id="searchForm" action="searchAdmin.php" method="POST">
                         <input type="text" id="searchInput" name="searchInput" placeholder="Search Name...">
+                        <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                     </form>
-                    <div id="searchResults"></div>
 
                     <br/>
+                    <p>
+                    Filter:
+                    <?php 
+                    printf("<a href='?sort=%s&order=%s' style='color: black;'>GENDER</a>", $sort, $order);
+                    
+                    foreach(allGender() as $key=>$value){
+                        printf("| <a href='?sort=%s&order=%s&gender=%s'>%s</a>",$sort,$order,$key,$key);
+                        
+                    }
+                    ?>
+                </p>
                         <form action="" method="POST">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark ">
@@ -100,11 +98,11 @@ if (isset($_GET["order"])){
                                     if($key == $sort){
                                         //user can click on the column
                                         //for sorting
-                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
+                                        printf("<th><a href='?sort=%s&order=%s&gender=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' : 'ASC',$gender, $value, $order == "ASC"?'⬇️':'⬆️');
                                     }else{
                                         //user never click anything
                                         //default
-                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
+                                        printf("<th><a href='?sort=%s&order=ASC&program=%s' style='color: white; text-decoration: none;'>%s</a></th>",$key,$gender, $value);
                                     }
                                 }
                                 ?>
@@ -122,11 +120,7 @@ if (isset($_GET["order"])){
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM admin";
-                                    if (!empty($searchQuery)) {
-                                        $sql .= " WHERE admin_name LIKE '%$searchQuery%'";
-                                    }
-                                    $sql .= " ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM admin WHERE gender LIKE '$gender' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record

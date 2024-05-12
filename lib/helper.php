@@ -140,6 +140,14 @@ function allCategory(){
     );
 }
 
+function allLevel(){
+    return array(
+        "BGN" => "Beginner",
+        "ITM" => "Intermediate",
+        "PRO" => "Professional"
+    );
+}
+
 function generateRecovery(){
     return rand(100000,999999);
 }

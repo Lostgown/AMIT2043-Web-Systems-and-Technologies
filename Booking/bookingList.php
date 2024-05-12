@@ -117,8 +117,8 @@ if (isset($_GET["order"])){
                                                     , $row->booking_id
                                                     , $row->event_id
                                                     , $row->member_id
-                                                    , $row->category
-                                                    , $row->level
+                                                    , allCategory()[$row->category]
+                                                    , allLevel()[$row->level]
                                                     , $row->booking_date
                                                     , $row->booking_time
                                                     , $row->booking_id, $row->booking_id);

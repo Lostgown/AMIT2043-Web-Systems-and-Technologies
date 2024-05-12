@@ -2,10 +2,7 @@
     session_start();
     include('../Sys/authCheck.php');
     validAdmin();
-    include ('../Sys/connection.php');
-
-    $query = "select * from event";
-    $result = mysqli_query($con,$query); 
+    include ('../lib/helper.php');
 ?>
 
 <?php 
@@ -18,6 +15,7 @@ $header = array(
     "description"=>"Description",
     "pax"=>"Pax",
     "remaining_pax"=>"Remaining Pax",
+    "status"=>"Status",
 );
 
 //retrieve sort parameter from URL
@@ -52,19 +50,13 @@ if (isset($_GET["order"])){
 <body class="bg-dark">
     
         <div class="d-flex justify-content-end">
-            <div class="p-4">
-                <form method="POST" action="searchResult.php">
-                <input type="text" class="searchBar " name="search" placeholder="Search ID..."
-                    onkeyup="this.value = this.value.toUpperCase();">
-                </form>
-            </div>
             <div class="p-3">
-                <a href="../Event/createEvent.php"><button type="button"
-                class=" btn btn-secondary btn-lg me-md-2">Create</button></a>
+                <a href="createEvent.php"><button type="button"
+                class=" btn btn-success btn-lg me-md-2">Create Event</button></a>
             </div>
             <div class="p-3">
                 
-                <a href="menuAdmin.php"><button type="button"
+                <a href="../Admin/menuAdmin.php"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
             </div>
         </div>
@@ -91,33 +83,68 @@ if (isset($_GET["order"])){
                                     }
                                 }
                                 ?>
-                                <td>Edit</td>
-                                <td>Delete</td>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             <tr>
-                                <?php 
-                                            while($row =mysqli_fetch_assoc($result))
-                                            {
-                                         ?>
-                                <td><?php echo $row['event_id']; ?></td>
-                                <td><?php echo $row['event_name']; ?></td>
-                                <td><?php echo $row['date']; ?></td>
-                                <td><?php echo $row['start_time']; ?></td>
-                                <td><?php echo $row['end_time']; ?></td>
-                                <td><?php echo $row['description']; ?></td>
-                                <td><?php echo $row['pax']; ?></td>
-                                <td><?php echo $row['remaining_pax']; ?></td>
+                            <?php
+                                //step 1: create DB connection
+                                //NOTE: arrangement of input in mysqli is important
+                                //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
+                                $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                                if($con -> connect_error){
+                                    //wth error
+                                    die("Connection error: ". $con->connect_error);
+                                }else{
+                                    //no error
+                                    //step 2: sql statement
+                                    $sql = "SELECT * FROM event ORDER BY $sort $order";
+                                    //step 3: ask connection, to processs sql
+                                    $result = $con -> query($sql);//object - a list of admin record
 
-                                <td><?php echo "<form action='../Event/updateEvent.php' method='POST'><button class ='btn btn-warning' type='submit' name='id' value='$row[event_id]'>Edit</button></form>"?>
-                                </td>
-                                <td><?php echo "<form action='../Sys/deleteEvent.php' method='POST'><button class ='btn btn-danger' type='submit' name='id' value='$row[event_id]'>Delete</button></form>"?>
-                                </td>
+                                    //NOTE: for DB we use "->"
+                                    //NOTE: for associative array we use "=>"
+                                    if($result->num_rows > 0){
+                                        //record found
+                                        while($row = $result->fetch_object()){
 
-                            </tr>
-                            <?php 
-                                            }
-                                        ?>
-                            </tr>
+                                            $eventStats = $row->status;
+                                            $rowClass = ($eventStats == 'Pending') ? 'table-warning' : 'table-success';
+                                            printf("<tr class='$rowClass';>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td><button class ='btn btn-warning'><a href='updateEvent.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
+                                                    <td><button class ='btn btn-danger'><a href='deleteEvent.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
+                                                    </tr>"
+                                                    , $row->event_id
+                                                    , $row->event_name
+                                                    , $row->date
+                                                    , $row->start_time
+                                                    , $row->end_time
+                                                    , $row->description
+                                                    , $row->pax
+                                                    , $row->remaining_pax
+                                                    , $row->status
+                                                    , $row->event_id, $row->event_id);
+                                        }
+                                    }
+
+                                    printf("<tr><td colspan='11'>
+                                            <b>%d</b> record(s) returned.
+                                            </td></tr>", $result->num_rows);
+
+                                    $con -> close(); //safety and security
+                                    $result -> free(); //to clean the result fetched or will use RAM
+                                }
+
+                                ?>
                         </table>
                     </div>
                 </div>

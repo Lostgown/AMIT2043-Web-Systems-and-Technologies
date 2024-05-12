@@ -49,26 +49,6 @@ if (isset($_GET["order"])){
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' href='../css/list.css'>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-    $('#searchInput').on('input', function() {
-        var searchValue = $(this).val(); // Get search query
-        if (searchValue.trim() !== '') { // Check if the search query is not empty
-            $.ajax({
-                type: 'POST',
-                url: 'searchMember.php',
-                data: { searchQuery: searchValue },
-                success: function(response) {
-                    $('#searchResults').html(response); // Display search results
-                }
-            });
-        } else {
-            $('#searchResults').html(''); // Clear search results if search query is empty
-        }
-    });
-});
-</script>
 
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
@@ -175,14 +155,12 @@ if (isset($_POST['submit']))
                         </div>
                         </form>
 
-                        <form id="searchForm">
+                        <form id="searchForm" action="searchMember.php" method="POST">
                             <input type="text" id="searchInput" name="searchInput" placeholder="Search Name...">
+                            <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                         </form>
-                        <div id="searchResults"></div>
                         <br/>
 
-                        
-                        
                         <form action="" method="POST">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark ">
