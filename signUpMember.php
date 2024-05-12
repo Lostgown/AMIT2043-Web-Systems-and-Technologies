@@ -33,11 +33,10 @@
         <?php
         require_once 'lib/helper.php';
 
-        $recoveryNum = generateRecovery();
         ?>
         
         <form action="" method="POST">
-        <div class = 'fixed'>     
+        <div class = 'fixed' >     
             <div class = 'content'>
             <div>
             <div class = "frm" style="text-align:left;">  
@@ -82,7 +81,7 @@
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date, recovery_no) VALUES(?,?,?,?,?,?,?,?,?)";
+                    $sql = "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date) VALUES(?,?,?,?,?,?,?,?)";
                     
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -91,7 +90,7 @@
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt -> bind_param("sssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth, $recoveryNum);
+                    $stmt -> bind_param("ssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -177,10 +176,10 @@
 <p id = "btnFemale"><label>
 <input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female 
 </p>
-</label><br/>
-                <div>
-                <div class="g-recaptcha" data-sitekey="6LdqsNkpAAAAAD5oK2j1SeEEnteTdba-9d2vQQk8"></div>
-                </div>
+</label>
+                
+        <div class="g-recaptcha" data-sitekey="6LdqsNkpAAAAAD5oK2j1SeEEnteTdba-9d2vQQk8"></div>
+                
 </div>
 
             

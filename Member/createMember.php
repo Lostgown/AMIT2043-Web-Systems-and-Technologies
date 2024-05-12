@@ -29,8 +29,6 @@
         <?php
         include '../Sys/authCheck.php';
         require_once '../lib/helper.php';
-
-        $recoveryNum = generateRecovery();
         ?>
         
         <form action="" method="POST">
@@ -79,7 +77,7 @@
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date, recovery_no) VALUES(?,?,?,?,?,?,?,?,?)";
+                    $sql = "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date) VALUES(?,?,?,?,?,?,?,?)";
                     
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -88,7 +86,7 @@
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt -> bind_param("sssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth, $recoveryNum);
+                    $stmt -> bind_param("ssssssss", $id, $name, $ic, $pass, $phone, $gender, $email, $birth);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -180,4 +178,4 @@
         </form>
         
     </body>
-</html>
+</html>0

@@ -21,6 +21,35 @@
         require_once '../lib/helper.php';
 ?>
 
+<?php
+error_reporting(0);
+ 
+$msg = "";
+ 
+// If upload button is clicked ...
+if (isset($_POST['btnInsert'])) {
+ 
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];
+    $folder = "./image/" . $filename;
+ 
+    $db = mysqli_connect("localhost", "root", "", "geeksforgeeks");
+ 
+    // Get all the submitted data from the form
+    $sql = "INSERT INTO image (filename) VALUES ('$filename')";
+ 
+    // Execute query
+    mysqli_query($db, $sql);
+ 
+    // Now let's move the uploaded image into the folder: image
+    if (move_uploaded_file($tempname, $folder)) {
+        echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+        echo "<h3>  Failed to upload image!</h3>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -130,14 +159,6 @@
                 </div>
 
                 <div class = 'input_box'>
-                  
-                <label class="input">
-                        <input class = "input_field" type = "text" name = "ic_no" value="<?php echo (isset($id))?$ic: ""; ?>" placeholder=""/>
-                        <span class="input_label">Image</span>
-                    </label>
-                </div>
-
-                <div class = 'input_box'>
                 <label class="input">
                     <input class = "input_field" type="date" name = "date"  value="<?php echo (isset($id))?$date: ""; ?>" placeholder=""/>  
                     <span class="input_label">Event Date</span>
@@ -170,6 +191,11 @@
                         <input class = "input_field" type = "number" name = "pax"  value="<?php echo (isset($id))?$pax: ""; ?>" placeholder=""/>  
                         <span class="input_label">Pax</span>
                     </label>
+                </div>
+
+                <div class = 'input_box'>
+                    <label>Upload Photo :  </label>
+                    <input class="form-control" type="file" name="uploadfile" value="" />
                 </div>
             </div>
             <br/>

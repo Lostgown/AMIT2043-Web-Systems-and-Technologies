@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Update booking</title>
+        <title>Update Booking</title>
         <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
         <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
         

@@ -6,8 +6,6 @@
 
 ?>
 
-
-
 <?php 
 $header = array(
     "member_id"=>"Member ID",
@@ -34,7 +32,13 @@ if (isset($_GET["order"])){
     $order = "ASC";
 }
 
-
+//retrieve gender
+if(isset($_GET["gender"])){
+    $gender = $_GET["gender"];
+}else{
+    $gender = "%";//retrieve everything
+    //select * from member where gender LIKE "M"
+}
 ?>
 
 <!DOCTYPE html>
@@ -128,11 +132,10 @@ if (isset($_POST['submit']))
                 $gender = $getData[4];
                 $email = $getData[5];
                 $birth = $getData[6];
-                $recoveryNum = generateRecovery();
 
                 // Construct the SQL query to insert the data
-                mysqli_query($con, "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date, recovery_no) 
-                     VALUES ('" . $id . "', '" . $name . "', '" . $ic . "', '" . $pass . "', '" . $phone . "', '" . $gender . "', '" . $email . "', '" . $birth . "', '" . $recoveryNum . "')");
+                mysqli_query($con, "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date) 
+                     VALUES ('" . $id . "', '" . $name . "', '" . $ic . "', '" . $pass . "', '" . $phone . "', '" . $gender . "', '" . $email . "', '" . $birth . "')");
             
             }
             
@@ -161,6 +164,18 @@ if (isset($_POST['submit']))
                         </form>
                         <br/>
 
+                    <p>
+                    Filter:
+                    <?php 
+                    printf("<a href='?sort=%s&order=%s' style='color: black;'>GENDER</a>", $sort, $order);
+                    
+                    foreach(allGender() as $key=>$value){
+                        printf("| <a href='?sort=%s&order=%s&gender=%s'>%s</a>",$sort,$order,$key,$key);
+                        
+                    }
+                    ?>
+                </p>
+
                         <form action="" method="POST">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark ">
@@ -169,11 +184,11 @@ if (isset($_POST['submit']))
                                     if($key == $sort){
                                         //user can click on the column
                                         //for sorting
-                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
+                                        printf("<th><a href='?sort=%s&order=%s&gender=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' : 'ASC',$gender, $value, $order == "ASC"?'⬇️':'⬆️');
                                     }else{
                                         //user never click anything
                                         //default
-                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
+                                        printf("<th><a href='?sort=%s&order=ASC&program=%s' style='color: white; text-decoration: none;'>%s</a></th>",$key,$gender, $value);
                                     }
                                 }
                                 ?>
@@ -192,7 +207,7 @@ if (isset($_POST['submit']))
                                     //no error
                                     //step 2: sql statement
                                     // $sql = "SELECT * FROM admin ORDER BY $sort $order ";
-                                    $sql = "SELECT * FROM member ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM member WHERE gender LIKE '$gender' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record

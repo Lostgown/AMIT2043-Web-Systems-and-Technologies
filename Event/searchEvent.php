@@ -32,12 +32,12 @@ if (isset($_GET["order"])){
     $order = "ASC";
 }
 
-//retrieve status
-if(isset($_GET["status"])){
-    $status = $_GET["status"];
-}else{
-    $status = "%";//retrieve everything
-    //select * from event where status LIKE "Pending"
+//retrieve search
+if(isset($_POST['searchInput'])) {
+    // Retrieve the search query from the POST data
+    $search = $_POST['searchInput'];
+}else {
+    $search = '';
 }
 ?>
 
@@ -77,22 +77,11 @@ if(isset($_GET["status"])){
                     </div>
                     <div class="card-body">
                     <form id="searchForm" action="searchEvent.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event Name...">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                     </form>
 
                     <br/>
-                    <p>
-                    Filter:
-                    <?php 
-                    printf("<a href='?sort=%s&order=%s' style='color: black;'>STATUS</a>", $sort, $order);
-                    
-                    printf("| <a href='?sort=%s&order=%s&status=%s' style='color: green;'>%s</a>",$sort,$order,'Completed','Completed');
-                    printf("| <a href='?sort=%s&order=%s&status=%s' style='color: orange;'>%s</a>",$sort,$order,'Pending','Pending');
-                        
-                    
-                    ?>
-                </p>
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark">
                             <?php 
@@ -100,11 +89,11 @@ if(isset($_GET["status"])){
                                     if($key == $sort){
                                         //user can click on the column
                                         //for sorting
-                                        printf("<th><a href='?sort=%s&order=%s&status=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' : 'ASC',$status, $value, $order == "ASC"?'⬇️':'⬆️');
+                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
                                     }else{
                                         //user never click anything
                                         //default
-                                        printf("<th><a href='?sort=%s&order=ASC&status=%s' style='color: white; text-decoration: none;'>%s</a></th>",$key,$status, $value);
+                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
                                     }
                                 }
                                 ?>
@@ -123,7 +112,7 @@ if(isset($_GET["status"])){
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM event WHERE status LIKE '$status' ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM event WHERE event_name LIKE '%$search%' ORDER BY $sort $order";
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record
 

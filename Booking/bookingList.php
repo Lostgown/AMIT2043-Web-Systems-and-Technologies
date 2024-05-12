@@ -29,6 +29,14 @@ if (isset($_GET["order"])){
 }else{
     $order = "ASC";
 }
+
+//retrieve Category
+if(isset($_GET["category"])){
+    $category = $_GET["category"];
+}else{
+    $category = "%";//retrieve everything
+    //select * from booking where category LIKE "MS"
+}
 ?>
 
 
@@ -61,9 +69,23 @@ if (isset($_GET["order"])){
                         <h2 class="display-6 text-center">Booking List</h2>
                     </div>
                     <div class="card-body">
+                    <form id="searchForm" action="searchBooking.php" method="POST">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
+                        <button type="submit" name="submit" class="btn btn-secondary">Search</button>
+                    </form>
 
                     <br/>
-                        <form action="" method="POST">
+                    <p>
+                    Filter:
+                    <?php 
+                    printf("<a href='?sort=%s&order=%s' style='color: black;'>CATEGORY</a>", $sort, $order);
+                    
+                    foreach(allCategory() as $key=>$value){
+                        printf("| <a href='?sort=%s&order=%s&category=%s'>%s</a>",$sort,$order,$key,$key);
+                        
+                    }
+                    ?>
+                </p>
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark ">
                                 <?php 
@@ -71,11 +93,11 @@ if (isset($_GET["order"])){
                                     if($key == $sort){
                                         //user can click on the column
                                         //for sorting
-                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
+                                        printf("<th><a href='?sort=%s&order=%s&category=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' : 'ASC',$category, $value, $order == "ASC"?'⬇️':'⬆️');
                                     }else{
                                         //user never click anything
                                         //default
-                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
+                                        printf("<th><a href='?sort=%s&order=ASC&category=%s' style='color: white; text-decoration: none;'>%s</a></th>",$key,$category, $value);
                                     }
                                 }
                                 ?>
@@ -93,7 +115,7 @@ if (isset($_GET["order"])){
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM booking ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM booking WHERE category LIKE '$category' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record
@@ -136,7 +158,6 @@ if (isset($_GET["order"])){
                                 ?>
 
                         </table>
-                        </form>
                     </div>
                 </div>
             </div>

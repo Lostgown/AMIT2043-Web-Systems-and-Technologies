@@ -7,15 +7,13 @@
 
 <?php 
 $header = array(
+    "booking_id"=>"Booking ID",
     "event_id"=>"Event ID",
-    "event_name"=>"Event Name",
-    "date"=>"Event Date",
-    "start_time"=>"Start Time",
-    "end_time"=>"End Time",
-    "description"=>"Description",
-    "pax"=>"Pax",
-    "remaining_pax"=>"Remaining Pax",
-    "status"=>"Status",
+    "member_id"=>"Member ID",
+    "category"=>"Category",
+    "level"=>"Level",
+    "booking_date"=>"Booking Date",
+    "booking_time"=>"Booking Time"
 );
 
 //retrieve sort parameter from URL
@@ -32,38 +30,33 @@ if (isset($_GET["order"])){
     $order = "ASC";
 }
 
-//retrieve status
-if(isset($_GET["status"])){
-    $status = $_GET["status"];
-}else{
-    $status = "%";//retrieve everything
-    //select * from event where status LIKE "Pending"
+//retrieve search
+if(isset($_POST['searchInput'])) {
+    // Retrieve the search query from the POST data
+    $search = $_POST['searchInput'];
+}else {
+    $search = '';
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Event List</title>
+    <title>Booking List</title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel='stylesheet' type='text/css' href='../css/list.css'>
 </head>
 
 
-<body class="bg-dark">
-    
+<body class="bg-dark ">
         <div class="d-flex justify-content-end">
             <div class="p-3">
-                <a href="createEvent.php"><button type="button"
-                class=" btn btn-success btn-lg me-md-2">Create Event</button></a>
-            </div>
-            <div class="p-3">
-                
                 <a href="../Admin/menuAdmin.php"><button type="button"
                 class=" btn btn-primary btn-lg me-md-2 ">Back</button></a>
             </div>
@@ -73,45 +66,35 @@ if(isset($_GET["status"])){
             <div class="col">
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Event List</h2>
+                        <h2 class="display-6 text-center">Booking List</h2>
                     </div>
                     <div class="card-body">
-                    <form id="searchForm" action="searchEvent.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event Name...">
+                    <form id="searchForm" action="searchBooking.php" method="POST">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                     </form>
 
                     <br/>
-                    <p>
-                    Filter:
-                    <?php 
-                    printf("<a href='?sort=%s&order=%s' style='color: black;'>STATUS</a>", $sort, $order);
-                    
-                    printf("| <a href='?sort=%s&order=%s&status=%s' style='color: green;'>%s</a>",$sort,$order,'Completed','Completed');
-                    printf("| <a href='?sort=%s&order=%s&status=%s' style='color: orange;'>%s</a>",$sort,$order,'Pending','Pending');
-                        
-                    
-                    ?>
-                </p>
+
+                        <form action="" method="POST">
                         <table class=" table table-bordered text-center">
-                            <tr class="table-dark">
-                            <?php 
+                            <tr class="table-dark ">
+                                <?php 
                                     foreach($header as $key=> $value){
                                     if($key == $sort){
                                         //user can click on the column
                                         //for sorting
-                                        printf("<th><a href='?sort=%s&order=%s&status=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' : 'ASC',$status, $value, $order == "ASC"?'⬇️':'⬆️');
+                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
                                     }else{
                                         //user never click anything
                                         //default
-                                        printf("<th><a href='?sort=%s&order=ASC&status=%s' style='color: white; text-decoration: none;'>%s</a></th>",$key,$status, $value);
+                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
                                     }
                                 }
                                 ?>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
-                            <tr>
                             <?php
                                 //step 1: create DB connection
                                 //NOTE: arrangement of input in mysqli is important
@@ -123,7 +106,8 @@ if(isset($_GET["status"])){
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM event WHERE status LIKE '$status' ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM booking WHERE member_id LIKE '%$search%' ORDER BY $sort $order";
+
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record
 
@@ -132,10 +116,7 @@ if(isset($_GET["status"])){
                                     if($result->num_rows > 0){
                                         //record found
                                         while($row = $result->fetch_object()){
-
-                                            $eventStats = $row->status;
-                                            $rowClass = ($eventStats == 'Pending') ? 'table-warning' : 'table-success';
-                                            printf("<tr class='$rowClass';>
+                                            printf("<tr>
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
@@ -143,25 +124,21 @@ if(isset($_GET["status"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td>%s </td>
-                                                    <td>%s </td>
-                                                    <td><button class ='btn btn-warning'><a href='updateEvent.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
-                                                    <td><button class ='btn btn-danger'><a href='deleteEvent.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
+                                                    <td><button class ='btn btn-warning'><a href='updateBooking.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
+                                                    <td><button class ='btn btn-danger'><a href='deleteBooking.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
+                                                    , $row->booking_id
                                                     , $row->event_id
-                                                    , $row->event_name
-                                                    , $row->date
-                                                    , $row->start_time
-                                                    , $row->end_time
-                                                    , $row->description
-                                                    , $row->pax
-                                                    , $row->remaining_pax
-                                                    , $row->status
-                                                    , $row->event_id, $row->event_id);
+                                                    , $row->member_id
+                                                    , allCategory()[$row->category]
+                                                    , allLevel()[$row->level]
+                                                    , $row->booking_date
+                                                    , $row->booking_time
+                                                    , $row->booking_id, $row->booking_id);
                                         }
                                     }
 
-                                    printf("<tr><td colspan='11'>
+                                    printf("<tr><td colspan='9'>
                                             <b>%d</b> record(s) returned.
                                             </td></tr>", $result->num_rows);
 
@@ -170,7 +147,9 @@ if(isset($_GET["status"])){
                                 }
 
                                 ?>
+
                         </table>
+                        </form>
                     </div>
                 </div>
             </div>
