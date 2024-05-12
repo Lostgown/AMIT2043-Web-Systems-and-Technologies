@@ -263,12 +263,37 @@
 
                         <main class="main">
                             <div class="container">
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event1</h3>
-                                    <button id='btnchng' name='id' value=''><a
-                                            style="text-decoration: none; color: white;" href="eventMaintain.php"> Update
-                                        </a></button>
-                                </div>
+                            <?php
+                                //step 1: create DB connection
+                                //NOTE: arrangement of input in mysqli is important
+                                //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
+                                $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                                if($con -> connect_error){
+                                    //wth error
+                                    die("Connection error: ". $con->connect_error);
+                                }else{
+                                    //step 2: sql statement
+                                    $sql = "SELECT * FROM event WHERE status LIKE '%Pending%'";
+
+                                    $result = $con -> query($sql);//object - a list of event
+
+                                    if($result->num_rows > 0){
+                                        //record found
+                                        while($row = $result->fetch_object()){
+                                            printf("<div class='box-recent-event'>
+                                                        <h3 class='text-color'> %s</h3>
+                                                        <button class ='btn btn-warning'><a href='updateEvent.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></div>"
+                                                    , $row->event_name
+                                                    , $row->event_id 
+                                                    );
+                                        }
+                                    }
+
+                                    $con -> close(); //safety and security
+                                    $result -> free(); //to clean the result fetched or will use RAM
+                                }
+
+                                ?>
 
                             </div>
                         </main>
@@ -310,4 +335,4 @@
         display: flex;
     }
     </style>
-    < /html>
+    </html>
