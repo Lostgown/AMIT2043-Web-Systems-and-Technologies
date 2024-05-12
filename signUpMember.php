@@ -26,6 +26,8 @@
         <title>Create Member</title>
         <link rel = 'stylesheet' type = 'text/css' href = 'css/main.css'>
         <link rel = 'stylesheet' type = 'text/css' href = 'css/form.css'>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
         <?php
@@ -163,7 +165,7 @@
     <span class="input_label">Birth Date</span>
 </label>
 </div>
-
+                
 <div class = "genderRadio">
 <p id = "gender" style="text-align: left;"> &nbspGender: &nbsp &nbsp </p>    
 
@@ -175,14 +177,29 @@
 <p id = "btnFemale"><label>
 <input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female 
 </p>
-</label><br />
-
+</label><br/>
+                <div>
+                <div class="g-recaptcha" data-sitekey="6LdqsNkpAAAAAD5oK2j1SeEEnteTdba-9d2vQQk8"></div>
+                </div>
 </div>
 
             
             <input type="submit" value="Create" id="btnRegister" name="btnInsert" onclick="<?php include 'Sys/authCheck.php'; ?>"/>
             <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='index.php'"/>
             <br/>
+
+    
         </form>
     </body>
 </html>
+<script>
+    $(document).on('click','#btnRegister',function(){
+        var response = grecaptcha.getResponse();
+        if(response.length==0)
+        {
+            alert("Please verify that you are not a robot");
+            return false;
+        }
+    });
+
+    </script>

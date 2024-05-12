@@ -37,7 +37,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                     <span class="input_label">Password</span>
                 </label>
                 </div>
-
+                
+                
                 <div class = "userType">
                     <p id = "btnMember"><label><input type = "radio" name = "loginType" value = 'member' checked/> Member </label></p>
                     <p id = "btnAdmin"><label><input type = "radio" name = "loginType" value = 'admin' /> Admin </label></p>
