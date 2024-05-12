@@ -157,10 +157,16 @@
             </div>
 
             
+            </p>    
+                    <p id = "btnMale"><label>
+                    <input type = "checkbox" name = "passVisibility" value="" onclick="showPassword()" /> Show password &nbsp 
+                    </label>
+                    </p>
+                 </div>
 
-            <br/>
+
             <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
-            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='bookingList.php'" />
+            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
             </form>
             <br/>
 
