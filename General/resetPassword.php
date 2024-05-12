@@ -1,8 +1,3 @@
-<?php 
-        session_start();
-        include('../Sys/connection.php');   
-?>
-
 <!DOCTYPE html>
 
 <html>
@@ -35,7 +30,7 @@
 
         //using GET method and POST method together
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id = strtoupper(trim($_POST["id"]));
+            $id =(trim($_SESSION["idUser"]));
             $password = trim($_POST["pass"]);
             $passwordCfn = trim($_POST["passCfn"]);
 
@@ -52,10 +47,10 @@
 
             $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             
-            $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
+            $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = $id";
 
             $stmt = $con->prepare($sql);
-            $stmt->bind_param("ss", $password, $id);
+            $stmt->bind_param("s", $password);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
@@ -73,19 +68,10 @@
         ?>
         
         
-
-        <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "text" name  = "id" value="" placeholder=""/>
-                            <span class="input_label">Id</span>
-                        </label>
-                    </div>
-        
                     <div class = 'input_box'>
                         <label class="input">
                             <input class = "input_field" type = "password" name = "pass" id="pass" value="" placeholder=""/>
                             <span class="input_label">Password</span>
-                            <label for="chkShowPassword">
                     </div>
 
                     <div class = 'input_box'>
@@ -105,7 +91,7 @@
                     </p>
                  </div>
 
-            <br/>
+
             <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
             <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
             </form>

@@ -37,16 +37,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                     <span class="input_label">Password</span>
                 </label>
                 </div>
+                <p><a href='retrievePassword.php' style = "text-decoration: none;">&nbsp;&nbsp;Forgot Password? </a></p>
 
                 <div class = "userType">
                     <p id = "btnMember"><label><input type = "radio" name = "loginType" value = 'member' checked/> Member </label></p>
                     <p id = "btnAdmin"><label><input type = "radio" name = "loginType" value = 'admin' /> Admin </label></p>
                 </div>
     
-                <p style = "text-align: center;"><input type = "submit" id = "btnlogin" name = 'btn' value = "Login" required = "required" /></p>  
+                <p style = "text-align: center;"><input type = "submit" id = "btnlogin" name = 'btn' value = "Login" required = "required" style="border: 0px;"/></p>  
 
                 <p id = "btnSignUp"><a href='signUpMember.php' style = "text-decoration: none;"> Sign Up as Member </a></p>  
-            
+
                 
                 
             </form>
