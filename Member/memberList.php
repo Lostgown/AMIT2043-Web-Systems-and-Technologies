@@ -5,6 +5,9 @@
     include ('../lib/helper.php');
 
 ?>
+
+
+
 <?php 
 $header = array(
     "member_id"=>"Member ID",
@@ -70,10 +73,6 @@ if (isset($_GET["order"])){
 <body class="bg-dark ">
         <div class="d-flex justify-content-end">
             <div class="p-3">
-                <a href="importMember.php"><button type="button"
-                class=" btn btn-secondary btn-lg me-md-2 ">Import</button></a>
-            </div>
-            <div class="p-3">
                 <a href="createMember.php"><button type="button"
                 class=" btn btn-success btn-lg me-md-2 ">Create New Member</button></a>
             </div>
@@ -90,17 +89,99 @@ if (isset($_GET["order"])){
                         <h2 class="display-6 text-center">Member List</h2>
                     </div>
                     <div class="card-body">
+                        <?php
+//import member file
+// Create connection
+$con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    
+if($con -> connect_error){
+    //with error
+    die("Connection error: ". $con->connect_error);
+} 
+
+if (isset($_POST['submit']))
+{
+ 
+    // Allowed mime types
+    $fileMimes = array(
+        'text/x-comma-separated-values',
+        'text/comma-separated-values',
+        'application/octet-stream',
+        'application/vnd.ms-excel',
+        'application/x-csv',
+        'text/x-csv',
+        'text/csv',
+        'application/csv',
+        'application/excel',
+        'application/vnd.msexcel',
+        'text/plain'
+    );
+ 
+    // Validate whether selected file is a CSV file
+    if (!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $fileMimes))
+    {
+ 
+            // Open uploaded CSV file with read-only mode
+            $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
+ 
+            // Skip the first line
+            fgetcsv($csvFile);
+ 
+            // Parse data from CSV file line by line
+             // Parse data from CSV file line by line
+             while (($getData = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
+
+                $sql = "SELECT member_id FROM member ORDER BY member_id DESC LIMIT 1";
+                $result= $con->query($sql);  
+                $row = mysqli_fetch_assoc($result); 
+                if (isset($row['member_id'])) {
+                $number = ltrim($row['member_id'],'M')+1;  
+                $id = 'M' . sprintf('%04d', $number);   
+                }
+                else {
+                    $id = "M0001";
+                }
+                $name = $getData[0];
+                $ic = $getData[1];
+                $pass = $getData[2];
+                $phone = $getData[3];
+                $gender = $getData[4];
+                $email = $getData[5];
+                $birth = $getData[6];
+                $recoveryNum = generateRecovery();
+
+                // Construct the SQL query to insert the data
+                mysqli_query($con, "INSERT INTO member (member_id, member_name, ic_no, member_pass, phone_no, gender, email, birth_date, recovery_no) 
+                     VALUES ('" . $id . "', '" . $name . "', '" . $ic . "', '" . $pass . "', '" . $phone . "', '" . $gender . "', '" . $email . "', '" . $birth . "', '" . $recoveryNum . "')");
+            
+            }
+            
+            // Close the file handle
+            fclose($csvFile);
+            
+            // Close the database connection
+            $con->close();
+
+            printf("<div style='border: 2px solid #92CAE4;background-color: #D5EDF8;color: #205791;'>
+                                Multiple Member from has been inserted.\n
+                                </div><br/>");
+    }
+}
+?>
+                        <form action="" method="POST" enctype="multipart/form-data" class="d-flex justify-content-end">
+                        <div class="input-group mb-3 " style="width: 400px;">
+                            <input type="file" class="form-control" id="import" name="file">
+                            <button type="submit" name="submit" class="btn btn-secondary">Import Member</button>
+                        </div>
+                        </form>
+
                         <form id="searchForm">
                             <input type="text" id="searchInput" name="searchInput" placeholder="Search Name...">
                         </form>
                         <div id="searchResults"></div>
                         <br/>
 
-                        <form action="upload.php" method="post" enctype="multipart/form-data">
-                            <label for="file">Choose a file to upload:</label>
-                            <input type="file" id="file" name="file">
-                            <button type="submit">Upload</button>
-                        </form>
+                        
                         
                         <form action="" method="POST">
                         <table class=" table table-bordered text-center">

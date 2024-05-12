@@ -25,7 +25,26 @@ if(isset($_POST['searchQuery'])) {
     if($result->num_rows > 0){
         while($row = $result->fetch_object()){
             // Output the search results (You can customize this part based on your requirements)
-            printf("<div>%s - %s</div>", $row->admin_id, $row->admin_name);
+            printf("<tr>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td><button class ='btn btn-warning'><a href='updateAdmin.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
+                                                    <td><button class ='btn btn-danger'><a href='deleteAdmin.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
+                                                    </tr>"
+                                                    , $row->admin_id
+                                                    , $row->admin_name
+                                                    , $row->ic_no
+                                                    , $row->phone_no
+                                                    , allGender()[$row->gender]
+                                                    , $row->email
+                                                    , $row->birth_date
+                                                    , $row->admin_id, $row->admin_id);
+                                        
         }
     } else {
         echo "No results found";

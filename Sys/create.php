@@ -31,7 +31,7 @@
 
         $sql ="INSERT INTO `event` 
         (`event_id`, `event_name`, `date`, `time`, `description`,`pax`) 
-        VALUES('$id', '$name', '$date', '$time', '$description','$pax')";
+        VALUES('$id', '$name', '$date', '$time','$description','$pax')";
         $con->query($sql); 
 
         echo "<link rel = 'stylesheet' type = 'text/css' href = '../Bling/main.css'><div></div>
