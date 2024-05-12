@@ -8,11 +8,38 @@
     $result = mysqli_query($con,$query); 
 ?>
 
+<?php 
+$header = array(
+    "event_id"=>"Event ID",
+    "event_name"=>"Event Name",
+    "date"=>"Event Date",
+    "start_time"=>"Start Time",
+    "end_time"=>"End Time",
+    "description"=>"Description",
+    "pax"=>"Pax",
+    "remaining_pax"=>"Remaining Pax",
+);
+
+//retrieve sort parameter from URL
+if(isset($_GET["sort"])){
+    $sort = $_GET["sort"];
+}else{
+    $sort="event_id";
+}
+
+//retrive order
+if (isset($_GET["order"])){
+    $order = $_GET["order"];
+}else{
+    $order = "ASC";
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Booking List</title>
+    <title>Event List</title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,12 +78,19 @@
                     <div class="card-body">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark">
-                                <td>Event ID</td>
-                                <td>Event Name</td>
-                                <td>Event Date</td>
-                                <td>Event Time</td>
-                                <td>Description</td>
-                                <td>Pax</td>
+                            <?php 
+                                    foreach($header as $key=> $value){
+                                    if($key == $sort){
+                                        //user can click on the column
+                                        //for sorting
+                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
+                                    }else{
+                                        //user never click anything
+                                        //default
+                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
+                                    }
+                                }
+                                ?>
                                 <td>Edit</td>
                                 <td>Delete</td>
                             </tr>
@@ -68,9 +102,12 @@
                                 <td><?php echo $row['event_id']; ?></td>
                                 <td><?php echo $row['event_name']; ?></td>
                                 <td><?php echo $row['date']; ?></td>
-                                <td><?php echo $row['time']; ?></td>
+                                <td><?php echo $row['start_time']; ?></td>
+                                <td><?php echo $row['end_time']; ?></td>
                                 <td><?php echo $row['description']; ?></td>
                                 <td><?php echo $row['pax']; ?></td>
+                                <td><?php echo $row['remaining_pax']; ?></td>
+
                                 <td><?php echo "<form action='../Event/updateEvent.php' method='POST'><button class ='btn btn-warning' type='submit' name='id' value='$row[event_id]'>Edit</button></form>"?>
                                 </td>
                                 <td><?php echo "<form action='../Sys/deleteEvent.php' method='POST'><button class ='btn btn-danger' type='submit' name='id' value='$row[event_id]'>Delete</button></form>"?>
