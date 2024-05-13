@@ -72,13 +72,13 @@ if (isset($_POST['btnInsert'])) {
             <h1 style="text-align:center"> Create Event </h1>
             
             <?php 
-            if(empty($_POST)){
+            if(empty($_POST['btnInsert'])){
                 //user never click or perform anything
                 
             }else{
                 //user click
                 //1.1 receive user input from student form
-                $name = trim($_POST["name"]);
+                $name = trim($_POST['name']);
                 $event_date = $_POST['date'];
                 $event_start = $_POST['start'];
                 $event_end = $_POST['end'];
@@ -202,10 +202,9 @@ if (isset($_POST['btnInsert'])) {
 
 
          
-            <input type="submit" value="Insert" id="btnRegister" name="btnInsert" />
+            <input type="submit" value="Insert" id="btnRegister" name="btnInsert" onclick="location='eventList.php'"/>
             <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='eventList.php'"/>
             <br/>
         </form>
-        
     </body>
 </html> 
