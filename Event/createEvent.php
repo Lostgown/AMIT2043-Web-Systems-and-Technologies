@@ -20,9 +20,6 @@
         require_once '../lib/helper.php';
 ?>
 
-
-
-
 <?php
         // if(isset($_FILES['image'])) {
         //     $file = $_FILES['image'];

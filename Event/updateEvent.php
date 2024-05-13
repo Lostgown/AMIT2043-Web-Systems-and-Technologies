@@ -41,7 +41,7 @@
             
             if($row = $result->fetch_object()){
                 $id = $row -> event_id;
-                $file = $row -> imgpath;
+                // $file = $row -> imgpath;
                 $name = $row -> event_name;
                 $date = $row -> date;
                 $start = $row -> start_time;
@@ -68,7 +68,7 @@
                 $event_end = $_POST['end'];
                 $desc = $_POST['desc'];
                 $pax = $_POST['pax'];
-                $file = $_FILES['image'];
+                // $file = $_FILES['image'];
                     
                 //1.2 validate input
                 //no validation for password as is TEMP pass
@@ -94,34 +94,34 @@
                     //yay no error
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
-                    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                    // $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-                    $save_as = uniqid() . '.' . $ext;
+                    // $save_as = uniqid() . '.' . $ext;
             
-                    $uploadDir = '../photo/';
-                    $imagePath = $uploadDir . $save_as;
+                    // $uploadDir = '../photo/';
+                    // $imagePath = $uploadDir . $save_as;
 
-                    move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
+                    // move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
                 
 
                     //step 2: SQL
                     // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     // $sql = mysqli_query($con, "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES ('$id', '$imagePath', '$name', '$event_date', '$event_start', '$event_end', '$desc', '$pax', '$pax', '$status')");
-                    $sql = "UPDATE event SET imgpath = ?, event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ?, remaining_pax = ?, status = ? WHERE event_id = ?";
+                    $sql = "UPDATE event SET event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ?, remaining_pax = ?, status = ? WHERE event_id = ?";
 
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
                     //NOTE: $con -> prepare() => when there is "?" parameter in above sql satatement
                     $stmt = $con->prepare($sql);
-                    
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt->bind_param("ssssssdsss", $imagePath, $name, $event_date, $event_start, $event_end, $desc, $pax, $remaining_pax, $status, $id);
-                    
+                    $stmt->bind_param("sssssdsss", $name, $event_date, $event_start, $event_end, $desc, $pax, $remaining_pax, $status, $id);
+
                     //step 3.2: Executer SQL
                     $stmt -> execute();
-                    
-                    if($stmt -> affected_rows >0){
+
+                    if($stmt -> affected_rows > 0){
+                        echo 'test3';
                         //insert successful
                         printf("<div class='info'>
                                 Event <b>%s</b> has been inserted.\nID is <b>%s</b>[<a href='eventList.php'>Back to list</a>]
@@ -132,7 +132,7 @@
                     }else{
                         //GG: unable to insert
                         echo "<div class='error'>Unable to insert.
-                              <a href='updateEvent.php'>Try Again</a></div>";
+                              <a href='eventList.php'>Try Again</a></div>";
                     }
                     
                     $stmt -> close();
@@ -192,12 +192,11 @@
                     </label>
                 </div>
 
-                <div class = 'input_box'>
+                <!-- <div class = 'input_box'>
                     <label>Upload Photo :  </label>
                     <input type="hidden" value="1048576" name="MAX_FILE_SIZE" />
                     <input class="form-control" type="file" name="image" value="" />
-
-                </div>
+                </div> -->
             </div>
             <br/>
 
