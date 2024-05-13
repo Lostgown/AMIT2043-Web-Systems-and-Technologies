@@ -54,6 +54,7 @@
             }
             $con -> close();
             $result -> free();
+            
         }else{
             //POST METHOD - update DB record
             //1.1 receive user input from student form

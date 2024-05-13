@@ -2,7 +2,8 @@
 // include('../css/form.css'); 
 
 date_default_timezone_set("Asia/Kuala_Lumpur");
-//test
+
+
 // create function - validate birth date
 function validateBirthDate($birth){
 
@@ -16,6 +17,21 @@ function validateBirthDate($birth){
         return "Please provide your <b>Birth date</b>!";
     } else if($birth_timestamp > $now_timestamp) {
         return "Your <b>Birth date</b> cannot exceed the current date.";
+    } else {
+        return "";
+    } 
+}
+
+function validateEventDate($a) {
+    $now = date("m/d/Y");
+
+    $birth_timestamp = strtotime($a);
+    $now_timestamp = strtotime($now);
+
+    if($a == null){
+        return "Please provide <b>Event Date</b>";
+    } else if($birth_timestamp < $now_timestamp) {
+        return "The event must be <b>host in the future</b>.";
     } else {
         return "";
     } 
@@ -131,47 +147,52 @@ function validateCfnPass($passwordCfn, $password) {
     }
 }
 
+function validateTimeStart($time) {
+    if($time == null) {
+        return 'Please provide a <b>Start</b> time.';
+    }
+}
+
+function validateTimeEnd($time) {
+    if($time == null) {
+        return 'Please provide an <b>End</b> time.';
+    }
+}
+
 function validateFile($file) {
-                    
-                    if($file['error'] > 0) {
-                        //check the error code
-                        switch ($file['error']) {
-                            
-                            case UPLOAD_ERR_NO_FILE: // code = 4
-                                return 'No file was selected';
-                            break;
-                       
-                            case UPLOAD_ERR_FROM_SIZE: // code = 2
-                            
-                            return'File uploaded is too large MAXIMUN 1MB allowed';
-                            break;
-                        
-                            default:  // other codes
-                                return 'There was an error while uplaoding the file';
-                                break;
-                        }
-                    } else if($file['size'] > 1048576) {
-                        //check the file size. prevent hacks
-                        //1mb = 1024kb = 1048576B
-                        return 'File uploaded is too large. maximum 1M';
-                    } else {
-                        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-                        
-                        // check the file extension
-                        if ($ext != 'jpg' && 
-                            $ext != 'jpeg' && 
-                            $ext != 'gif' &&
-                            $ext != 'png') {
-                            
-                            return 'Only JPG, GIF, and PNG format are allowed';
-                        } else {
-                            // everything good
-                            $save_as = uniqid() . '.' . $ext;
-                            move_uploaded_file($file['tmp_name'], 'uploads/' . $save_as);
-                            
-                        }
-                    }
-                }
+    if($file == null) {
+        return 'null';
+    } else if($file > 1048576) {
+         //check the file size. prevent hacks
+         //1mb = 1024kb = 1048576B
+        return 'File uploaded is too large. maximum 1M';
+    } else {
+        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        // check the file extension
+        if ($ext != 'jpg' && 
+        $ext != 'jpeg' && 
+        $ext != 'gif' &&
+        $ext != 'png') {
+        
+        return 'Only JPG, GIF, and PNG format are allowed';
+}
+                
+    switch ($file) {
+        case UPLOAD_ERR_NO_FILE: // code = 4
+            return 'No file was selected';
+        break;
+   
+        case UPLOAD_ERR_FROM_SIZE: // code = 2
+        
+        return'File uploaded is too large MAXIMUN 1MB allowed';
+        break;
+    
+        default:  // other codes
+            return 'There was an error while uplaoding the file';
+            break;
+    }
+}
+}
 
 
 //create function - return all gender 

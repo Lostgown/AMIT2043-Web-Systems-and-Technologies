@@ -16,39 +16,70 @@
     }
 
 ?>
-
 <?php
         require_once '../lib/helper.php';
 ?>
 
+
+
+
 <?php
-error_reporting(0);
- 
-$msg = "";
- 
-// If upload button is clicked ...
-if (isset($_POST['btnInsert'])) {
- 
-    $filename = $_FILES["image"]["name"];
-    $tempname = $_FILES["image"]["tmp_name"];
-    $folder = "../photo/" . $filename;
-    $path = "../photo/$filename";
- 
-    // Get all the submitted data from the form
-    // $sql = "INSERT INTO event (filename) VALUES ('$filename')";
-    $sql = mysqli_query($con, "INSERT INTO event (imgpath) VALUES ('$filename')");
- 
-    // Execute query
-    // mysqli_query($db, $sql);
- 
-    // Now let's move the uploaded image into the folder: image
-    if (move_uploaded_file($tempname, $folder)) {
-        echo "<h3>  Image uploaded successfully!</h3>";
-    } else {
-        echo "<h3>  Failed to upload image!</h3>";
-    }
-}
+        // if(isset($_FILES['image'])) {
+        //     $file = $_FILES['image'];
+            
+        //     if($file['error'] > 0) {
+        //         //check the error code
+        //         switch ($file['error']) {
+                    
+        //             case UPLOAD_ERR_NO_FILE: // code = 4
+        //                 $err = 'No file was selected';
+        //             break;
+               
+        //             case UPLOAD_ERR_FROM_SIZE: // code = 2
+        //             $err = 'File uploaded is too large MAXIMUN 1MB allowed';
+        //             break;
+                
+        //             default:  // other codes
+        //                 $err = 'There was an error while uplaoding the file';
+        //                 break;
+        //         }
+        //     } else if($file['size'] > 1048576) {
+        //         //check the file size. prevent hacks
+        //         //1mb = 1024kb = 1048576B
+        //         $err = 'File uploaded is too large. maximum 1M';
+        //     } else {
+        //         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                
+        //         // check the file extension
+        //         if ($ext != 'jpg' && 
+        //             $ext != 'jpeg' && 
+        //             $ext != 'gif' &&
+        //             $ext != 'png') {
+                    
+        //             $err = 'Only JPG, GIF, and PNG format are allowed';
+        //         } else {
+        //             // everything good
+        //             $save_as = uniqid() . '.' . $ext;
+
+        //             $uploadDir = '../photo/';
+        //             $imagePath = $uploadDir . $save_as;
+
+        //             $sql = mysqli_query($con, "INSERT INTO event (imgpath) VALUES ('$imagePath')");
+
+        //             move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
+
+        //             // $sql = mysqli_query($con, "INSERT INTO event (imgpath) VALUES ('$file')");
+                    
+        //             printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',
+        //                     $save_as, $save_as);
+
+                    
+        //         }
+        //     }
+        // }   
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -78,22 +109,28 @@ if (isset($_POST['btnInsert'])) {
             }else{
                 //user click
                 //1.1 receive user input from student form
-                $name = trim($_POST['name']);
-                $event_date = $_POST['date'];
+                $name = $_POST['name'];
+                $event_date = trim($_POST['date']);
                 $event_start = $_POST['start'];
                 $event_end = $_POST['end'];
-                $desc = $_POST['decs'];
+                $desc = $_POST['desc'];
                 $pax = $_POST['pax'];
-                        
+                $file = $_FILES['image'];
+                    
                 //1.2 validate input
                 //no validation for password as is TEMP pass
-                // $error["name"] = validateName($name);
-                // $error["date"] = validateBirthDate($event_date);
-
+                // $error['image'] = validateFile($file);
+                $error['date'] = validateEventDate($event_date);
+                $error['start'] = validateTimeStart($event_start);
+                $error['end'] = validateTimeEnd($event_end);
                 
                 //filter out empty error
                 $error = array_filter($error);
                 //check id $error contains value
+
+                $i = 0;
+                $i++;
+
                 if(empty($error)){
                     $count = 0;
                     $count++;
@@ -106,18 +143,31 @@ if (isset($_POST['btnInsert'])) {
                     //yay no error
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
+                    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+                    $save_as = uniqid() . '.' . $ext;
+            
+                    $uploadDir = '../photo/';
+                    $imagePath = $uploadDir . $save_as;
+
+                    move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
+                    
+                    printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',
+                            $save_as, $save_as);
+
                     //step 2: SQL
-                    $sql = "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES(?,?,?,?,?,?,?,?,?,?)";
-                    // $sql = "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES(?,?,?,?,?,?,?,?,?,'Pending')";
+                    // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                    // $sql = mysqli_query($con, "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES ('$id', '$imagePath', '$name', '$event_date', '$event_start', '$event_end', '$desc', '$pax', '$pax', '$status')");
+                    $sql = "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
                     //NOTE: $con -> prepare() => when there is "?" parameter in above sql satatement
-                    $stmt = $con -> prepare($sql);
+                    $stmt = $con->prepare($sql);
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    // $stmt -> bind_param("sbssssdds", $id, $path, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status);
-                    $stmt -> bind_param("sbssssdds", $id, $path, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status);
+                    $stmt->bind_param("sssssssdss", $id, $imagePath, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -147,6 +197,7 @@ if (isset($_POST['btnInsert'])) {
                 }
                 
             }
+
             ?>
             <div>
                 <div class = 'input_box'>
@@ -202,7 +253,7 @@ if (isset($_POST['btnInsert'])) {
 
 
          
-            <input type="submit" value="Insert" id="btnRegister" name="btnInsert" onclick="location='eventList.php'"/>
+            <input type="submit" value="Insert" id="btnRegister" name="btnInsert" onclick="location='../Admin/menuAdmin.php'"/>
             <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='eventList.php'"/>
             <br/>
         </form>
