@@ -120,6 +120,7 @@
                 $error['date'] = validateEventDate($event_date);
                 $error['start'] = validateTimeStart($event_start);
                 $error['end'] = validateTimeEnd($event_end);
+                $error['image'] = validateFile($file);
                 
                 //filter out empty error
                 $error = array_filter($error);
