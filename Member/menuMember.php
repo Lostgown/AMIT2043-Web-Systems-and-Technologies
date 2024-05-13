@@ -7,6 +7,42 @@
 
 ?>
 
+<?php 
+$header = array(
+    "event_id"=>"Event ID",
+    "event_name"=>"Event Name",
+    "date"=>"Event Date",
+    "start_time"=>"Start Time",
+    "end_time"=>"End Time",
+    "description"=>"Description",
+    "pax"=>"Pax",
+    "remaining_pax"=>"Remaining Pax",
+    "status"=>"Status",
+);
+
+//retrieve sort parameter from URL
+if(isset($_GET["sort"])){
+    $sort = $_GET["sort"];
+}else{
+    $sort="event_id";
+}
+
+//retrive order
+if (isset($_GET["order"])){
+    $order = $_GET["order"];
+}else{
+    $order = "ASC";
+}
+
+//retrieve search
+if(isset($_POST['searchInput'])) {
+    // Retrieve the search query from the POST data
+    $search = $_POST['searchInput'];
+}else {
+    $search = '';
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -255,7 +291,31 @@
                             </div>
                         </section>
 
+                
+
                         <main class="main">
+                        <form id="searchForm" action="menuMember.php" method="POST">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
+                        <button type="submit" name="submit" class="btn btn-secondary">Search</button>
+                        </form>
+                        <?php 
+                                    foreach($header as $key=> $value){
+                                        if($key == $sort){
+                                            //user can click on the column
+                                            //for sorting
+                                            printf("<th><a href='?sort=%s&order=%s' style='color: black; text-decoration: ;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
+                                        }else{
+                                            //user never click anything
+                                            //default
+                                            printf("<th><a href='?sort=%s&order=ASC' style='color: black; text-decoration: ;'>%s  |  </a></th>",$key, $value);
+                                        }
+                                }
+
+                                // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+                                // $result = $con -> query($sql);
+
+                                ?>
                             <h2>My Bookings</h2>
                             <div class="container">
                             <?php
@@ -263,10 +323,12 @@
                                 //NOTE: arrangement of input in mysqli is important
                                 //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
                                 $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
                                 if($con -> connect_error){
                                     //wth error
                                     die("Connection error: ". $con->connect_error);
                                 }else{
+                                    
                                     //step 2: sql statement
                                     $sql = "SELECT booking.*, event.status FROM booking INNER JOIN event ON booking.event_id = event.event_id WHERE booking.member_id LIKE '%$_SESSION[idUser]%' AND event.status LIKE '%Pending%'";
 
@@ -312,12 +374,14 @@
                                 //NOTE: arrangement of input in mysqli is important
                                 //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
                                 $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
                                 if($con -> connect_error){
                                     //wth error
                                     die("Connection error: ". $con->connect_error);
                                 }else{
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM event WHERE status LIKE '%Pending%' ORDER BY date ASC";
+                                    // $sql = "SELECT * FROM event WHERE status LIKE '%Pending%' ORDER BY date ASC";
+                                    $sql = "SELECT * FROM event WHERE event_name LIKE '%$search%' ORDER BY $sort $order";
 
                                     $result = $con -> query($sql);//object - a list of event
 
