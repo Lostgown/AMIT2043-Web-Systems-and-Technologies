@@ -49,7 +49,7 @@
                 $pax = $row -> pax;
                 $remain_pax = $row -> remaining_pax;
                 $status = $row -> status;
-                
+
             }else{
                 //unable to fetch record from DB
                 echo "<div class='error'>Unable to retrieve record.
@@ -79,8 +79,6 @@
                 $error = array_filter($error);
                 //check id $error contains value
 
-                $i = 0;
-                $i++;
 
                 if(empty($error)){
                     $count = 0;
@@ -118,7 +116,7 @@
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt->bind_param("ssssssdsss", $imagePath, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status, $id);
+                    $stmt->bind_param("ssssssddss", $imagePath, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status, $id);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
