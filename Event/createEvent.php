@@ -121,6 +121,8 @@
                 $error['start'] = validateTimeStart($event_start);
                 $error['end'] = validateTimeEnd($event_end);
                 $error['image'] = validateFile($file);
+                $error['name'] = validateEventName($name);
+                $error['desc'] = validateDesc($desc);
                 
                 //filter out empty error
                 $error = array_filter($error);

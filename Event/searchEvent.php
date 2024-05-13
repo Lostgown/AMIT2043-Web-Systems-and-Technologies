@@ -85,6 +85,7 @@ if(isset($_POST['searchInput'])) {
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark">
                             <?php 
+                            
                                     foreach($header as $key=> $value){
                                     if($key == $sort){
                                         //user can click on the column

@@ -214,6 +214,19 @@ function validateTimeEnd($time) {
     }
 }
 
+function validateEventName($name) {
+    if($name == null) {
+        return 'Name field cannot be <b>empty</b>.';
+    }
+}
+
+function validateDesc($desc) {
+    if($desc == null) {
+        return 'Description  field cannot be <b>empty</b>.';
+    }
+}
+
+
 function validateFile($file) {
     if ($file['error'] === UPLOAD_ERR_NO_FILE) {
         return 'No file was selected';
