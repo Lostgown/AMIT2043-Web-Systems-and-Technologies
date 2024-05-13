@@ -13,7 +13,7 @@
         require_once '../lib/helper.php';
         ?>
         
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
         <div class = 'fixed'>     
             <div class = 'content'>
             <div>
@@ -43,11 +43,12 @@
                 $id = $row -> event_id;
                 $file = $row -> imgpath;
                 $name = $row -> event_name;
-                $start_date = $row -> date;
+                $date = $row -> date;
                 $start = $row -> start_time;
                 $end = $row -> end_time;
+                $desc = $row -> description;
                 $pax = $row -> pax;
-                $remain_pax = $row -> remaining_pax;
+                $remaining_pax = $row -> remaining_pax;
                 $status = $row -> status;
 
             }else{
@@ -57,6 +58,7 @@
             }
             $con -> close();
             $result -> free();
+
         }else{
            //user click
                 //1.1 receive user input from student form
@@ -100,9 +102,7 @@
                     $imagePath = $uploadDir . $save_as;
 
                     move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
-                    
-                    printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',
-                            $save_as, $save_as);
+                
 
                     //step 2: SQL
                     // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -116,7 +116,7 @@
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt->bind_param("ssssssddss", $imagePath, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status, $id);
+                    $stmt->bind_param("ssssssdsss", $imagePath, $name, $event_date, $event_start, $event_end, $desc, $pax, $remaining_pax, $status, $id);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -126,10 +126,13 @@
                         printf("<div class='info'>
                                 Event <b>%s</b> has been inserted.\nID is <b>%s</b>[<a href='eventList.php'>Back to list</a>]
                                 </div>", $name, $id);
+
+                                printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',
+                                $save_as, $save_as);
                     }else{
                         //GG: unable to insert
                         echo "<div class='error'>Unable to insert.
-                              <a href='createEvent.php'>Try Again</a></div>";
+                              <a href='updateEvent.php'>Try Again</a></div>";
                     }
                     
                     $stmt -> close();
