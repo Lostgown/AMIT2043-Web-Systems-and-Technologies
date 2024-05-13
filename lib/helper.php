@@ -122,6 +122,49 @@ function validateCfnPass($passwordCfn, $password) {
     }
 }
 
+function validateFile($file) {
+                    
+                    if($file['error'] > 0) {
+                        //check the error code
+                        switch ($file['error']) {
+                            
+                            case UPLOAD_ERR_NO_FILE: // code = 4
+                                return 'No file was selected';
+                            break;
+                       
+                            case UPLOAD_ERR_FROM_SIZE: // code = 2
+                            
+                            return'File uploaded is too large MAXIMUN 1MB allowed';
+                            break;
+                        
+                            default:  // other codes
+                                return 'There was an error while uplaoding the file';
+                                break;
+                        }
+                    } else if($file['size'] > 1048576) {
+                        //check the file size. prevent hacks
+                        //1mb = 1024kb = 1048576B
+                        return 'File uploaded is too large. maximum 1M';
+                    } else {
+                        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                        
+                        // check the file extension
+                        if ($ext != 'jpg' && 
+                            $ext != 'jpeg' && 
+                            $ext != 'gif' &&
+                            $ext != 'png') {
+                            
+                            return 'Only JPG, GIF, and PNG format are allowed';
+                        } else {
+                            // everything good
+                            $save_as = uniqid() . '.' . $ext;
+                            move_uploaded_file($file['tmp_name'], 'uploads/' . $save_as);
+                            
+                        }
+                    }
+                }
+
+
 //create function - return all gender 
 function allGender(){
     return array(

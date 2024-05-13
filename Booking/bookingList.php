@@ -129,7 +129,7 @@ if(isset($_GET["category"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td>%s </td>
+                                                    <td>%s </td>    
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>

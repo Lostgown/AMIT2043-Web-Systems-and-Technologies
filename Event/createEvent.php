@@ -3,7 +3,7 @@
         include('../Sys/connection.php');               
 
                                                                                       
-        $sql = "SELECT event_id FROM admin ORDER BY event_id DESC LIMIT 1";
+        $sql = "SELECT event_id FROM event ORDER BY event_id DESC LIMIT 1";
         $result= $con->query($sql);  
         $row = mysqli_fetch_assoc($result); 
         if (isset($row['event_id'])) {
@@ -29,17 +29,17 @@ $msg = "";
 // If upload button is clicked ...
 if (isset($_POST['btnInsert'])) {
  
-    $filename = $_FILES["uploadfile"]["name"];
-    $tempname = $_FILES["uploadfile"]["tmp_name"];
-    $folder = "./image/" . $filename;
- 
-    $db = mysqli_connect("localhost", "root", "", "geeksforgeeks");
+    $filename = $_FILES["image"]["name"];
+    $tempname = $_FILES["image"]["tmp_name"];
+    $folder = "../photo/" . $filename;
+    $path = "../photo/$filename";
  
     // Get all the submitted data from the form
-    $sql = "INSERT INTO image (filename) VALUES ('$filename')";
+    // $sql = "INSERT INTO event (filename) VALUES ('$filename')";
+    $sql = mysqli_query($con, "INSERT INTO event (imgpath) VALUES ('$filename')");
  
     // Execute query
-    mysqli_query($db, $sql);
+    // mysqli_query($db, $sql);
  
     // Now let's move the uploaded image into the folder: image
     if (move_uploaded_file($tempname, $folder)) {
@@ -64,7 +64,7 @@ if (isset($_POST['btnInsert'])) {
         require_once '../lib/helper.php';
         ?>
         
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
         <div class = 'fixed'>     
             <div class = 'content'>
             <div>
@@ -79,39 +79,36 @@ if (isset($_POST['btnInsert'])) {
                 //user click
                 //1.1 receive user input from student form
                 $name = trim($_POST["name"]);
-                $ic = trim($_POST["ic_no"]);
-                $pass = trim($_POST["pass"]);
-                $phone = trim($_POST["phone_no"]);
-                if(isset($_POST["gender"])){
-                    $gender = trim($_POST["gender"]);
-                }else{
-                    $gender = NULL;
-                }
-                $email = trim($_POST["email"]);
-                $birth = trim($_POST["birth_date"]);
+                $event_date = $_POST['date'];
+                $event_start = $_POST['start'];
+                $event_end = $_POST['end'];
+                $desc = $_POST['decs'];
+                $pax = $_POST['pax'];
                         
                 //1.2 validate input
                 //no validation for password as is TEMP pass
-                $error["name"] = validateName($name);
-                $error["ic_no"] = validateIC($ic);
-                $error["phone_no"] = validatePhone($phone);
-                $error["email"] = validateEmail($email);
-                $error["gender"] = validateGender($gender);
-                $error["pass"] = validatePassTemp($pass);
-                $error["birth_date"] = validateBirthDate($birth);
+                // $error["name"] = validateName($name);
+                // $error["date"] = validateBirthDate($event_date);
 
                 
                 //filter out empty error
                 $error = array_filter($error);
-                
                 //check id $error contains value
                 if(empty($error)){
+                    $count = 0;
+                    $count++;
+                    if($count == 1) {
+                        $status = 'Completed';
+                    } else {
+                        $status == 'Pending';
+                    }
+
                     //yay no error
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES(?,?,?,?,?,?,?,?,?,'Pending')";
-                    
+                    $sql = "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES(?,?,?,?,?,?,?,?,?,?)";
+                    // $sql = "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES(?,?,?,?,?,?,?,?,?,'Pending')";
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
                     //NOTE: $con -> prepare() => when there is "?" parameter in above sql satatement
@@ -119,7 +116,7 @@ if (isset($_POST['btnInsert'])) {
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt -> bind_param("sssssssss", $id, $path, $name, $date, $start, $end, $desc, $pax, $pax);
+                    $stmt -> bind_param("sbssssdds", $id, $path, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -195,7 +192,9 @@ if (isset($_POST['btnInsert'])) {
 
                 <div class = 'input_box'>
                     <label>Upload Photo :  </label>
-                    <input class="form-control" type="file" name="uploadfile" value="" />
+                    <input type="hidden" value="1048576" name="MAX_FILE_SIZE" />
+                    <input class="form-control" type="file" name="image" value="" />
+
                 </div>
             </div>
             <br/>
