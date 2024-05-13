@@ -13,7 +13,7 @@
         require_once '../lib/helper.php';
         ?>
         
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST">
         <div class = 'fixed'>     
             <div class = 'content'>
             <div>
