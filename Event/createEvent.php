@@ -100,7 +100,7 @@ if (isset($_POST['btnInsert'])) {
                     if($count == 1) {
                         $status = 'Completed';
                     } else {
-                        $status == 'Pending';
+                        $status = 'Pending';
                     }
 
                     //yay no error
@@ -116,6 +116,7 @@ if (isset($_POST['btnInsert'])) {
                     
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
+                    // $stmt -> bind_param("sbssssdds", $id, $path, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status);
                     $stmt -> bind_param("sbssssdds", $id, $path, $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $status);
                     
                     //step 3.2: Executer SQL
