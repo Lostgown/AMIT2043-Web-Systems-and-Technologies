@@ -160,39 +160,28 @@ function validateTimeEnd($time) {
 }
 
 function validateFile($file) {
-    if($file == null) {
-        return 'null';
-    } else if($file > 1048576) {
-         //check the file size. prevent hacks
-         //1mb = 1024kb = 1048576B
-        return 'File uploaded is too large. maximum 1M';
+    if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+        return 'No file was selected';
+    } elseif ($file['error'] !== UPLOAD_ERR_OK) {
+        return 'There was an error while uploading the file';
     } else {
-        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-        // check the file extension
-        if ($ext != 'jpg' && 
-        $ext != 'jpeg' && 
-        $ext != 'gif' &&
-        $ext != 'png') {
+        // Check the file size
+        if ($file['size'] > 1048576) { // 1MB in bytes
+            return 'File uploaded is too large. Maximum 1MB allowed';
+        }
         
-        return 'Only JPG, GIF, and PNG format are allowed';
-}
-                
-    switch ($file) {
-        case UPLOAD_ERR_NO_FILE: // code = 4
-            return 'No file was selected';
-        break;
-   
-        case UPLOAD_ERR_FROM_SIZE: // code = 2
+        // Check the file extension
+        $allowedExtensions = ['jpg'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($ext, $allowedExtensions)) {
+            return 'Only JPG formats are allowed';
+        }
         
-        return'File uploaded is too large MAXIMUN 1MB allowed';
-        break;
-    
-        default:  // other codes
-            return 'There was an error while uplaoding the file';
-            break;
+        // If no errors, return null to indicate no validation error
+        return null;
     }
 }
-}
+
 
 
 //create function - return all gender 
