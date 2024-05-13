@@ -39,7 +39,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Project/PHP/PHPProject.php to edi
                 </div>
                 
                 
-                <p><a href='retrievePassword.php' style = "text-decoration: none;">&nbsp;&nbsp;Forgot Password? </a></p>
+                <!--<p><a href='retrievePassword.php' style = "text-decoration: none;">&nbsp;&nbsp;Forgot Password? </a></p>-->
 
                 <div class = "userType">
                     <p id = "btnMember"><label><input type = "radio" name = "loginType" value = 'member' checked/> Member </label></p>

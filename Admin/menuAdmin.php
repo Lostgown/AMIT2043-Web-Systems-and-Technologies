@@ -67,8 +67,8 @@
     }
 
     .box-recent-event {
-        width: 31rem;
-        height: 20rem;
+        width: 18rem;
+        height: auto;
         background-color: #ccc;
         border-radius: 12px;
         margin: 15px;
@@ -273,7 +273,7 @@
                                     die("Connection error: ". $con->connect_error);
                                 }else{
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM event WHERE status LIKE '%Pending%'";
+                                    $sql = "SELECT * FROM event WHERE status LIKE '%Pending%' ORDER BY date ASC";
 
                                     $result = $con -> query($sql);//object - a list of event
 
@@ -281,11 +281,23 @@
                                         //record found
                                         while($row = $result->fetch_object()){
                                             printf("<div class='box-recent-event'>
+                                                        <img src='../photo/%s' style='width:280px; height:180px;'>
                                                         <h3 class='text-color'> %s</h3>
-                                                        <img src='../photo/%s'>
-                                                        <button class ='btn btn-warning'><a href='updateEvent.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></div>"
-                                                    , $row->event_name
+                                                        <p> Date : %s</p>
+                                                        <p> Start Time : %s</p>
+                                                        <p> End Time : %s</p>
+                                                        <p> Description : %s</p>
+                                                        <p> Pax : %s</p>
+                                                        <p> Remaining Pax : %s</p>
+                                                        <button class ='btn btn-warning'><a href='../Event/updateEvent.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></div>"
                                                     , $row->imgpath
+                                                    , $row->event_name
+                                                    , $row->date
+                                                    , $row->start_time
+                                                    , $row->end_time
+                                                    , $row->description
+                                                    , $row->pax
+                                                    , $row->remaining_pax
                                                     , $row->event_id 
                                                     );
                                         }

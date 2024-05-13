@@ -66,8 +66,8 @@
     }
 
     .box-recent-event {
-        width: 31rem;
-        height: 20rem;
+        width: 18rem;
+        height: auto;
         background-color: #ccc;
         border-radius: 12px;
         margin: 15px;
@@ -237,7 +237,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="JoinedEventMember.php">
+                                        <a href="bookingMember.php">
                                             <button> My Bookings</button>
                                         </a>
                                     </li>
@@ -248,33 +248,53 @@
 
                         <main class="main">
                             <div class="container">
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event1</h3>
-                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
-                                    </button>
-                                </div>
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event1</h3>
-                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
-                                    </button>
-                                </div>
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event1</h3>
-                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
-                                    </button>
-                                </div>
-                                <div class="box-recent-event">
-                                    <h3 class="text-color"> Event1</h3>
-                                    <!-- <button id='btnchng' name='id' value='$_SESSION[idUser]'> View </button> -->
-                                    <button onclick="JoinEvent()" id='btnchng' name='id' value='$_SESSION[idUser]'> Join
-                                    </button>
+                            <?php
+                                //step 1: create DB connection
+                                //NOTE: arrangement of input in mysqli is important
+                                //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
+                                $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                                if($con -> connect_error){
+                                    //wth error
+                                    die("Connection error: ". $con->connect_error);
+                                }else{
+                                    //step 2: sql statement
+                                    $sql = "SELECT * FROM event WHERE status LIKE '%Pending%' ORDER BY date ASC";
 
-                                    <!-- view button removed -->
-                                </div>
+                                    $result = $con -> query($sql);//object - a list of event
 
+                                    if($result->num_rows > 0){
+                                        //record found
+                                        while($row = $result->fetch_object()){
+                                            printf("<div class='box-recent-event'>
+                                                        <img src='../photo/%s' style='width:280px; height:180px;'>
+                                                        <h3 class='text-color'> %s</h3>
+                                                        <p> Date : %s</p>
+                                                        <p> Start Time : %s</p>
+                                                        <p> End Time : %s</p>
+                                                        <p> Description : %s</p>
+                                                        <p> Pax : %s</p>
+                                                        <p> Remaining Pax : %s</p>
+                                                        <button><a href='../Booking/createBooking.php?id=%s' style='text-decoration:none;color:black;'>Join</a></button></div>"
+                                                    , $row->imgpath
+                                                    , $row->event_name
+                                                    , $row->date
+                                                    , $row->start_time
+                                                    , $row->end_time
+                                                    , $row->description
+                                                    , $row->pax
+                                                    , $row->remaining_pax
+                                                    , $row->event_id 
+                                                    );
+                                        }
+                                    } else {
+                                        printf("<h3>No Recent Hosting Event</h3>");
+                                    }
+
+                                    $con -> close(); //safety and security
+                                    $result -> free(); //to clean the result fetched or will use RAM
+                                }
+
+                                ?>
                             </div>
                         </main>
                     </div>
@@ -292,18 +312,5 @@
     <footer style="padding-bottom: 2.5rem; position: relative; bottom: 0; width: 100%; height: 2.5rem;">
         <?php include('../lib/footer.php'); ?>
     </footer>
-    <script>
-    var i = 0;
-
-    function JoinEvent() {
-        if (i < 5) {
-            alert("You have successfully joined the event!!");
-            i++;
-        } else {
-
-            alert("The pax is full");
-        }
-        console.log(i);
-    }
-    </script>
-    < /html>
+    
+    </html>

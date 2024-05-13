@@ -39,6 +39,15 @@ function validateGender($gender){
     }
 }
 
+//create function - validate category
+function validateCategory($category){
+    if($category == null){
+        return "Please select a <b>Category</b>.";
+    }else if(!array_key_exists($category, allCategory())){
+        return "Invalid <b>Category</b>";
+    }
+}
+
 //create function validateEmail
 function validateEmail($email) {
     if($email == null){

@@ -1,3 +1,22 @@
+<?php
+    if(isset($_POST['event'])){
+        include('../Sys/connection.php');               
+
+                                                                                      
+        $sql = "SELECT booking_id FROM booking ORDER BY booking_id DESC LIMIT 1";
+        $result= $con->query($sql);  
+        $row = mysqli_fetch_assoc($result); 
+        if (isset($row['booking_id'])) {
+                $number = ltrim($row['booking_id'],'B')+1;  
+                $id = 'B' . sprintf('%04d', $number);   
+        }
+        else {
+                $id = "B0001";
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -26,23 +45,20 @@
         if($_SERVER["REQUEST_METHOD"] == "GET"){
             //GET method - retrieve existing record and display before delete
             //retrieve id from URL
-            $id = strtoupper(trim($_GET["id"]));
+            $event =(trim($_GET["id"]));
             
             //retrieve record from database based on id
             //step 1: Connect DB
             $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
             
             //step 2: SQL statement
-            $sql = "SELECT * FROM booking WHERE booking_id = '$id'";
-            
-            //step 2.1: Remove special character
-            $id = $con ->real_escape_string($id);
+            $sql = "SELECT * FROM booking";
             
             //step 3: process SQL
             $result = $con -> query($sql);
             
             if($row = $result->fetch_object()){
-                $id = $row -> booking_id;
+                $id = $_SESSION['idUser'];
                 $event = $row -> event_id;
                 $member = $row -> member_id;
                 $category = $row -> category;
@@ -57,16 +73,15 @@
         }else{
             //POST METHOD - update DB record
             //1.1 receive user input from student form
-                $id = (trim($_POST["hdID"]));
                 $event = trim($_POST["event"]);
                 $member = trim($_POST["member"]);
                 $category = trim($_POST["category"]);
                 $level = trim($_POST["level"]);
-                $date = 
-                $time =  
+                $date = date("Y-m-d");
+                $time =  date("H:i:s");
 
                 //1.2 validate input
-                $error["name"] = validateName($name);
+                $error["category"] = validateCategory($category);
                 //$error["ic_no"] = validateIC($ic);
 
                 //filter out empty error
@@ -78,7 +93,7 @@
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "UPDATE booking SET category = ?, level = ?, booking_date = ?, booking_time = ? WHERE admin_id = ?";
+                    $sql = "INSERT INTO booking (booking_id, event_id, member_id, category, level, booking_date, booking_time) VALUES(?,?,?,?,?,?,?)";
                     
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -87,7 +102,7 @@
                     
                     //step 3.1: Pass parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt -> bind_param("sssss", $category, $level, $date, $time, $id);
+                    $stmt -> bind_param("sssssss", $id, $event, $member, $category, $level, $date, $time);
                     
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -95,12 +110,12 @@
                     if($stmt -> affected_rows >0){
                         //insert successful
                         printf("<div class='info'>
-                                Booking <b>%s</b> has been updated.[<a href='bookingList.php'>Back to list</a>]
+                                Booking <b>%s</b> has been inserted.[<a href='bookingList.php'>Back to list</a>]
                                 </div>", $id);
                     }else{
                         //GG: unable to insert
-                        echo "<div class='error'>Unable to update.
-                              <a href='updateBooking.php'>Try Again</a></div>";
+                        echo "<div class='error'>Unable to insert.
+                              <a href='createBooking.php'>Try Again</a></div>";
                     }
                     
                     $stmt -> close();
@@ -118,13 +133,6 @@
             
 
             <div>    
-                <div class = 'input_box'>
-                        <label class="input">
-                            <input class = "input_field" type = "text" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>" readonly/>
-                            <span class="input_label">Booking ID</span>
-                        </label>
-                    </div> 
-
                     <div class = 'input_box'>
                         <label class="input">
                             <input class = "input_field" type = "text" name  = "event" value="<?php echo (isset($event))?$event: ""; ?>" readonly/>
@@ -180,8 +188,8 @@
             </div>
 
             <br/>
-            <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />
-            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
+            <input type="submit" value="Create" id="btnUpdate" name="btnUpdate" />
+            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Member/menuMember.php'" />
             </form>
             <br/>
 
