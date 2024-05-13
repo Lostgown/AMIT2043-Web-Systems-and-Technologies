@@ -5,40 +5,6 @@
     include('../Sys/connection.php');
     require_once('../lib/helper.php');
 ?>
-<?php 
-$header = array(
-    "event_id"=>"Event ID",
-    "event_name"=>"Event Name",
-    "date"=>"Event Date",
-    "start_time"=>"Start Time",
-    "end_time"=>"End Time",
-    "description"=>"Description",
-    "pax"=>"Pax",
-    "remaining_pax"=>"Remaining Pax",
-    "status"=>"Status",
-);
-
-if(isset($_GET["sort"])){
-    $sort = $_GET["sort"];
-}else{
-    $sort="event_id";
-}
-
-//retrive order
-if (isset($_GET["order"])){
-    $order = $_GET["order"];
-}else{
-    $order = "ASC";
-}
-
-if(isset($_POST['searchInput'])) {
-    // Retrieve the search query from the POST data
-    $search = $_POST['searchInput'];
-}else {
-    $search = '';
-}
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -101,7 +67,7 @@ if(isset($_POST['searchInput'])) {
     }
 
     .box-recent-event {
-        width: 98rem;
+        width: 18rem;
         height: auto;
         background-color: #ccc;
         border-radius: 12px;
@@ -297,65 +263,21 @@ if(isset($_POST['searchInput'])) {
 
                         <main class="main">
                             <div class="container">
-                            <div class="card-body">
-
-                    <form style="text-align: left;" id="searchForm" action="menuAdmin.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
-                        <button type="submit" name="submit" class="btn btn-secondary">Search</button>
-                    </form>
-                    <!-- <div class="card mt-2"> -->
-                    <p>
-                    Filter:
-                    <?php 
-                    printf("<a href='?sort=%s&order=%s' style='color: black;'>STATUS</a>", $sort, $order);
-                    
-                    printf("| <a href='?sort=%s&order=%s&status=%s' style='color: green;'>%s</a>",$sort,$order,'Completed','Completed');
-                    printf("| <a href='?sort=%s&order=%s&status=%s' style='color: orange;'>%s</a>",$sort,$order,'Pending','Pending');
-                        
-                    
-                    ?>
-                    </p>
-
-                    <!-- <br/> -->
-                        <!-- <table class=" table table-bordered text-center"> -->
-                            <!-- <tr class="table-dark"> -->
-                            <?php 
-                                    foreach($header as $key=> $value){
-                                    if($key == $sort){
-                                        //user can click on the column
-                                        //for sorting
-                                        printf("<th><a href='?sort=%s&order=%s' style='color: ; text-decoration: ;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
-                                    }else{
-                                        //user never click anything
-                                        //default
-                                        printf("<th><a href='?sort=%s&order=ASC' style='color: ; text-decoration: ;'>%s |  </a></th>",$key, $value);
-                                    }
-                                }
-                                ?>
-                                <!-- <th>Edit</th> -->
-                                <!-- <th>Delete</th> -->
-                            <!-- </tr> -->
-                            <!-- <tr> -->
-                                <br />
-                                <br />
-                                <hr />
                             <?php
                                 //step 1: create DB connection
                                 //NOTE: arrangement of input in mysqli is important
                                 //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
                                 $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                                
                                 if($con -> connect_error){
                                     //wth error
                                     die("Connection error: ". $con->connect_error);
                                 }else{
-                                    //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM event WHERE event_name LIKE '%$search%' ORDER BY $sort $order";
-                                    //step 3: ask connection, to processs sql
-                                    $result = $con -> query($sql);//object - a list of admin record
+                                    $sql = "SELECT * FROM event WHERE status LIKE '%Pending%' ORDER BY date ASC";
 
-                                    //NOTE: for DB we use "->"
-                                    //NOTE: for associative array we use "=>"
+                                    $result = $con -> query($sql);//object - a list of event
+
                                     if($result->num_rows > 0){
                                         //record found
                                         while($row = $result->fetch_object()){
@@ -394,8 +316,6 @@ if(isset($_POST['searchInput'])) {
                                 }
 
                                 ?>
-                        <!-- </table> -->
-                    </div>
 
                             </div>
                         </main>
