@@ -4,6 +4,52 @@
 date_default_timezone_set("Asia/Kuala_Lumpur");
 
 
+function validateRemaining($event){
+    $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    
+    $sql = "SELECT remaining_pax FROM event WHERE event_id = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $event);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch the remaining pax count from the result
+    $row = $result->fetch_assoc();
+    $remainingPax = $row['remaining_pax'];
+
+    // Close statement
+    $stmt->close();
+
+    // Check if there are remaining pax
+    if ($remainingPax > 0) {
+        // There are remaining pax
+        return "";
+    } else {
+        // No remaining pax
+        return "There is no remaining pax!";
+    }
+}
+
+function validateJoinedEvent($event,$member){
+    //step 1: connect to database
+    $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+    
+    $sql = "SELECT * FROM booking WHERE member_id = ? AND event_id = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ss", $member, $event);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        return "You had already joined the event!"; // Member has joined the event
+    } else {
+        return ""; // Member has not joined the event
+    }
+
+    $result -> free();
+    $con ->close();
+}
+
 // create function - validate birth date
 function validateBirthDate($birth){
 
@@ -61,6 +107,15 @@ function validateCategory($category){
         return "Please select a <b>Category</b>.";
     }else if(!array_key_exists($category, allCategory())){
         return "Invalid <b>Category</b>";
+    }
+}
+
+//create function - validate level
+function validateLevel($level){
+    if($level == null){
+        return "Please select a <b>Level</b>.";
+    }else if(!array_key_exists($level, allLevel())){
+        return "Invalid <b>Level</b>";
     }
 }
 

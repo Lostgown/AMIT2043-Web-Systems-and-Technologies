@@ -283,6 +283,7 @@
                                             printf("<div class='box-recent-event'>
                                                         <img src='../photo/%s' style='width:280px; height:180px;'>
                                                         <h3 class='text-color'> %s</h3>
+                                                        <p> Event ID : %s</p>
                                                         <p> Date : %s</p>
                                                         <p> Start Time : %s</p>
                                                         <p> End Time : %s</p>
@@ -292,6 +293,7 @@
                                                         <button class ='btn btn-warning'><a href='../Event/updateEvent.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></div>"
                                                     , $row->imgpath
                                                     , $row->event_name
+                                                    , $row->event_id
                                                     , $row->date
                                                     , $row->start_time
                                                     , $row->end_time

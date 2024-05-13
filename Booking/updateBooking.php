@@ -60,12 +60,12 @@
                 $member = trim($_POST["member"]);
                 $category = trim($_POST["category"]);
                 $level = trim($_POST["level"]);
-                $date = 
-                $time =  
+                $date = date("Y-m-d");
+                $time =  date("H:i:s");  
 
                 //1.2 validate input
-                $error["name"] = validateName($name);
-                //$error["ic_no"] = validateIC($ic);
+                $error["category"] = validateCategory($category);
+                $error["level"] = validateLevel($level);
 
                 //filter out empty error
                 $error = array_filter($error);
@@ -76,7 +76,7 @@
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     
                     //step 2: SQL
-                    $sql = "UPDATE booking SET category = ?, level = ?, booking_date = ?, booking_time = ? WHERE admin_id = ?";
+                    $sql = "UPDATE booking SET category = ?, level = ?, booking_date = ?, booking_time = ? WHERE booking_id = ?";
                     
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement

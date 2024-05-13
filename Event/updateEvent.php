@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Update Admin</title>
+        <title>Update Event</title>
         <link rel = 'stylesheet' type = 'text/css' href = '../css/main.css'>
         <link rel = 'stylesheet' type = 'text/css' href = '../css/form.css'>
         
@@ -202,7 +202,7 @@
 
 
          
-            <input type="submit" value="Insert" id="btnRegister" name="btnInsert" "/>
+            <input type="submit" value="Insert" id="btnRegister" name="btnInsert"/>
             <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='eventList.php'"/>
             <br/>
             </form>

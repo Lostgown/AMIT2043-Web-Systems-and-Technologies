@@ -131,11 +131,8 @@
                 if(empty($error)){
                     $count = 0;
                     $count++;
-                    if($count == 1) {
-                        $status = 'Completed';
-                    } else {
-                        $status = 'Pending';
-                    }
+
+                    $status = 'Pending';
 
                     //yay no error
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -149,7 +146,7 @@
 
                     move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
                     
-                    printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',
+                    printf('<div class="info"> image uploaded successfully. it is saved as <a href="../Admin/menuAdmin.php?image=%s">%s</a></div>',
                             $save_as, $save_as);
 
                     //step 2: SQL

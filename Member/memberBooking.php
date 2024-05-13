@@ -1,7 +1,6 @@
 <?php
     session_start();
     include('../Sys/authCheck.php');
-    validAdmin();
     include ('../lib/helper.php');
 ?>
 
@@ -44,7 +43,7 @@ if(isset($_GET["category"])){
 <html>
 
 <head>
-    <title>Booking List</title>
+    <title>My Booking</title>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,11 +65,11 @@ if(isset($_GET["category"])){
             <div class="col">
                 <div class="card mt-2">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Booking List</h2>
+                        <h2 class="display-6 text-center">My Booking</h2>
                     </div>
                     <div class="card-body">
                     <form id="searchForm" action="searchBooking.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event ID...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                     </form>
 
@@ -101,6 +100,7 @@ if(isset($_GET["category"])){
                                     }
                                 }
                                 ?>
+                                <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                             <?php
@@ -114,7 +114,7 @@ if(isset($_GET["category"])){
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM booking WHERE category LIKE '$category' ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM booking WHERE category LIKE '$category' AND member_id LIKE '%$_SESSION[idUser]%' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record
@@ -131,8 +131,9 @@ if(isset($_GET["category"])){
                                                     <td>%s </td>    
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td>%s </td>  
-                                                    <td><button class ='btn btn-danger'><a href='deleteBooking.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
+                                                    <td>%s </td>
+                                                    <td><button class ='btn btn-warning'><a href='../Booking/updateBooking.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
+                                                    <td><button class ='btn btn-danger'><a href='../Booking/deleteBooking.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
                                                     , $row->booking_id
                                                     , $row->event_id

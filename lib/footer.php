@@ -122,14 +122,8 @@ ul {
             <div class='footer-col'>
                 <h4>Events Management</h4>
                 <ul>
-                    <li><a href='../General/resetPassword.php'>Reset Password</a></li>
-                </ul>
-            </div>
-            <div class='footer-col'>
-                <h4>Events Management</h4>
-                <ul>
-                    <li><a href='../Event/join_event.php'>Events Details</a></li>
-                    <li><a href='../Member/JoinedEventMember.php'>My Bookings</a></li>
+                    <li><a href='../Member/eventShow.php'>Events Details</a></li>
+                    <li><a href='../Member/memberBooking.php'>My Bookings</a></li>
                 </ul>
             </div>
             <div class='footer-col'>

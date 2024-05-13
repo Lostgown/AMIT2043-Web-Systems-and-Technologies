@@ -1,7 +1,6 @@
 <?php
     session_start();
     include('../Sys/authCheck.php');
-    validAdmin();
     include ('../lib/helper.php');
 ?>
 
@@ -30,12 +29,12 @@ if (isset($_GET["order"])){
     $order = "ASC";
 }
 
-//retrieve Category
-if(isset($_GET["category"])){
-    $category = $_GET["category"];
-}else{
-    $category = "%";//retrieve everything
-    //select * from booking where category LIKE "MS"
+//retrieve search
+if(isset($_POST['searchInput'])) {
+    // Retrieve the search query from the POST data
+    $search = $_POST['searchInput'];
+}else {
+    $search = '';
 }
 ?>
 
@@ -75,17 +74,8 @@ if(isset($_GET["category"])){
                     </form>
 
                     <br/>
-                    <p>
-                    Filter:
-                    <?php 
-                    printf("<a href='?sort=%s&order=%s' style='color: black;'>CATEGORY</a>", $sort, $order);
-                    
-                    foreach(allCategory() as $key=>$value){
-                        printf("| <a href='?sort=%s&order=%s&category=%s'>%s</a>",$sort,$order,$key,$key);
-                        
-                    }
-                    ?>
-                </p>
+
+                        <form action="" method="POST">
                         <table class=" table table-bordered text-center">
                             <tr class="table-dark ">
                                 <?php 
@@ -93,14 +83,15 @@ if(isset($_GET["category"])){
                                     if($key == $sort){
                                         //user can click on the column
                                         //for sorting
-                                        printf("<th><a href='?sort=%s&order=%s&category=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' : 'ASC',$category, $value, $order == "ASC"?'⬇️':'⬆️');
+                                        printf("<th><a href='?sort=%s&order=%s' style='color: white; text-decoration: none;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
                                     }else{
                                         //user never click anything
                                         //default
-                                        printf("<th><a href='?sort=%s&order=ASC&category=%s' style='color: white; text-decoration: none;'>%s</a></th>",$key,$category, $value);
+                                        printf("<th><a href='?sort=%s&order=ASC' style='color: white; text-decoration: none;'>%s</a></th>",$key, $value);
                                     }
                                 }
                                 ?>
+                                <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                             <?php
@@ -114,7 +105,7 @@ if(isset($_GET["category"])){
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM booking WHERE category LIKE '$category' ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM booking WHERE event_id LIKE '%$search%' AND member_id LIKE '%$_SESSION[idUser]%' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record
@@ -128,10 +119,11 @@ if(isset($_GET["category"])){
                                                     <td>%s </td>
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td>%s </td>    
                                                     <td>%s </td>
                                                     <td>%s </td>
-                                                    <td>%s </td>  
+                                                    <td>%s </td>
+                                                    <td>%s </td>
+                                                    <td><button class ='btn btn-warning'><a href='updateBooking.php?id=%s' style='text-decoration:none;color:black;'>Edit</a></button></td>  
                                                     <td><button class ='btn btn-danger'><a href='deleteBooking.php?id=%s' style='text-decoration:none;color:white;'>Delete</a></button></td>
                                                     </tr>"
                                                     , $row->booking_id
@@ -156,6 +148,7 @@ if(isset($_GET["category"])){
                                 ?>
 
                         </table>
+                        </form>
                     </div>
                 </div>
             </div>

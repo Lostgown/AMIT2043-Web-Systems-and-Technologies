@@ -41,48 +41,22 @@
             <div class = "frm" style="text-align:left;">  
             <h1 style="text-align:center"> Create Booking </h1>
         <?php 
-        //using GET method and POST method together
-        if($_SERVER["REQUEST_METHOD"] == "GET"){
-            //GET method - retrieve existing record and display before delete
-            //retrieve id from URL
+        
             $event =(trim($_GET["id"]));
-            
-            //retrieve record from database based on id
-            //step 1: Connect DB
-            $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-            
-            //step 2: SQL statement
-            $sql = "SELECT * FROM booking";
-            
-            //step 3: process SQL
-            $result = $con -> query($sql);
-            
-            if($row = $result->fetch_object()){
-                $id = $_SESSION['idUser'];
-                $event = $row -> event_id;
-                $member = $row -> member_id;
-                $category = $row -> category;
-                $level = $row -> level;
-            }else{
-                //unable to fetch record from DB
-                echo "<div class='error'>Unable to retrieve record.
-                [ <a href='bookingList.php'>Back to list</a> ]</div>";
-            }
-            $con -> close();
-            $result -> free();
-        }else{
+            $member = trim($_SESSION["idUser"]);
+            if(isset($_POST["btnUpdate"])){
             //POST METHOD - update DB record
             //1.1 receive user input from student form
-                $event = trim($_POST["event"]);
-                $member = trim($_POST["member"]);
                 $category = trim($_POST["category"]);
                 $level = trim($_POST["level"]);
                 $date = date("Y-m-d");
                 $time =  date("H:i:s");
 
                 //1.2 validate input
+                $error["event"] = validateRemaining($event);
+                $error["member"] = validateJoinedEvent($event,$member);
                 $error["category"] = validateCategory($category);
-                //$error["ic_no"] = validateIC($ic);
+                $error["level"] = validateLevel($level);
 
                 //filter out empty error
                 $error = array_filter($error);
@@ -107,18 +81,26 @@
                     //step 3.2: Executer SQL
                     $stmt -> execute();
                     
-                    if($stmt -> affected_rows >0){
-                        //insert successful
-                        printf("<div class='info'>
-                                Booking <b>%s</b> has been inserted.[<a href='bookingList.php'>Back to list</a>]
-                                </div>", $id);
-                    }else{
-                        //GG: unable to insert
-                        echo "<div class='error'>Unable to insert.
-                              <a href='createBooking.php'>Try Again</a></div>";
-                    }
-                    
+                    if ($stmt->affected_rows > 0) {
+                        // Step 2: Prepare and execute SQL query to update remaining pax in event table
+                        $sqlUpdateEvent = "UPDATE event SET remaining_pax = remaining_pax - 1 WHERE event_id = ?";
+                        $stmtUpdateEvent = $con->prepare($sqlUpdateEvent);
+                        $stmtUpdateEvent->bind_param("s", $event);
+                        $stmtUpdateEvent->execute();
+
+                        if($stmtUpdateEvent -> affected_rows >0){
+                            //insert successful
+                            printf("<div class='info'>
+                                    Booking <b>%s</b> has been inserted.[<a href='bookingList.php'>Back to list</a>]
+                                    </div>", $id);
+                        }else{
+                            //GG: unable to insert
+                            echo "<div class='error'>Unable to insert.
+                                <a href='createBooking.php'>Try Again</a></div>";
+                        }
+                }
                     $stmt -> close();
+                    $stmtUpdateEvent -> close();
                     $con -> close();
                 }else{
                     //with error
@@ -128,7 +110,7 @@
                     }
                     echo "</ul>";
                 }
-        }
+    }
         ?>
             
 

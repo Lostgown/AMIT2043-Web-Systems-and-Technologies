@@ -130,19 +130,28 @@
             //step 3: execute sql
             $stmt -> execute();
             
-            if($stmt -> affected_rows > 0){
-                //successfully deleted
-                printf("<div class='info'><b>%s</b> has been deleted.
-                       [ <a href='bookingList.php'>Back to list</a> ]
-                        </div>", $id);
-            }else{
-                //unable to delete
-                echo "<div class='error'>Unable to delete.
-                [ <a href='bookingList.php'>Back to list</a> ]</div>";
-                
+            if ($stmt->affected_rows > 0) {
+                // Step 2: Prepare and execute SQL query to update remaining pax in event table
+                $sqlUpdateEvent = "UPDATE event SET remaining_pax = remaining_pax + 1 WHERE event_id = ?";
+                $stmtUpdateEvent = $con->prepare($sqlUpdateEvent);
+                $stmtUpdateEvent->bind_param("s", $event);
+                $stmtUpdateEvent->execute();
+
+                if($stmtUpdateEvent -> affected_rows > 0){
+                    //successfully deleted
+                    printf("<div class='info'><b>%s</b> has been deleted.
+                        [ <a href='bookingList.php'>Back to list</a> ]
+                            </div>", $id);
+                }else{
+                    //unable to delete
+                    echo "<div class='error'>Unable to delete.
+                    [ <a href='bookingList.php'>Back to list</a> ]</div>";
+                    
+                }
             }
            $con -> close();
            $stmt -> close();
+           $stmtUpdateEvent -> close();
         }
         ?>
         </div>
