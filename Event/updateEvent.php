@@ -67,7 +67,8 @@
                 $event_end = $_POST['end'];
                 $desc = $_POST['desc'];
                 $pax = $_POST['pax'];
-                    
+                $remaining_pax = $_POST['remaining'];
+
                 //1.2 validate input
                 //no validation for password as is TEMP pass
                 $error['date'] = validateEventDate($event_date);
@@ -100,7 +101,7 @@
                     $stmt = $con->prepare($sql);
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt->bind_param("sssssdds", $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $id);
+                    $stmt->bind_param("sssssdds", $name, $event_date, $event_start, $event_end, $desc, $pax, $remaining_pax, $id);
 
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -134,6 +135,7 @@
         ?>
                 <div>
                 <input class = "input_field" type = "hidden" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>"/>
+                <input class = "input_field" type = "hidden" name  = "remaining" value="<?php echo (isset($remaining_pax))?$remaining_pax: ""; ?>"/>
                 <!-- curi curi -->
 
                 <div class = 'input_box'>

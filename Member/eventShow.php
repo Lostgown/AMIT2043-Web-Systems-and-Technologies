@@ -202,7 +202,7 @@ if(isset($_POST['searchInput'])) {
 
                         <main class="main">
                         <form id="searchForm" action="eventShow.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event    ...">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event Name...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                         </form>
                         <?php 
