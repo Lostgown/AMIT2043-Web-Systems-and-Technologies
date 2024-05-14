@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2024 at 04:24 PM
+-- Generation Time: May 14, 2024 at 04:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -156,7 +156,7 @@ INSERT INTO `event` (`event_id`, `imgpath`, `event_name`, `date`, `start_time`, 
 ('E0017', '../photo/664370b74259a.jpg', 'Training 14 June', '2024-06-14', '15:00:00', '17:00:00', 'Fun Game Day ', 20, 20, 'Pending'),
 ('E0018', '../photo/6643713002665.jpg', 'Training 16 June', '2024-06-16', '17:00:00', '19:00:00', 'Footwork Training', 20, 20, 'Pending'),
 ('E0019', '../photo/664371977591d.jpg', 'Training 18 June', '2024-06-18', '16:00:00', '18:00:00', 'Smash Training', 20, 19, 'Pending'),
-('E0020', '../photo/664372017780b.jpg', 'Training 20 June', '2024-05-20', '15:00:00', '17:00:00', 'In-game Strategy Training', 50, 48, 'Pending');
+('E0020', '../photo/664372017780b.jpg', 'Training 20 June', '2024-06-20', '15:00:00', '17:00:00', 'In-game Strategy Training', 50, 48, 'Pending');
 
 -- --------------------------------------------------------
 
