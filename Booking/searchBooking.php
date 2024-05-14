@@ -106,7 +106,7 @@ if(isset($_POST['searchInput'])) {
                                 }else{
                                     //no error
                                     //step 2: sql statement
-                                    $sql = "SELECT * FROM booking WHERE member_id LIKE '%$search%' ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM booking WHERE event_id LIKE '%$search%' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
                                     $result = $con -> query($sql);//object - a list of admin record

@@ -70,7 +70,7 @@ if(isset($_GET["category"])){
                     </div>
                     <div class="card-body">
                     <form id="searchForm" action="searchBooking.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event ID...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                     </form>
 
