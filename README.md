@@ -12,3 +12,5 @@ Pass:abcde
 Role:Member
 ID:M0001
 Pass:abcde
+
+Can use importMember.csv to test the import function
