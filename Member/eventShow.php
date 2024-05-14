@@ -191,10 +191,6 @@ if(isset($_POST['searchInput'])) {
             <div class="content">
 
 
-
-                <!-- <div class="box-container"> -->
-
-
                             <?php 
                             echo "<style>button {float:right;margin-top: 10px;margin-right: 10px;display: block;background: orange;color: #fff;font-size: 17px;border-radius: 30px;border:none;padding: 8px 25px;text-decoration: none;}button:hover{background: rgb(255, 186, 58);transition: all 0.3s ease 0s;}</style>"
                             ?>
@@ -287,11 +283,6 @@ if(isset($_POST['searchInput'])) {
                             </div>
                         </main>
                     </div>
-
-
-
-
-
                 </div>
                 </p>
             </div>

@@ -106,7 +106,7 @@ if(isset($_GET["category"])){
                             <?php
                                 //step 1: create DB connection
                                 //NOTE: arrangement of input in mysqli is important
-                                //this method is using object oriented technique(new keyword is to create object/ like declaring variable)
+                                //this method is using object oriented technique('new' keyword is to create object/ like declaring variable)
                                 $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                                 if($con -> connect_error){
                                     //wth error
@@ -117,7 +117,7 @@ if(isset($_GET["category"])){
                                     $sql = "SELECT * FROM booking WHERE category LIKE '$category' AND member_id LIKE '%$_SESSION[idUser]%' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
-                                    $result = $con -> query($sql);//object - a list of admin record
+                                    $result = $con -> query($sql); //object - a list of admin record
 
                                     //NOTE: for DB we use "->"
                                     //NOTE: for associative array we use "=>"

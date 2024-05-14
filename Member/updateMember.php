@@ -125,6 +125,7 @@
             
 
             <input class = "input_field" type = "hidden" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>"/> 
+            <!-- curi curi -->
 
 <div class = 'input_box'>
     <label class="input">
@@ -171,7 +172,6 @@
 <input type = "radio" name = "gender" value = 'F' <?php echo (isset($gender) && $gender == "F")?"checked":"" ?>/> Female </p></label>
 <br>
 </div>
-
 
             <br/>
             <input type="submit" value="Update" id="btnUpdate" name="btnUpdate" />

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <meta charset="UTF-8">
@@ -68,12 +67,9 @@
                 $event_end = $_POST['end'];
                 $desc = $_POST['desc'];
                 $pax = $_POST['pax'];
-
-                // $file = $_FILES['image'];
                     
                 //1.2 validate input
                 //no validation for password as is TEMP pass
-                // $error['image'] = validateFile($file);
                 $error['date'] = validateEventDate($event_date);
                 $error['start'] = validateTimeStart($event_start);
                 $error['end'] = validateTimeEnd($event_end);
@@ -82,8 +78,6 @@
                 
                 //filter out empty error
                 $error = array_filter($error);
-                //check id $error contains value
-
 
                 if(empty($error)){
                     $count = 0;
@@ -93,17 +87,7 @@
                     }
 
                     //yay no error
-                    $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-                    
-                    // $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-                    // $save_as = uniqid() . '.' . $ext;
-            
-                    // $uploadDir = '../photo/';
-                    // $imagePath = $uploadDir . $save_as;
-
-                    // move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
-                
+                    $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);                
 
                     //step 2: SQL
                     // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -128,7 +112,6 @@
                                 Event <b>%s</b> has been inserted.\nID is <b>%s</b>[<a href='eventList.php'>Back to list</a>]
                                 </div>", $name, $id);
 
-                                // printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',$save_as, $save_as);
                     }else{
                         //GG: unable to insert
                         echo "<div class='error'>Unable to insert.
@@ -149,8 +132,9 @@
                 }
         }
         ?>
-<div>
-<input class = "input_field" type = "hidden" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>"/>
+                <div>
+                <input class = "input_field" type = "hidden" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>"/>
+                <!-- curi curi -->
 
                 <div class = 'input_box'>
                     <label class="input">
@@ -194,11 +178,6 @@
                     </label>
                 </div>
 
-                <!-- <div class = 'input_box'>
-                    <label>Upload Photo :  </label>
-                    <input type="hidden" value="1048576" name="MAX_FILE_SIZE" />
-                    <input class="form-control" type="file" name="image" value="" />
-                </div> -->
             </div>
             <br/>
 
