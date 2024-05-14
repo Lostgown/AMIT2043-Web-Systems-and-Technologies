@@ -275,7 +275,7 @@ if(isset($_POST['searchInput'])) {
                                 <h3 style="color: white; text-align: center;">Navigation</h3>
                                 <ul class="side-bar-nav">
                                     <li>
-                                        <a href="../Event/join_event.php">
+                                        <a href="eventShow.php">
                                             <button> Events Menu</button>
                                         </a>
                                     </li>

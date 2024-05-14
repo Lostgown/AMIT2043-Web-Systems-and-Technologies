@@ -90,8 +90,8 @@
                     $sql = "UPDATE admin SET admin_name = ?, ic_no = ?, phone_no =?, gender = ? , email = ?, birth_date = ? WHERE admin_id = ?";
                     
                     //step 3: Process SQL
-                    //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
-                    //NOTE: $con -> prepare() => when there is "?" parameter in above sql satatement
+                    //NOTE: $con -> query() => use when there is no "?" parameter in above sql satatement
+                    //NOTE: $con -> prepare() => use when there is "?" parameter in above sql satatement
                     $stmt = $con -> prepare($sql);
                     
                     //step 3.1: Pass parameter into SQL
