@@ -77,6 +77,8 @@
                 $error['date'] = validateEventDate($event_date);
                 $error['start'] = validateTimeStart($event_start);
                 $error['end'] = validateTimeEnd($event_end);
+                $error['name'] = validateEventName($name);
+                $error['desc'] = validateDesc($desc);
                 
                 //filter out empty error
                 $error = array_filter($error);
@@ -106,7 +108,7 @@
                     //step 2: SQL
                     // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     // $sql = mysqli_query($con, "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES ('$id', '$imagePath', '$name', '$event_date', '$event_start', '$event_end', '$desc', '$pax', '$pax', '$status')");
-                    $sql = "UPDATE event SET event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ? WHERE event_id = ?";
+                    $sql = "UPDATE event SET event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ?, remaining_pax = ? WHERE event_id = ?";
 
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -114,7 +116,7 @@
                     $stmt = $con->prepare($sql);
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt->bind_param("sssssds", $name, $event_date, $event_start, $event_end, $desc, $pax, $id);
+                    $stmt->bind_param("sssssdds", $name, $event_date, $event_start, $event_end, $desc, $pax, $pax, $id);
 
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -126,8 +128,7 @@
                                 Event <b>%s</b> has been inserted.\nID is <b>%s</b>[<a href='eventList.php'>Back to list</a>]
                                 </div>", $name, $id);
 
-                                printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',
-                                $save_as, $save_as);
+                                // printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',$save_as, $save_as);
                     }else{
                         //GG: unable to insert
                         echo "<div class='error'>Unable to insert.
