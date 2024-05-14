@@ -295,7 +295,7 @@ if(isset($_POST['searchInput'])) {
 
                         <main class="main">
                         <form id="searchForm" action="menuMember.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                         </form>
                         <?php 
