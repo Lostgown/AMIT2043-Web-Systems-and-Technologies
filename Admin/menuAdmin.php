@@ -277,7 +277,7 @@
                                         //record found
                                         while($row = $result->fetch_object()){
                                             printf("<div class='box-recent-event'>
-                                                        <img src='../photo/%s' style='width:280px; height:180px;'>
+                                                        <img src='../photo/%s' style='width:280px; height:180px;border-radius:10px;'>
                                                         <h3 class='text-color'> %s</h3>
                                                         <p> Event ID : %s</p>
                                                         <p> Date : %s</p>
