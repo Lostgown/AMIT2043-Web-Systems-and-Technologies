@@ -258,7 +258,6 @@ if (isset($_POST['submit']))
     </div>
     </div>
 </body>
-<!-- <footer> -->
 <footer style="padding-bottom: 2.5rem; position: relative; bottom: 0; width: 100%; height: 2.5rem;">
     <?php include('../lib/footer.php'); ?>
 </footer>

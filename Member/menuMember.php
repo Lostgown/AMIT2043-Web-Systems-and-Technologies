@@ -194,10 +194,8 @@ if(isset($_POST['searchInput'])) {
                     <h1 style="color:#555555;margin-top:30px;font-weight: 400px;
                     font-size: 30px;text-decoration: none;text-align: center;">Member Menu<h1>
                 </div>
-
-                <!-- <div class="box-container"> -->
+                
                 <div class="container">
-                    <!-- <div class="box-profile"> -->
                     <div class="dashboard">
                         <header class="header">
                             <h2 style="color: white; text-align: center;">Recent Event</h2>
@@ -277,7 +275,7 @@ if(isset($_POST['searchInput'])) {
                                 <h3 style="color: white; text-align: center;">Navigation</h3>
                                 <ul class="side-bar-nav">
                                     <li>
-                                        <a href="../Event/join_event.php">
+                                        <a href="eventShow.php">
                                             <button> Events Menu</button>
                                         </a>
                                     </li>
@@ -295,7 +293,7 @@ if(isset($_POST['searchInput'])) {
 
                         <main class="main">
                         <form id="searchForm" action="menuMember.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Member ID...">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                         </form>
                         <?php 
@@ -310,10 +308,6 @@ if(isset($_POST['searchInput'])) {
                                             printf("<th><a href='?sort=%s&order=ASC' style='color: black; text-decoration: ;'>%s  |  </a></th>",$key, $value);
                                         }
                                 }
-
-                                // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-                                // $result = $con -> query($sql);
 
                                 ?>
                             <h2>My Bookings</h2>

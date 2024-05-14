@@ -20,64 +20,6 @@
         require_once '../lib/helper.php';
 ?>
 
-<?php
-        // if(isset($_FILES['image'])) {
-        //     $file = $_FILES['image'];
-            
-        //     if($file['error'] > 0) {
-        //         //check the error code
-        //         switch ($file['error']) {
-                    
-        //             case UPLOAD_ERR_NO_FILE: // code = 4
-        //                 $err = 'No file was selected';
-        //             break;
-               
-        //             case UPLOAD_ERR_FROM_SIZE: // code = 2
-        //             $err = 'File uploaded is too large MAXIMUN 1MB allowed';
-        //             break;
-                
-        //             default:  // other codes
-        //                 $err = 'There was an error while uplaoding the file';
-        //                 break;
-        //         }
-        //     } else if($file['size'] > 1048576) {
-        //         //check the file size. prevent hacks
-        //         //1mb = 1024kb = 1048576B
-        //         $err = 'File uploaded is too large. maximum 1M';
-        //     } else {
-        //         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-                
-        //         // check the file extension
-        //         if ($ext != 'jpg' && 
-        //             $ext != 'jpeg' && 
-        //             $ext != 'gif' &&
-        //             $ext != 'png') {
-                    
-        //             $err = 'Only JPG, GIF, and PNG format are allowed';
-        //         } else {
-        //             // everything good
-        //             $save_as = uniqid() . '.' . $ext;
-
-        //             $uploadDir = '../photo/';
-        //             $imagePath = $uploadDir . $save_as;
-
-        //             $sql = mysqli_query($con, "INSERT INTO event (imgpath) VALUES ('$imagePath')");
-
-        //             move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
-
-        //             // $sql = mysqli_query($con, "INSERT INTO event (imgpath) VALUES ('$file')");
-                    
-        //             printf('<div class="info"> image uploaded successfully. it is saved as <a href="gallery.php?image=%s">%s</a></div>',
-        //                     $save_as, $save_as);
-
-                    
-        //         }
-        //     }
-        // }   
-?>
-
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -139,6 +81,7 @@
 
                     //yay no error
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
                     
                     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
@@ -148,6 +91,7 @@
                     $imagePath = $uploadDir . $save_as;
 
                     move_uploaded_file($file['tmp_name'], '../photo/' . $save_as);
+
                     
                     printf('<div class="info"> image uploaded successfully. it is saved as <a href="../Admin/menuAdmin.php?image=%s">%s</a></div>',
                             $save_as, $save_as);
@@ -248,8 +192,6 @@
             </div>
             <br/>
 
-
-         
             <input type="submit" value="Insert" id="btnRegister" name="btnInsert" onclick="location='../Admin/menuAdmin.php'"/>
             <input type="button" value="Cancel" id= "btnCancel" name="btnCancel" onclick="location='eventList.php'"/>
             <br/>

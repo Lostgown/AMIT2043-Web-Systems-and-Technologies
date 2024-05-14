@@ -26,7 +26,6 @@
 
         <?php 
          session_start(); 
-        // $id = $_SESSION['idUser'];  
 
         //using GET method and POST method together
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -54,10 +53,10 @@
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
-                // Password reset successful
+
                 echo "<div class='info'>Password reset successfully for ID: $id.</div>";
             } else {
-                // Unable to update password
+
                 echo "<div class='error'>Unable to reset password. Please try again.</div>";
             }
             
@@ -83,14 +82,12 @@
 
                     <div class = "genderRadio">
                     <p id = "gender" style="text-align: left;"> 
-                    <!-- &nbspShow password: &nbsp &nbsp  -->
                 </p>    
                     <p id = "btnMale"><label>
                     <input type = "checkbox" name = "passVisibility" value="" onclick="showPassword()" /> Show password &nbsp 
                     </label>
                     </p>
                  </div>
-
 
             <input type="submit" value="Reset" id="btnUpdate" name="btnUpdate" />
             <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />

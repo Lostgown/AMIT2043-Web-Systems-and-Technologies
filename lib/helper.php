@@ -139,7 +139,6 @@ function validateName($name){
         return "Invalid user <b>Name</b>.";
     }
 }
-// add check uppercase 
 
 //create function - check admin id
 function validateAdminId($id) {
@@ -158,12 +157,6 @@ function validatePhone($phone) {
     }
 }
 
-// function validateTempPass($password) {
-//     if($password == null) {
-//         return 'Please enter your <b>Password</b>.';
-//     } 
-// }
-
 function validatePass($password) {
     if($password == null) {
         // echo 'Please enter your <b>Password</b>.';
@@ -181,12 +174,12 @@ function validatePass($password) {
     }
 }
 
+// password validate for admin page (dont have to follow passwor format accordingly)
 function validatePassTemp($password) {
     if($password == null) {
         return 'Please enter your <b>Password</b>.';
     } 
 }
-
 
 
 function validateCfnPass($passwordCfn, $password) {
@@ -237,14 +230,12 @@ function validateFile($file) {
         if ($file['size'] > 1048576) { // 1MB in bytes
             return 'File uploaded is too large. Maximum 1MB allowed';
         }
-        
         // Check the file extension
         $allowedExtensions = ['jpg'];
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         if (!in_array($ext, $allowedExtensions)) {
             return 'Only JPG formats are allowed';
         }
-        
         // If no errors, return null to indicate no validation error
         return null;
     }

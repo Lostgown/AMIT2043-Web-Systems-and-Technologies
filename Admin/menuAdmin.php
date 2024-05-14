@@ -148,18 +148,13 @@
                     font-size: 30px;text-decoration: none;text-align: center;">ADMIN MENU<h1>
                 </div>
 
-                <!-- <div class="box-container"> -->
                 <div class="container">
-                    <!-- <div class="box-profile"> -->
                     <div class="dashboard">
                         <header class="header">
                             <h2 style="color: white; text-align: center;">Recent Event Hosting</h2>
                         </header>
 
                         <section class="sidebar">
-                            <!-- <li< /li> -->
-
-
 
                             <div class="box-profile-admin">
                                 <h3 style="text-align: center;">Profile</h3>
@@ -319,9 +314,6 @@
 
                             </div>
                         </main>
-
-
-
                     </div>
                 </div>
                 </p>

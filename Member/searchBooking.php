@@ -108,7 +108,7 @@ if(isset($_POST['searchInput'])) {
                                     $sql = "SELECT * FROM booking WHERE event_id LIKE '%$search%' AND member_id LIKE '%$_SESSION[idUser]%' ORDER BY $sort $order";
 
                                     //step 3: ask connection, to processs sql
-                                    $result = $con -> query($sql);//object - a list of admin record
+                                    $result = $con -> query($sql); //object - a list of admin record
 
                                     //NOTE: for DB we use "->"
                                     //NOTE: for associative array we use "=>"

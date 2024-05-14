@@ -191,10 +191,6 @@ if(isset($_POST['searchInput'])) {
             <div class="content">
 
 
-
-                <!-- <div class="box-container"> -->
-
-
                             <?php 
                             echo "<style>button {float:right;margin-top: 10px;margin-right: 10px;display: block;background: orange;color: #fff;font-size: 17px;border-radius: 30px;border:none;padding: 8px 25px;text-decoration: none;}button:hover{background: rgb(255, 186, 58);transition: all 0.3s ease 0s;}</style>"
                             ?>
@@ -205,7 +201,7 @@ if(isset($_POST['searchInput'])) {
                 
 
                         <main class="main">
-                        <form id="searchForm" action="menuMember.php" method="POST">
+                        <form id="searchForm" action="eventShow.php" method="POST">
                         <input type="text" id="searchInput" name="searchInput" placeholder="Search Event    ...">
                         <button type="submit" name="submit" class="btn btn-secondary">Search</button>
                         </form>
@@ -230,7 +226,7 @@ if(isset($_POST['searchInput'])) {
 
 
                             <hr>
-                            <h2>Recent Event Hosting</h2>
+                            <h2>Overall Event Hosting</h2>
                             <div class="container">
                                 
                             <?php
@@ -287,11 +283,6 @@ if(isset($_POST['searchInput'])) {
                             </div>
                         </main>
                     </div>
-
-
-
-
-
                 </div>
                 </p>
             </div>
