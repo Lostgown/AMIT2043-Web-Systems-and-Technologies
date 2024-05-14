@@ -174,12 +174,12 @@ function validatePass($password) {
     }
 }
 
+// password validate for admin page (dont have to follow passwor format accordingly)
 function validatePassTemp($password) {
     if($password == null) {
         return 'Please enter your <b>Password</b>.';
     } 
 }
-
 
 
 function validateCfnPass($passwordCfn, $password) {

@@ -48,6 +48,7 @@
                 $name = trim($_POST["name"]);
                 $ic = trim($_POST["ic_no"]);
                 $pass = trim($_POST["pass"]);
+                $passCfn = trim($_POST["passCfn"]);
                 $phone = trim($_POST["phone_no"]);
                 if(isset($_POST["gender"])){
                     $gender = trim($_POST["gender"]);
@@ -65,6 +66,7 @@
                 $error["email"] = validateEmail($email);
                 $error["gender"] = validateGender($gender);
                 $error["pass"] = validatePassTemp($pass);
+                $error["passCfn"] = validateCfnPass($passCfn, $pass);
                 $error["birth_date"] = validateBirthDate($birth);
 
                 
@@ -141,6 +143,13 @@
 
 <div class = 'input_box'>
     <label class="input">
+        <input class = "input_field" type = "password" name  = "passCfn" value="" placeholder=""/>
+        <span class="input_label">Password Confirmation</span>
+    </label>
+</div>
+
+<div class = 'input_box'>
+    <label class="input">
         <input class = "input_field" type = "text" id ="phone_no" name  = "phone_no"  value="<?php echo (isset($id))?$phone: ""; ?>" placeholder=""/>  
         <span class="input_label">Phone Number</span>
     </label>
@@ -178,4 +187,4 @@
         </form>
         
     </body>
-</html>0
+</html>
