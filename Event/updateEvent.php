@@ -18,7 +18,17 @@
             <div>
             <div class = "frm" style="text-align:left;">  
             <h1 style="text-align:center"> Update Event </h1>
-        <?php 
+        <?php
+        //check status
+        function checkAndUpdateStatus($event_date) {
+            $current_date = date('Y-m-d');
+            if ($current_date > $event_date) {
+                return 'Completed';
+            } else {
+                return 'Pending';
+            }
+        }
+
         //using GET method and POST method together
         if($_SERVER["REQUEST_METHOD"] == "GET"){
             //GET method - retrieve existing record and display before delete
@@ -71,7 +81,6 @@
 
                 //1.2 validate input
                 //no validation for password as is TEMP pass
-                $error['date'] = validateEventDate($event_date);
                 $error['start'] = validateTimeStart($event_start);
                 $error['end'] = validateTimeEnd($event_end);
                 $error['name'] = validateEventName($name);
@@ -81,19 +90,15 @@
                 $error = array_filter($error);
 
                 if(empty($error)){
-                    $count = 0;
-                    $count++;
-                    if($count == 1) {
-                        $status = 'Pending';
-                    }
 
+                    $status = checkAndUpdateStatus($event_date);
                     //yay no error
                     $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);                
 
                     //step 2: SQL
                     // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     // $sql = mysqli_query($con, "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES ('$id', '$imagePath', '$name', '$event_date', '$event_start', '$event_end', '$desc', '$pax', '$pax', '$status')");
-                    $sql = "UPDATE event SET event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ?, remaining_pax = ? WHERE event_id = ?";
+                    $sql = "UPDATE event SET event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ?, remaining_pax = ?, status = ? WHERE event_id = ?";
 
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -101,7 +106,7 @@
                     $stmt = $con->prepare($sql);
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt->bind_param("sssssdds", $name, $event_date, $event_start, $event_end, $desc, $pax, $remaining_pax, $id);
+                    $stmt->bind_param("sssssddss", $name, $event_date, $event_start, $event_end, $desc, $pax, $remaining_pax,$status, $id);
 
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -168,7 +173,7 @@
 
                 <div class = 'input_box'>
                         <label class="input">
-                                <textarea class = "input_field" type = "" name  = "desc" placeholder= " " value="<?php echo (isset($id))?$desc: ""; ?>" ></textarea>  
+                                <textarea class = "input_field" type = "" name  = "desc" placeholder= " " ><?php echo (isset($id))?htmlspecialchars($desc): ""; ?></textarea>  
                                 <span class="input_label">Description</span>
                         </label>
                 </div>

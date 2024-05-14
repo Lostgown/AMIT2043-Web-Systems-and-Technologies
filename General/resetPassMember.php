@@ -46,7 +46,7 @@
 
             $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-            $sql = "UPDATE admin SET admin_pass = ? WHERE admin_id = ?";
+            $sql = "UPDATE member SET member_pass = ? WHERE member_id = ?";        
 
             $stmt = $con->prepare($sql);
             $stmt->bind_param("ss", $password, $id);
@@ -90,7 +90,7 @@
                  </div>
 
             <input type="submit" value="Reset" id="btnUpdate" name="btnUpdate" />
-            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Admin/menuAdmin.php'" />
+            <input type="button" value="Cancel" id="btnCancel" name="Cancel" onclick="location='../Member/menuMember.php'" />
             </form>
             <br/>
 

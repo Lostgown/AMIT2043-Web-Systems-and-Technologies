@@ -275,6 +275,11 @@ if(isset($_POST['searchInput'])) {
                                 <h3 style="color: white; text-align: center;">Navigation</h3>
                                 <ul class="side-bar-nav">
                                     <li>
+                                        <a href="../General/resetPassMember.php">
+                                            <button> Reset Password</button>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="eventShow.php">
                                             <button> Events Menu</button>
                                         </a>

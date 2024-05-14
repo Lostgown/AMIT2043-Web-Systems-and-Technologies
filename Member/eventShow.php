@@ -210,8 +210,8 @@ $header = array(
                         </form>
                             <hr>
                             <h2>Overall Event Host</h2>
-                            <div class="container">
-                            <div id="searchResults"></div>    
+                            <div class="container" id="searchResults">
+                               
                             </div>
 
                             <hr>
