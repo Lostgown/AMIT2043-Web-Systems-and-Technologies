@@ -20,27 +20,6 @@ $header = array(
     "status"=>"Status",
 );
 
-//retrieve sort parameter from URL
-if(isset($_GET["sort"])){
-    $sort = $_GET["sort"];
-}else{
-    $sort="event_id";
-}
-
-//retrive order
-if (isset($_GET["order"])){
-    $order = $_GET["order"];
-}else{
-    $order = "ASC";
-}
-
-//retrieve search
-if(isset($_POST['searchInput'])) {
-    // Retrieve the search query from the POST data
-    $search = $_POST['searchInput'];
-}else {
-    $search = '';
-}
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +32,32 @@ if(isset($_POST['searchInput'])) {
     <title>Member Menu</title>
     <link rel='stylesheet' type='text/css' href='../css/main.css'>
     <link rel='stylesheet' type='text/css' href='../css/menuMember.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Load all events by default
+            $.ajax({
+                type: 'POST',
+                url: 'searchEvent.php',
+                success: function(response) {
+                    $('#searchResults').html(response);
+                }
+            });
 
+            // Filter events based on the search query
+            $('#searchInput').on('input', function() {
+                var searchValue = $(this).val(); // Get search query
+                $.ajax({
+                    type: 'POST',
+                    url: 'searchEvent.php',
+                    data: { searchQuery: searchValue },
+                    success: function(response) {
+                        $('#searchResults').html(response); // Display search results
+                    }
+                });
+            });
+        });
+    </script>
     <style>
     .side-bar-nav {
         padding: 12px;
@@ -201,34 +205,18 @@ if(isset($_POST['searchInput'])) {
                 
 
                         <main class="main">
-                        <form id="searchForm" action="eventShow.php" method="POST">
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event Name...">
-                        <button type="submit" name="submit" class="btn btn-secondary">Search</button>
+                        <form id="searchForm">
+                        <input type="text" id="searchInput" name="searchInput" placeholder="Search Event Name..." style="height: 30px;">
                         </form>
-                        <?php 
-                                    foreach($header as $key=> $value){
-                                        if($key == $sort){
-                                            //user can click on the column
-                                            //for sorting
-                                            printf("<th><a href='?sort=%s&order=%s' style='color: black; text-decoration: ;'>%s %s</a></th>",$key,$order == 'ASC' ? 'DESC' :  'ASC', $value, $order == "ASC"?'⬇️':'⬆️');
-                                        }else{
-                                            //user never click anything
-                                            //default
-                                            printf("<th><a href='?sort=%s&order=ASC' style='color: black; text-decoration: ;'>%s  |  </a></th>",$key, $value);
-                                        }
-                                }
-
-                                // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-                                // $result = $con -> query($sql);
-
-                                ?>
-
+                            <hr>
+                            <h2>Overall Event Host</h2>
+                            <div class="container">
+                            <div id="searchResults"></div>    
+                            </div>
 
                             <hr>
-                            <h2>Overall Event Hosting</h2>
+                            <h2>Completed Event</h2>
                             <div class="container">
-                                
                             <?php
                                 //step 1: create DB connection
                                 //NOTE: arrangement of input in mysqli is important
@@ -241,7 +229,7 @@ if(isset($_POST['searchInput'])) {
                                 }else{
                                     //step 2: sql statement
                                     // $sql = "SELECT * FROM event WHERE status LIKE '%Pending%' ORDER BY date ASC";
-                                    $sql = "SELECT * FROM event WHERE event_name LIKE '%$search%' ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM event WHERE status LIKE '%Completed%' ORDER BY date ";
 
                                     $result = $con -> query($sql);//object - a list of event
 
@@ -256,9 +244,7 @@ if(isset($_POST['searchInput'])) {
                                                         <p> Start Time : %s</p>
                                                         <p> End Time : %s</p>
                                                         <p> Description : %s</p>
-                                                        <p> Pax : %s</p>
-                                                        <p> Remaining Pax : %s</p>
-                                                        <button><a href='../Booking/createBooking.php?id=%s' style='text-decoration:none;color:black;'>Join</a></button></div>"
+                                                        </div>"
                                                     , $row->imgpath
                                                     , $row->event_name
                                                     , $row->event_id
@@ -266,9 +252,6 @@ if(isset($_POST['searchInput'])) {
                                                     , $row->start_time
                                                     , $row->end_time
                                                     , $row->description
-                                                    , $row->pax
-                                                    , $row->remaining_pax
-                                                    , $row->event_id 
                                                     );
                                         }
                                     } else {
@@ -281,6 +264,8 @@ if(isset($_POST['searchInput'])) {
 
                                 ?>
                             </div>
+
+                            
                         </main>
                     </div>
                 </div>

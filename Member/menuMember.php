@@ -375,7 +375,7 @@ if(isset($_POST['searchInput'])) {
                                 }else{
                                     //step 2: sql statement
                                     // $sql = "SELECT * FROM event WHERE status LIKE '%Pending%' ORDER BY date ASC";
-                                    $sql = "SELECT * FROM event WHERE event_name LIKE '%$search%' ORDER BY $sort $order";
+                                    $sql = "SELECT * FROM event WHERE event_name LIKE '%$search%' AND status LIKE '%Pending%' ORDER BY $sort $order";
 
                                     $result = $con -> query($sql);//object - a list of event
 
