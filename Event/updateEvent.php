@@ -41,7 +41,6 @@
             
             if($row = $result->fetch_object()){
                 $id = $row -> event_id;
-                // $file = $row -> imgpath;
                 $name = $row -> event_name;
                 $date = $row -> date;
                 $start = $row -> start_time;
@@ -62,12 +61,14 @@
         }else{
            //user click
                 //1.1 receive user input from student form
+                $id = $_POST['hdID'];
                 $name = $_POST['name'];
                 $event_date = trim($_POST['date']);
                 $event_start = $_POST['start'];
                 $event_end = $_POST['end'];
                 $desc = $_POST['desc'];
                 $pax = $_POST['pax'];
+
                 // $file = $_FILES['image'];
                     
                 //1.2 validate input
@@ -86,8 +87,6 @@
                     $count = 0;
                     $count++;
                     if($count == 1) {
-                        $status = 'Completed';
-                    } else {
                         $status = 'Pending';
                     }
 
@@ -107,7 +106,7 @@
                     //step 2: SQL
                     // $con = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                     // $sql = mysqli_query($con, "INSERT INTO event (event_id, imgpath, event_name, date, start_time, end_time, description, pax, remaining_pax, status) VALUES ('$id', '$imagePath', '$name', '$event_date', '$event_start', '$event_end', '$desc', '$pax', '$pax', '$status')");
-                    $sql = "UPDATE event SET event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ?, remaining_pax = ?, status = ? WHERE event_id = ?";
+                    $sql = "UPDATE event SET event_name = ?, date = ?, start_time = ?, end_time = ?, description = ?, pax = ? WHERE event_id = ?";
 
                     //step 3: Process SQL
                     //NOTE: $con -> query() => when there is no "?" parameter in above sql satatement
@@ -115,7 +114,7 @@
                     $stmt = $con->prepare($sql);
                     //step 3.1: PAss parameter into SQL
                     //NOTE: string(s), int(i), double(d), blob(b) - binaryfile, img file
-                    $stmt->bind_param("sssssdsss", $name, $event_date, $event_start, $event_end, $desc, $pax, $remaining_pax, $status, $id);
+                    $stmt->bind_param("sssssds", $name, $event_date, $event_start, $event_end, $desc, $pax, $id);
 
                     //step 3.2: Executer SQL
                     $stmt -> execute();
@@ -150,6 +149,8 @@
         }
         ?>
 <div>
+<input class = "input_field" type = "hidden" name  = "hdID" value="<?php echo (isset($id))?$id: ""; ?>"/>
+
                 <div class = 'input_box'>
                     <label class="input">
                         <input class = "input_field" type = "text" name = "name" value="<?php echo (isset($id))?$name: ""; ?>" placeholder=""/>
